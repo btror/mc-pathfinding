@@ -7,23 +7,22 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public abstract class Simulation {
-    protected final int[][][] stormZone;
-    protected final int[] simulationStrikeStart;
-    protected final int[] simulationStrikeTarget;
+    protected int[][][] simulationSnapshot;
+    protected int[] simulationStart;
+    protected int[] simulationTarget;
 
-    protected Node[][][] simulationStormZone;
-    protected Node simulationNodeStrikeStart;
-    protected Node simulationNodeStrikeTarget;
-    protected Node simulationNodeStrikeCurrent;
+    protected Node[][][] nodeSnapshot;
+    protected Node nodeStart;
+    protected Node nodeTarget;
+    protected Node nodeCurrent;
 
-    protected final PriorityQueue<Node> openList;
-    protected final ArrayList<Node> closedList;
+    protected PriorityQueue<Node> openList;
+    protected ArrayList<Node> closedList;
+
+    public Simulation() {
+    }
 
     /**
-     * Constructor.
-     * <p>
-     * Creates a storm simulation.
-     * <p>
      * Simulation Integer Mappings:
      * 0 = open space (can be explored in pathfinding)
      * 1 = blocked space (cannot be explored in pathfinding)
@@ -33,36 +32,29 @@ public abstract class Simulation {
      * 5 = target space
      */
     public Simulation(
-            int[][][] stormZone,
-            int[] simulationStrikeStart,
-            int[] simulationStrikeTarget
+            int[][][] simulationSnapshot,
+            int[] simulationStart,
+            int[] simulationTarget
     ) {
-        this.stormZone = stormZone;
-        this.simulationStrikeStart = simulationStrikeStart;
-        this.simulationStrikeTarget = simulationStrikeTarget;
-        this.simulationStormZone = new Node[this.stormZone.length][this.stormZone[0].length][this.stormZone[0][0].length];
+        this.simulationSnapshot = simulationSnapshot;
+        this.simulationStart = simulationStart;
+        this.simulationTarget = simulationTarget;
+        this.nodeSnapshot = new Node[this.simulationSnapshot.length][this.simulationSnapshot[0].length][this.simulationSnapshot[0][0].length];
         this.openList = new PriorityQueue<>(10, new NodeComparator());
         this.closedList = new ArrayList<>();
     }
 
-    /**
-     * Kick off storm simulation pathfinding.
-     */
     public abstract void start();
 
-    /**
-     * Creates the final pathfinding path (supposed to emulate the storm bolt).
-     *
-     * @return final path found.
-     */
-    public boolean getPath() {
-        boolean pathFound = true;
-        while (!openList.isEmpty() && !simulationNodeStrikeCurrent.equals(simulationNodeStrikeTarget)) {
-            simulationNodeStrikeCurrent = openList.peek();
+    protected abstract void calculateNeighborValues();
+
+    public void findPath() {
+        while (!openList.isEmpty() && !nodeCurrent.equals(nodeTarget)) {
+            nodeCurrent = openList.peek();
             openList.remove(openList.peek());
 
-            if (simulationNodeStrikeCurrent.equals(simulationNodeStrikeTarget)) {
-                closedList.add(simulationNodeStrikeCurrent);
+            if (nodeCurrent.equals(nodeTarget)) {
+                closedList.add(nodeCurrent);
 
                 ArrayList<Node> path = generatePath();
 
@@ -70,8 +62,8 @@ public abstract class Simulation {
                     int row = path.get(i).getRow();
                     int col = path.get(i).getCol();
                     int zNum = path.get(i).getZ();
-                    if (stormZone[row][col][zNum] == 2) {
-                        stormZone[row][col][zNum] = 3;
+                    if (simulationSnapshot[row][col][zNum] == 2) {
+                        simulationSnapshot[row][col][zNum] = 3;
                     }
                 }
                 break;
@@ -81,59 +73,46 @@ public abstract class Simulation {
                 } catch (NullPointerException e) {
                     System.out.println(e.getMessage());
                 }
-                stormZone[simulationNodeStrikeStart.getRow()][simulationNodeStrikeStart.getCol()][simulationNodeStrikeStart.getZ()] = 4;
-                stormZone[simulationNodeStrikeTarget.getRow()][simulationNodeStrikeTarget.getCol()][simulationNodeStrikeTarget.getZ()] = 5;
+                simulationSnapshot[nodeStart.getRow()][nodeStart.getCol()][nodeStart.getZ()] = 4;
+                simulationSnapshot[nodeTarget.getRow()][nodeTarget.getCol()][nodeTarget.getZ()] = 5;
                 try {
                     assert openList.peek() != null;
-                } catch (NullPointerException e) {
-                    pathFound = false;
+                } catch (NullPointerException ignored) {
                 }
-                closedList.add(simulationNodeStrikeCurrent);
+                closedList.add(nodeCurrent);
             }
         }
-
-        if (openList.size() == 0) {
-            pathFound = false;
-        }
-
-        return pathFound;
     }
 
-    /**
-     * Calculate node movement cost.
-     *
-     * @param node simulation node.
-     * @return movement cost.
-     */
     protected int calculateG(Node node) {
         int row = node.getRow();
         int col = node.getCol();
         int zNum = node.getZ();
-        if (row == simulationNodeStrikeCurrent.getRow() && col == simulationNodeStrikeCurrent.getCol() && zNum == simulationNodeStrikeCurrent.getZ()) {
+        if (row == nodeCurrent.getRow() && col == nodeCurrent.getCol() && zNum == nodeCurrent.getZ()) {
             return 0;
         }
 
         Node parent = node.getParent();
         if (parent == null) {
             int xDistance;
-            if (col > simulationNodeStrikeCurrent.getCol()) {
-                xDistance = col - simulationNodeStrikeCurrent.getCol();
+            if (col > nodeCurrent.getCol()) {
+                xDistance = col - nodeCurrent.getCol();
             } else {
-                xDistance = simulationNodeStrikeCurrent.getCol() - col;
+                xDistance = nodeCurrent.getCol() - col;
             }
 
             int yDistance;
-            if (row > simulationNodeStrikeCurrent.getRow()) {
-                yDistance = row - simulationNodeStrikeCurrent.getRow();
+            if (row > nodeCurrent.getRow()) {
+                yDistance = row - nodeCurrent.getRow();
             } else {
-                yDistance = simulationNodeStrikeCurrent.getRow() - row;
+                yDistance = nodeCurrent.getRow() - row;
             }
 
             int zDistance;
-            if (zNum > simulationNodeStrikeCurrent.getZ()) {
-                zDistance = zNum - simulationNodeStrikeCurrent.getZ();
+            if (zNum > nodeCurrent.getZ()) {
+                zDistance = zNum - nodeCurrent.getZ();
             } else {
-                zDistance = simulationNodeStrikeCurrent.getZ() - zNum;
+                zDistance = nodeCurrent.getZ() - zNum;
             }
 
             return (xDistance * 10) + (yDistance * 10) + (zDistance * 10);
@@ -142,12 +121,6 @@ public abstract class Simulation {
         return 10 + parent.getG();
     }
 
-    /**
-     * Calculate node heuristic value.
-     *
-     * @param node simulation node.
-     * @return heuristic value.
-     */
     protected int calculateH(Node node) {
         int row = node.getRow();
         int col = node.getCol();
@@ -156,32 +129,32 @@ public abstract class Simulation {
         int y = 0;
         int z = 0;
 
-        while (col < simulationNodeStrikeTarget.getCol() || col > simulationNodeStrikeTarget.getCol()) {
+        while (col < nodeTarget.getCol() || col > nodeTarget.getCol()) {
             x += 10;
-            if (col < simulationNodeStrikeTarget.getCol()) {
+            if (col < nodeTarget.getCol()) {
                 col++;
             }
-            if (col > simulationNodeStrikeTarget.getCol()) {
+            if (col > nodeTarget.getCol()) {
                 col--;
             }
         }
 
-        while (row < simulationNodeStrikeTarget.getRow() || row > simulationNodeStrikeTarget.getRow()) {
+        while (row < nodeTarget.getRow() || row > nodeTarget.getRow()) {
             y += 10;
-            if (row < simulationNodeStrikeTarget.getRow()) {
+            if (row < nodeTarget.getRow()) {
                 row++;
             }
-            if (row > simulationNodeStrikeTarget.getRow()) {
+            if (row > nodeTarget.getRow()) {
                 row--;
             }
         }
 
-        while (zNum < simulationNodeStrikeTarget.getZ() || zNum > simulationNodeStrikeTarget.getZ()) {
+        while (zNum < nodeTarget.getZ() || zNum > nodeTarget.getZ()) {
             z += 10;
-            if (zNum < simulationNodeStrikeTarget.getZ()) {
+            if (zNum < nodeTarget.getZ()) {
                 zNum++;
             }
-            if (zNum > simulationNodeStrikeTarget.getZ()) {
+            if (zNum > nodeTarget.getZ()) {
                 zNum--;
             }
         }
@@ -189,19 +162,9 @@ public abstract class Simulation {
         return x + y + z;
     }
 
-    /**
-     * Calculate neighboring node values.
-     */
-    protected abstract void calculateNeighborValues();
-
-    /**
-     * Generate final pathfinding path.
-     *
-     * @return final path.
-     */
     private ArrayList<Node> generatePath() {
         ArrayList<Node> path = new ArrayList<>();
-        Node temp = simulationNodeStrikeCurrent;
+        Node temp = nodeCurrent;
         path.add(temp);
         while (temp.getParent() != null) {
             temp = temp.getParent();
@@ -211,12 +174,19 @@ public abstract class Simulation {
         return path;
     }
 
-    /**
-     * Get storm simulation.
-     *
-     * @return storm simulation.
-     */
+    public void setStormZone(int[][][] simulationSnapshot) {
+        this.simulationSnapshot = simulationSnapshot;
+    }
+
+    public void setSimulationStrikeStart(int[] simulationStart) {
+        this.simulationStart = simulationStart;
+    }
+
+    public void setSimulationStrikeTarget(int[] simulationTarget) {
+        this.simulationTarget = simulationTarget;
+    }
+
     public int[][][] getSimulationStormZone() {
-        return stormZone;
+        return simulationSnapshot;
     }
 }

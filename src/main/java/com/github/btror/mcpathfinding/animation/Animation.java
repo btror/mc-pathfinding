@@ -2,7 +2,7 @@ package com.github.btror.mcpathfinding.animation;
 
 import com.github.btror.mcpathfinding.McPathfinding;
 import com.github.btror.mcpathfinding.simulation.Simulation;
-import com.github.btror.mcpathfinding.simulation.pathfinding.AStar;
+import com.github.btror.mcpathfinding.simulation.util.SimulationFactory;
 import org.bukkit.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -11,44 +11,47 @@ import java.util.ArrayList;
 public class Animation {
     private final McPathfinding plugin;
     private final Location[][][] snapshot;
-    private final ArrayList<Location> path;
-    private final Location start;
-    private final Location target;
-    private int[][][] simulation;
+    private final Location snapshotStart;
+    private final Location snapshotTarget;
+    private final ArrayList<Location> snapshotPath;
+    private final Simulation simulation;
 
     /**
-     * @param plugin   plugin instance
-     * @param snapshot worldly area
-     * @param start    pathfinding start location
-     * @param target   pathfinding target location
+     * @param plugin         plugin instance
+     * @param snapshot       worldly area
+     * @param snapshotStart  pathfinding start location
+     * @param snapshotTarget pathfinding target location
      */
     public Animation(
             McPathfinding plugin,
             Location[][][] snapshot,
-            Location start,
-            Location target
+            Location snapshotStart,
+            Location snapshotTarget,
+            String algorithm
     ) {
         this.plugin = plugin;
         this.snapshot = snapshot;
-        this.path = new ArrayList<>();
-        this.start = start;
-        this.target = target;
+        this.snapshotStart = snapshotStart;
+        this.snapshotTarget = snapshotTarget;
+        this.snapshotPath = new ArrayList<>();
+        this.simulation = SimulationFactory.getSimulation(algorithm);
     }
 
     public void start() {
-        simulation = createSimulation();
-        if (simulation != null) {
+        createSimulation();
+        if (simulation.getSimulationStormZone() != null) {
             createPath();
             animate();
         }
     }
 
     private void createPath() {
-        for (int i = 0; i < simulation.length; i++) {
-            for (int j = 0; j < simulation[0].length; j++) {
-                for (int k = 0; k < simulation[0][0].length; k++) {
-                    if (simulation[i][j][k] == 3) {
-                        path.add(snapshot[i][j][k].getBlock().getLocation());
+        int[][][] simulationStormZone = simulation.getSimulationStormZone();
+        for (int i = 0; i < simulationStormZone.length; i++) {
+            for (int j = 0; j < simulationStormZone[0].length; j++) {
+                for (int k = 0; k < simulationStormZone[0][0].length; k++) {
+                    if (simulationStormZone[i][j][k] == 3) {
+                        snapshotPath.add(snapshot[i][j][k].getBlock().getLocation());
                     }
                 }
             }
@@ -68,7 +71,7 @@ public class Animation {
      * 4 = start space
      * 5 = target space
      */
-    private int[][][] createSimulation() {
+    private void createSimulation() {
         int[][][] simulationStormZone = new int[snapshot.length][snapshot[0].length][snapshot[0][0].length];
         int[] simulationStart = new int[3];
         int[] simulationTarget = new int[3];
@@ -82,14 +85,14 @@ public class Animation {
                         simulationStormZone[i][j][k] = 1;
                     }
 
-                    if (snapshot[i][j][k] == start) {
+                    if (snapshot[i][j][k] == snapshotStart) {
                         simulationStormZone[i][j][k] = 4;
                         simulationStart[0] = i;
                         simulationStart[1] = j;
                         simulationStart[2] = k;
                     }
 
-                    if (snapshot[i][j][k] == target) {
+                    if (snapshot[i][j][k] == snapshotTarget) {
                         simulationStormZone[i][j][k] = 5;
                         simulationTarget[0] = i;
                         simulationTarget[1] = j;
@@ -99,22 +102,18 @@ public class Animation {
             }
         }
 
-        // TODO: add user defined instantiation factory class maybe
-        Simulation simulation = new AStar(simulationStormZone, simulationStart, simulationTarget);
+        simulation.setStormZone(simulationStormZone);
+        simulation.setSimulationStrikeStart(simulationStart);
+        simulation.setSimulationStrikeTarget(simulationTarget);
         simulation.start();
-
-        if (simulation.getPath()) {
-            return simulation.getSimulationStormZone();
-        }
-
-        return null;
+        simulation.findPath();
     }
 
     private class Path extends BukkitRunnable {
 
         @Override
         public void run() {
-            for (Location location : path) {
+            for (Location location : snapshotPath) {
                 World world = location.getWorld();
                 assert world != null;
                 world.spawnParticle(

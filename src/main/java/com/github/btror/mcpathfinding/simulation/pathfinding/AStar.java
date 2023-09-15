@@ -5,141 +5,144 @@ import com.github.btror.mcpathfinding.simulation.util.Node;
 
 public class AStar extends Simulation {
 
-    public AStar(int[][][] stormZone, int[] simulationStrikeStart, int[] simulationStrikeTarget) {
-        super(stormZone, simulationStrikeStart, simulationStrikeTarget);
+    public AStar() {
+    }
+
+    public AStar(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
+        super(simulationSnapshot, simulationStart, simulationTarget);
     }
 
     @Override
     public void start() {
-        simulationNodeStrikeCurrent = new Node(
-                simulationStrikeStart[0],
-                simulationStrikeStart[1],
-                simulationStrikeStart[2],
+        nodeCurrent = new Node(
+                simulationStart[0],
+                simulationStart[1],
+                simulationStart[2],
                 0
         );
-        simulationNodeStrikeTarget = new Node(
-                simulationStrikeTarget[0],
-                simulationStrikeTarget[1],
-                simulationStrikeTarget[2],
+        nodeTarget = new Node(
+                simulationTarget[0],
+                simulationTarget[1],
+                simulationTarget[2],
                 0
         );
-        simulationStormZone[simulationStrikeStart[0]][simulationStrikeStart[1]][simulationStrikeStart[2]] = simulationNodeStrikeCurrent;
-        simulationStormZone[simulationStrikeTarget[0]][simulationStrikeTarget[1]][simulationStrikeTarget[2]] = simulationNodeStrikeTarget;
+        nodeSnapshot[simulationStart[0]][simulationStart[1]][simulationStart[2]] = nodeCurrent;
+        nodeSnapshot[simulationTarget[0]][simulationTarget[1]][simulationTarget[2]] = nodeTarget;
 
-        for (int i = 0; i < stormZone.length; i++) {
-            for (int j = 0; j < stormZone[i].length; j++) {
-                for (int k = 0; k < stormZone[i][j].length; k++) {
-                    if (stormZone[i][j][k] == 0) {
+        for (int i = 0; i < simulationSnapshot.length; i++) {
+            for (int j = 0; j < simulationSnapshot[i].length; j++) {
+                for (int k = 0; k < simulationSnapshot[i][j].length; k++) {
+                    if (simulationSnapshot[i][j][k] == 0) {
                         Node node = new Node(i, j, k, 0);
-                        simulationStormZone[i][j][k] = node;
+                        nodeSnapshot[i][j][k] = node;
                     }
-                    if (stormZone[i][j][k] == 1) {
+                    if (simulationSnapshot[i][j][k] == 1) {
                         Node node = new Node(i, j, k, 1);
-                        simulationStormZone[i][j][k] = node;
+                        nodeSnapshot[i][j][k] = node;
                     }
                 }
             }
         }
 
-        int g = calculateG(simulationNodeStrikeCurrent);
-        simulationNodeStrikeCurrent.setG(g);
+        int g = calculateG(nodeCurrent);
+        nodeCurrent.setG(g);
 
-        int h = calculateH(simulationNodeStrikeCurrent);
-        simulationNodeStrikeCurrent.setH(h);
+        int h = calculateH(nodeCurrent);
+        nodeCurrent.setH(h);
 
-        simulationNodeStrikeCurrent.setF();
-        simulationNodeStrikeStart = simulationNodeStrikeCurrent;
-        openList.add(simulationNodeStrikeCurrent);
+        nodeCurrent.setF();
+        nodeStart = nodeCurrent;
+        openList.add(nodeCurrent);
     }
 
     @Override
     public void calculateNeighborValues() {
-        int row = simulationNodeStrikeCurrent.getRow();
-        int col = simulationNodeStrikeCurrent.getCol();
-        int zNum = simulationNodeStrikeCurrent.getZ();
+        int row = nodeCurrent.getRow();
+        int col = nodeCurrent.getCol();
+        int zNum = nodeCurrent.getZ();
 
-        if (zNum - 1 > -1 && simulationStormZone[row][col][zNum - 1].getType() == 0
-                && !closedList.contains(simulationStormZone[row][col][zNum - 1])) {
-            Node[][][] grid = simulationStormZone;
-            grid[row][col][zNum - 1].setParent(simulationNodeStrikeCurrent);
+        if (zNum - 1 > -1 && nodeSnapshot[row][col][zNum - 1].getType() == 0
+                && !closedList.contains(nodeSnapshot[row][col][zNum - 1])) {
+            Node[][][] grid = nodeSnapshot;
+            grid[row][col][zNum - 1].setParent(nodeCurrent);
             int g = calculateG(grid[row][col][zNum - 1]);
             grid[row][col][zNum - 1].setG(g);
             int h = calculateH(grid[row][col][zNum - 1]);
             grid[row][col][zNum - 1].setH(h);
             grid[row][col][zNum - 1].setF();
-            simulationStormZone = grid;
+            nodeSnapshot = grid;
             openList.add(grid[row][col][zNum - 1]);
-            stormZone[row][col][zNum - 1] = 2;
+            simulationSnapshot[row][col][zNum - 1] = 2;
         }
 
-        if (col + 1 < simulationStormZone.length && simulationStormZone[row][col + 1][zNum].getType() == 0
-                && !closedList.contains(simulationStormZone[row][col + 1][zNum])) {
-            Node[][][] grid = simulationStormZone;
-            grid[row][col + 1][zNum].setParent(simulationNodeStrikeCurrent);
+        if (col + 1 < nodeSnapshot.length && nodeSnapshot[row][col + 1][zNum].getType() == 0
+                && !closedList.contains(nodeSnapshot[row][col + 1][zNum])) {
+            Node[][][] grid = nodeSnapshot;
+            grid[row][col + 1][zNum].setParent(nodeCurrent);
             int g = calculateG(grid[row][col + 1][zNum]);
             grid[row][col + 1][zNum].setG(g);
             int h = calculateH(grid[row][col + 1][zNum]);
             grid[row][col + 1][zNum].setH(h);
             grid[row][col + 1][zNum].setF();
-            simulationStormZone = grid;
+            nodeSnapshot = grid;
             openList.add(grid[row][col + 1][zNum]);
-            stormZone[row][col + 1][zNum] = 2;
+            simulationSnapshot[row][col + 1][zNum] = 2;
         }
 
-        if (row - 1 > -1 && simulationStormZone[row - 1][col][zNum].getType() == 0
-                && !closedList.contains(simulationStormZone[row - 1][col][zNum])) {
-            Node[][][] grid = simulationStormZone;
-            grid[row - 1][col][zNum].setParent(simulationNodeStrikeCurrent);
+        if (row - 1 > -1 && nodeSnapshot[row - 1][col][zNum].getType() == 0
+                && !closedList.contains(nodeSnapshot[row - 1][col][zNum])) {
+            Node[][][] grid = nodeSnapshot;
+            grid[row - 1][col][zNum].setParent(nodeCurrent);
             int g = calculateG(grid[row - 1][col][zNum]);
             grid[row - 1][col][zNum].setG(g);
             int h = calculateH(grid[row - 1][col][zNum]);
             grid[row - 1][col][zNum].setH(h);
             grid[row - 1][col][zNum].setF();
-            simulationStormZone = grid;
+            nodeSnapshot = grid;
             openList.add(grid[row - 1][col][zNum]);
-            stormZone[row - 1][col][zNum] = 2;
+            simulationSnapshot[row - 1][col][zNum] = 2;
         }
 
-        if (col - 1 > -1 && simulationStormZone[row][col - 1][zNum].getType() == 0
-                && !closedList.contains(simulationStormZone[row][col - 1][zNum])) {
-            Node[][][] grid = simulationStormZone;
-            grid[row][col - 1][zNum].setParent(simulationNodeStrikeCurrent);
+        if (col - 1 > -1 && nodeSnapshot[row][col - 1][zNum].getType() == 0
+                && !closedList.contains(nodeSnapshot[row][col - 1][zNum])) {
+            Node[][][] grid = nodeSnapshot;
+            grid[row][col - 1][zNum].setParent(nodeCurrent);
             int g = calculateG(grid[row][col - 1][zNum]);
             grid[row][col - 1][zNum].setG(g);
             int h = calculateH(grid[row][col - 1][zNum]);
             grid[row][col - 1][zNum].setH(h);
             grid[row][col - 1][zNum].setF();
-            simulationStormZone = grid;
+            nodeSnapshot = grid;
             openList.add(grid[row][col - 1][zNum]);
-            stormZone[row][col - 1][zNum] = 2;
+            simulationSnapshot[row][col - 1][zNum] = 2;
         }
 
-        if (row + 1 < simulationStormZone.length && simulationStormZone[row + 1][col][zNum].getType() == 0
-                && !closedList.contains(simulationStormZone[row + 1][col][zNum])) {
-            Node[][][] grid = simulationStormZone;
-            grid[row + 1][col][zNum].setParent(simulationNodeStrikeCurrent);
+        if (row + 1 < nodeSnapshot.length && nodeSnapshot[row + 1][col][zNum].getType() == 0
+                && !closedList.contains(nodeSnapshot[row + 1][col][zNum])) {
+            Node[][][] grid = nodeSnapshot;
+            grid[row + 1][col][zNum].setParent(nodeCurrent);
             int g = calculateG(grid[row + 1][col][zNum]);
             grid[row + 1][col][zNum].setG(g);
             int h = calculateH(grid[row + 1][col][zNum]);
             grid[row + 1][col][zNum].setH(h);
             grid[row + 1][col][zNum].setF();
-            simulationStormZone = grid;
+            nodeSnapshot = grid;
             openList.add(grid[row + 1][col][zNum]);
-            stormZone[row + 1][col][zNum] = 2;
+            simulationSnapshot[row + 1][col][zNum] = 2;
         }
 
-        if (zNum + 1 < simulationStormZone.length && simulationStormZone[row][col][zNum + 1].getType() == 0
-                && !closedList.contains(simulationStormZone[row][col][zNum + 1])) {
-            Node[][][] grid = simulationStormZone;
-            grid[row][col][zNum + 1].setParent(simulationNodeStrikeCurrent);
+        if (zNum + 1 < nodeSnapshot.length && nodeSnapshot[row][col][zNum + 1].getType() == 0
+                && !closedList.contains(nodeSnapshot[row][col][zNum + 1])) {
+            Node[][][] grid = nodeSnapshot;
+            grid[row][col][zNum + 1].setParent(nodeCurrent);
             int g = calculateG(grid[row][col][zNum + 1]);
             grid[row][col][zNum + 1].setG(g);
             int h = calculateH(grid[row][col][zNum + 1]);
             grid[row][col][zNum + 1].setH(h);
             grid[row][col][zNum + 1].setF();
-            simulationStormZone = grid;
+            nodeSnapshot = grid;
             openList.add(grid[row][col][zNum + 1]);
-            stormZone[row][col][zNum + 1] = 2;
+            simulationSnapshot[row][col][zNum + 1] = 2;
         }
     }
 }
