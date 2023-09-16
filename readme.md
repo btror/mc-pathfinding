@@ -1,6 +1,6 @@
-# Spigot Pathfinding Plugin
+# Spigot Pathfinding Library
 
-The mc-pathfinding plugin provides pathfinding and animation capabilities for your Minecraft server. This README will guide you on how to use this plugin in your server environment.
+The mc-pathfinding library provides pathfinding and animation capabilities for your Minecraft server plugins. This README will guide you on how to use this library in your server plugins.
 
 
 ## Table of Contents
@@ -12,7 +12,7 @@ The mc-pathfinding plugin provides pathfinding and animation capabilities for yo
 - [License](#license)
 
 
-## Installation
+## Installation TODO: change to explain how to add library as dependency
 
 1. **Download the Plugin JAR**:
     - Obtain the McPathfinding plugin JAR file from the [Releases](https://github.com/yourusername/McPathfinding/releases) section of this repository.
@@ -24,7 +24,7 @@ The mc-pathfinding plugin provides pathfinding and animation capabilities for yo
     - Start your Minecraft server or reload it if it's already running.
 
 
-## Usage
+## Usage TODO: add more details and examples
 
 ### Pathfinding Methods
 
@@ -89,16 +89,14 @@ plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.G
 Feel free to explore more customization options and use different pathfinding methods provided by the plugin to create engaging animations in your Minecraft server.
 
 
-## Contributing
+## Contributing TODO: be more specific
 
 If you'd like to contribute to the development of this plugin or report issues, please check out the GitHub repository for more information.
 
 
-## Data model
-
-TODO: create data model
+## Data model TODO: create data model
 
 
-## License
+## License TODO: find appropriate license
 
 PLACEHOLDER: This project is licensed under the MIT License - see the LICENSE file for details.
