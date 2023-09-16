@@ -211,6 +211,27 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
+    public void astar(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean diagonalMovement,
+            int delay,
+            int period) {
+        search(
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                "astar",
+                diagonalMovement,
+                delay,
+                period);
+    }
+
     public void greedyBestFirstSearch(
             Location[][][] snapshot,
             Location startLocation,
@@ -393,6 +414,27 @@ public final class McPathfinding extends JavaPlugin {
                 particle,
                 "gbfs",
                 false,
+                delay,
+                period);
+    }
+
+    public void greedyBestFirstSearch(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean diagonalMovement,
+            int delay,
+            int period) {
+        search(
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                "gbfs",
+                diagonalMovement,
                 delay,
                 period);
     }

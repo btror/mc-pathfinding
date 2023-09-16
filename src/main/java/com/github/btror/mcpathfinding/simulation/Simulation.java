@@ -20,7 +20,7 @@ public abstract class Simulation {
     protected PriorityQueue<Node> openList;
     protected ArrayList<Node> closedList;
 
-    protected boolean diagonalMovement; // TODO: use variable
+    protected boolean diagonalMovement;
 
     public Simulation() {
         this.openList = new PriorityQueue<>(10, new NodeComparator());
