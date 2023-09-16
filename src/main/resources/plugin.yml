@@ -1,7 +1,11 @@
 name: mc-pathfinding
-version: '${project.version}'
+version: "${project.version}"
 main: com.github.btror.mcpathfinding.McPathfinding
-api-version: 1.20
-authors: [ btror ]
+api-version: 1.13
+authors: [btror]
 description: Spigot pathfinding plugin.
 website: https://github.com/btror
+commands:
+  mcpathfinding:
+    description: starts pathfinding
+    usage: /mcpathfinding

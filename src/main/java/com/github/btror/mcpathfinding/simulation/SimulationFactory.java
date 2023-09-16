@@ -1,6 +1,5 @@
-package com.github.btror.mcpathfinding.simulation.util;
+package com.github.btror.mcpathfinding.simulation;
 
-import com.github.btror.mcpathfinding.simulation.Simulation;
 import com.github.btror.mcpathfinding.simulation.pathfinding.AStar;
 import com.github.btror.mcpathfinding.simulation.pathfinding.GreedyBestFirstSearch;
 

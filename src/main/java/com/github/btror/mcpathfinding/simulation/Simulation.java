@@ -10,6 +10,7 @@ public abstract class Simulation {
     protected int[][][] simulationSnapshot;
     protected int[] simulationStart;
     protected int[] simulationTarget;
+    protected ArrayList<Integer[]> simulationPath;
 
     protected Node[][][] nodeSnapshot;
     protected Node nodeStart;
@@ -22,6 +23,9 @@ public abstract class Simulation {
     protected boolean diagonalMovement; // TODO: use variable
 
     public Simulation() {
+        this.openList = new PriorityQueue<>(10, new NodeComparator());
+        this.closedList = new ArrayList<>();
+        this.simulationPath = new ArrayList<>();
     }
 
     /**
@@ -36,14 +40,14 @@ public abstract class Simulation {
     public Simulation(
             int[][][] simulationSnapshot,
             int[] simulationStart,
-            int[] simulationTarget
-    ) {
+            int[] simulationTarget) {
         this.simulationSnapshot = simulationSnapshot;
         this.simulationStart = simulationStart;
         this.simulationTarget = simulationTarget;
-        this.nodeSnapshot = new Node[this.simulationSnapshot.length][this.simulationSnapshot[0].length][this.simulationSnapshot[0][0].length];
+        this.nodeSnapshot = new Node[simulationSnapshot.length][simulationSnapshot[0].length][simulationSnapshot[0][0].length];
         this.openList = new PriorityQueue<>(10, new NodeComparator());
         this.closedList = new ArrayList<>();
+        this.simulationPath = new ArrayList<>();
     }
 
     public abstract void start();
@@ -66,6 +70,7 @@ public abstract class Simulation {
                     int zNum = path.get(i).getZ();
                     if (simulationSnapshot[row][col][zNum] == 2) {
                         simulationSnapshot[row][col][zNum] = 3;
+                        simulationPath.add(new Integer[] { row, col, zNum });
                     }
                 }
                 break;
@@ -177,6 +182,7 @@ public abstract class Simulation {
     }
 
     public void setSimulationSnapshot(int[][][] simulationSnapshot) {
+        this.nodeSnapshot = new Node[simulationSnapshot.length][simulationSnapshot[0].length][simulationSnapshot[0][0].length];
         this.simulationSnapshot = simulationSnapshot;
     }
 
@@ -194,5 +200,9 @@ public abstract class Simulation {
 
     public int[][][] getSimulationSnapshot() {
         return simulationSnapshot;
+    }
+
+    public ArrayList<Integer[]> getSimulationPath() {
+        return this.simulationPath;
     }
 }

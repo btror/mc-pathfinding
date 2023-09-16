@@ -2,7 +2,7 @@ package com.github.btror.mcpathfinding.animation;
 
 import com.github.btror.mcpathfinding.McPathfinding;
 import com.github.btror.mcpathfinding.simulation.Simulation;
-import com.github.btror.mcpathfinding.simulation.util.SimulationFactory;
+import com.github.btror.mcpathfinding.simulation.SimulationFactory;
 import org.bukkit.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -35,8 +35,7 @@ public class Animation {
             String algorithm,
             boolean diagonalMovement,
             long delay,
-            long period
-    ) {
+            long period) {
         this.plugin = plugin;
         this.snapshot = snapshot;
         this.snapshotStart = snapshotStart;
@@ -58,16 +57,19 @@ public class Animation {
     }
 
     private void createPath() {
-        int[][][] simulationStormZone = simulation.getSimulationSnapshot();
-        for (int i = 0; i < simulationStormZone.length; i++) {
-            for (int j = 0; j < simulationStormZone[0].length; j++) {
-                for (int k = 0; k < simulationStormZone[0][0].length; k++) {
-                    if (simulationStormZone[i][j][k] == 3) {
-                        snapshotPath.add(snapshot[i][j][k].getBlock().getLocation());
-                    }
-                }
-            }
+        for (Integer[] space : simulation.getSimulationPath()) {
+            snapshotPath.add(snapshot[space[0]][space[1]][space[2]]);
         }
+        // int[][][] simulationSnapshot = simulation.getSimulationSnapshot();
+        // for (int i = 0; i < simulationSnapshot.length; i++) {
+        // for (int j = 0; j < simulationSnapshot[0].length; j++) {
+        // for (int k = 0; k < simulationSnapshot[0][0].length; k++) {
+        // if (simulationSnapshot[i][j][k] == 3) {
+        // snapshotPath.add(snapshot[i][j][k].getBlock().getLocation());
+        // }
+        // }
+        // }
+        // }
     }
 
     private void animate() {
@@ -84,7 +86,7 @@ public class Animation {
      * 5 = target space
      */
     private void createSimulation() {
-        int[][][] simulationStormZone = new int[snapshot.length][snapshot[0].length][snapshot[0][0].length];
+        int[][][] simulationSnapshot = new int[snapshot.length][snapshot[0].length][snapshot[0][0].length];
         int[] simulationStart = new int[3];
         int[] simulationTarget = new int[3];
 
@@ -92,20 +94,20 @@ public class Animation {
             for (int j = 0; j < snapshot[i].length; j++) {
                 for (int k = 0; k < snapshot[i][j].length; k++) {
                     if (snapshot[i][j][k].getBlock().getType() == Material.AIR) {
-                        simulationStormZone[i][j][k] = 0;
+                        simulationSnapshot[i][j][k] = 0;
                     } else {
-                        simulationStormZone[i][j][k] = 1;
+                        simulationSnapshot[i][j][k] = 1;
                     }
 
                     if (snapshot[i][j][k] == snapshotStart) {
-                        simulationStormZone[i][j][k] = 4;
+                        simulationSnapshot[i][j][k] = 4;
                         simulationStart[0] = i;
                         simulationStart[1] = j;
                         simulationStart[2] = k;
                     }
 
                     if (snapshot[i][j][k] == snapshotTarget) {
-                        simulationStormZone[i][j][k] = 5;
+                        simulationSnapshot[i][j][k] = 5;
                         simulationTarget[0] = i;
                         simulationTarget[1] = j;
                         simulationTarget[2] = k;
@@ -114,7 +116,7 @@ public class Animation {
             }
         }
 
-        simulation.setSimulationSnapshot(simulationStormZone);
+        simulation.setSimulationSnapshot(simulationSnapshot);
         simulation.setSimulationStrikeStart(simulationStart);
         simulation.setSimulationStrikeTarget(simulationTarget);
         simulation.start();
@@ -122,27 +124,33 @@ public class Animation {
     }
 
     private class Path extends BukkitRunnable {
+        int counter = 0;
 
         @Override
         public void run() {
-            for (Location location : snapshotPath) {
-                World world = location.getWorld();
-                assert world != null;
-                world.spawnParticle(
-                        Particle.FIREWORKS_SPARK,
-                        location.getX(),
-                        location.getY(),
-                        location.getZ(),
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        null,
-                        true
-                );
+            // for (Location location : snapshotPath) {
+            // World world = location.getWorld();
+            // assert world != null;
+            // world.spawnParticle(
+            // Particle.FIREWORKS_SPARK,
+            // location.getX(),
+            // location.getY(),
+            // location.getZ(),
+            // 1,
+            // 0,
+            // 0,
+            // 0,
+            // 0,
+            // null,
+            // true);
+            // }
+
+            snapshotPath.get(counter).getBlock().setType(Material.DIAMOND_BLOCK);
+
+            if (counter == snapshotPath.size() - 1) {
+                this.cancel();
             }
-            this.cancel();
+            counter++;
         }
     }
 }
