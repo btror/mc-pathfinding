@@ -13,25 +13,32 @@ public class Animation {
     private final Location[][][] snapshot;
     private final Location snapshotStart;
     private final Location snapshotTarget;
+    private final Material material;
+    private final Particle particle;
     private final ArrayList<Location> snapshotPath;
     private final Simulation simulation;
     private final long delay;
     private final long period;
 
     /**
-     * @param plugin         plugin instance
-     * @param snapshot       worldly area
-     * @param snapshotStart  pathfinding start location
-     * @param snapshotTarget pathfinding target location
-     * @param algorithm      pathfinding algorithm to use
-     * @param delay          animation delay (TaskTimer delay param)
-     * @param period         animation speed (TaskTimer period param)
+     * @param plugin           plugin instance
+     * @param snapshot         worldly area
+     * @param snapshotStart    pathfinding start location
+     * @param snapshotTarget   pathfinding target location
+     * @param material         pathfinding path block type
+     * @param particle         pathfinding particle effect
+     * @param algorithm        pathfinding algorithm to use
+     * @param diagonalMovement pathfinding algorithm using diagonal movement in calculations
+     * @param delay            animation delay (TaskTimer delay param)
+     * @param period           animation speed (TaskTimer period param)
      */
     public Animation(
             McPathfinding plugin,
             Location[][][] snapshot,
             Location snapshotStart,
             Location snapshotTarget,
+            Material material,
+            Particle particle,
             String algorithm,
             boolean diagonalMovement,
             long delay,
@@ -40,6 +47,8 @@ public class Animation {
         this.snapshot = snapshot;
         this.snapshotStart = snapshotStart;
         this.snapshotTarget = snapshotTarget;
+        this.material = material;
+        this.particle = particle;
         this.snapshotPath = new ArrayList<>();
         this.simulation = SimulationFactory.getSimulation(algorithm);
         assert this.simulation != null;
@@ -60,16 +69,6 @@ public class Animation {
         for (Integer[] space : simulation.getSimulationPath()) {
             snapshotPath.add(snapshot[space[0]][space[1]][space[2]]);
         }
-        // int[][][] simulationSnapshot = simulation.getSimulationSnapshot();
-        // for (int i = 0; i < simulationSnapshot.length; i++) {
-        // for (int j = 0; j < simulationSnapshot[0].length; j++) {
-        // for (int k = 0; k < simulationSnapshot[0][0].length; k++) {
-        // if (simulationSnapshot[i][j][k] == 3) {
-        // snapshotPath.add(snapshot[i][j][k].getBlock().getLocation());
-        // }
-        // }
-        // }
-        // }
     }
 
     private void animate() {
@@ -128,28 +127,30 @@ public class Animation {
 
         @Override
         public void run() {
-            // for (Location location : snapshotPath) {
-            // World world = location.getWorld();
-            // assert world != null;
-            // world.spawnParticle(
-            // Particle.FIREWORKS_SPARK,
-            // location.getX(),
-            // location.getY(),
-            // location.getZ(),
-            // 1,
-            // 0,
-            // 0,
-            // 0,
-            // 0,
-            // null,
-            // true);
-            // }
-
-            snapshotPath.get(counter).getBlock().setType(Material.DIAMOND_BLOCK);
+            if (material != null) {
+                snapshotPath.get(counter).getBlock().setType(material);
+            }
+            if (particle != null) {
+                World world = snapshotPath.get(counter).getWorld();
+                assert world != null;
+                world.spawnParticle(
+                        Particle.FIREWORKS_SPARK,
+                        snapshotPath.get(counter).getX(),
+                        snapshotPath.get(counter).getY(),
+                        snapshotPath.get(counter).getZ(),
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        null,
+                        true);
+            }
 
             if (counter == snapshotPath.size() - 1) {
                 this.cancel();
             }
+
             counter++;
         }
     }

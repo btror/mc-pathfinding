@@ -1,20 +1,26 @@
 package com.github.btror.mcpathfinding.commands;
 
 import com.github.btror.mcpathfinding.McPathfinding;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
+
+import static org.bukkit.Bukkit.getLogger;
 
 public record McPathfindingCommand(McPathfinding plugin) implements CommandExecutor, Listener {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
+
         try {
+            // EXAMPLE OF HOW THE LIBRARY IS USED
             Location[][][] snapshot = new Location[10][10][10];
 
             Location snapshotSpawnLocation = new Location(
@@ -40,13 +46,12 @@ public record McPathfindingCommand(McPathfinding plugin) implements CommandExecu
             Location snapshotTargetLocation = snapshot[(int) (Math.random() * 9 + 0)][(int) (Math.random() * 9
                     + 0)][(int) (Math.random() * 9 + 0)];
 
-            plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, 0, 10);
+            plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.ELECTRIC_SPARK, 0, 10);
 
             return true;
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "/mcpathfinding");
+        } catch (Exception error) {
+            getLogger().info(error.getMessage());
         }
 
         return false;
