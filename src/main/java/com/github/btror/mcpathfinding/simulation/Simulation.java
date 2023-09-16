@@ -19,6 +19,8 @@ public abstract class Simulation {
     protected PriorityQueue<Node> openList;
     protected ArrayList<Node> closedList;
 
+    protected boolean diagonalMovement; // TODO: use variable
+
     public Simulation() {
     }
 
@@ -174,7 +176,7 @@ public abstract class Simulation {
         return path;
     }
 
-    public void setStormZone(int[][][] simulationSnapshot) {
+    public void setSimulationSnapshot(int[][][] simulationSnapshot) {
         this.simulationSnapshot = simulationSnapshot;
     }
 
@@ -186,7 +188,11 @@ public abstract class Simulation {
         this.simulationTarget = simulationTarget;
     }
 
-    public int[][][] getSimulationStormZone() {
+    public void setDiagonalMovement(boolean diagonalMovement) {
+        this.diagonalMovement = diagonalMovement;
+    }
+
+    public int[][][] getSimulationSnapshot() {
         return simulationSnapshot;
     }
 }

@@ -16,11 +16,143 @@ public final class McPathfinding extends JavaPlugin {
         getLogger().info("mc-pathfinding disabled...");
     }
 
-    public void astar(Location[][][] snapshot, Location startLocation, Location targetLocation) {
-        new Animation(this, snapshot, startLocation, targetLocation, "astar").start();
+    public void astar(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation
+    ) {
+        astar(
+                snapshot,
+                startLocation,
+                targetLocation,
+                0,
+                1
+        );
     }
 
-    public void greedyBestFirstSearch(Location[][][] snapshot, Location startLocation, Location targetLocation) {
-        new Animation(this, snapshot, startLocation, targetLocation, "gbfs").start();
+    public void astar(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            long delay,
+            long period
+    ) {
+        new Animation(
+                this,
+                snapshot,
+                startLocation,
+                targetLocation,
+                "astar",
+                false,
+                delay,
+                period
+        ).start();
+    }
+
+    public void astar(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            boolean diagonalMovement
+    ) {
+        astar(
+                snapshot,
+                startLocation,
+                targetLocation,
+                diagonalMovement,
+                0,
+                1
+        );
+    }
+
+    public void astar(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            boolean diagonalMovement,
+            long delay,
+            long period
+    ) {
+        new Animation(
+                this,
+                snapshot,
+                startLocation,
+                targetLocation,
+                "astar",
+                diagonalMovement,
+                delay,
+                period
+        ).start();
+    }
+
+    public void greedyBestFirstSearch(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation
+    ) {
+        greedyBestFirstSearch(
+                snapshot,
+                startLocation,
+                targetLocation,
+                0,
+                1
+        );
+    }
+
+    public void greedyBestFirstSearch(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            long delay,
+            long period
+    ) {
+        new Animation(
+                this,
+                snapshot,
+                startLocation,
+                targetLocation,
+                "gbfs",
+                false,
+                delay,
+                period
+        ).start();
+    }
+
+    public void greedyBestFirstSearch(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            boolean diagonalMovement
+    ) {
+        new Animation(
+                this,
+                snapshot,
+                startLocation,
+                targetLocation,
+                "gbfs",
+                diagonalMovement,
+                0,
+                1
+        ).start();
+    }
+
+    public void greedyBestFirstSearch(
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            boolean diagonalMovement,
+            long delay,
+            long period
+    ) {
+        new Animation(
+                this,
+                snapshot,
+                startLocation,
+                targetLocation,
+                "gbfs",
+                diagonalMovement,
+                delay,
+                period
+        ).start();
     }
 }

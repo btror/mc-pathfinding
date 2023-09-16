@@ -15,19 +15,27 @@ public class Animation {
     private final Location snapshotTarget;
     private final ArrayList<Location> snapshotPath;
     private final Simulation simulation;
+    private final long delay;
+    private final long period;
 
     /**
      * @param plugin         plugin instance
      * @param snapshot       worldly area
      * @param snapshotStart  pathfinding start location
      * @param snapshotTarget pathfinding target location
+     * @param algorithm      pathfinding algorithm to use
+     * @param delay          animation delay (TaskTimer delay param)
+     * @param period         animation speed (TaskTimer period param)
      */
     public Animation(
             McPathfinding plugin,
             Location[][][] snapshot,
             Location snapshotStart,
             Location snapshotTarget,
-            String algorithm
+            String algorithm,
+            boolean diagonalMovement,
+            long delay,
+            long period
     ) {
         this.plugin = plugin;
         this.snapshot = snapshot;
@@ -35,18 +43,22 @@ public class Animation {
         this.snapshotTarget = snapshotTarget;
         this.snapshotPath = new ArrayList<>();
         this.simulation = SimulationFactory.getSimulation(algorithm);
+        assert this.simulation != null;
+        this.simulation.setDiagonalMovement(diagonalMovement);
+        this.delay = delay;
+        this.period = period;
     }
 
     public void start() {
         createSimulation();
-        if (simulation.getSimulationStormZone() != null) {
+        if (simulation.getSimulationSnapshot() != null) {
             createPath();
             animate();
         }
     }
 
     private void createPath() {
-        int[][][] simulationStormZone = simulation.getSimulationStormZone();
+        int[][][] simulationStormZone = simulation.getSimulationSnapshot();
         for (int i = 0; i < simulationStormZone.length; i++) {
             for (int j = 0; j < simulationStormZone[0].length; j++) {
                 for (int k = 0; k < simulationStormZone[0][0].length; k++) {
@@ -59,7 +71,7 @@ public class Animation {
     }
 
     private void animate() {
-        new Path().runTaskTimer(plugin, 0, 1);
+        new Path().runTaskTimer(plugin, delay, period);
     }
 
     /**
@@ -102,7 +114,7 @@ public class Animation {
             }
         }
 
-        simulation.setStormZone(simulationStormZone);
+        simulation.setSimulationSnapshot(simulationStormZone);
         simulation.setSimulationStrikeStart(simulationStart);
         simulation.setSimulationStrikeTarget(simulationTarget);
         simulation.start();
