@@ -53,9 +53,12 @@ The plugin provides various pathfinding algorithms that you can use to create an
 
 Here is a list of methods available in the McPathfinding library:
 
-| Method                     | Description                                                                   |
+### `astar`
+
+Performs A\* pathfinding with the specified parameters.
+
+| Parameter                  | Description                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------- |
-| astar                      | Performs A\* pathfinding with the specified parameters.                       |
 | `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
 | `Location startLocation`   | The starting Location for the pathfinding operation.                          |
 | `Location targetLocation`  | The target Location to reach.                                                 |
@@ -65,9 +68,12 @@ Here is a list of methods available in the McPathfinding library:
 | `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
 | `long period`              | (optional) The period (in ticks) at which the animation updates.              |
 
-| Method                     | Description                                                                   |
+### `greedyBestFirstSearch`
+
+Performs Greedy Best First Search pathfinding with the specified parameters.
+
+| Parameter                  | Description                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------- |
-| greedyBestFirstSearch      | Performs Greedy Best First Search pathfinding with the specified parameters.  |
 | `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
 | `Location startLocation`   | The starting Location for the pathfinding operation.                          |
 | `Location targetLocation`  | The target Location to reach.                                                 |
@@ -76,10 +82,13 @@ Here is a list of methods available in the McPathfinding library:
 | `boolean diagonalMovement` | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
 | `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
 | `long period`              | (optional) The period (in ticks) at which the animation updates.              |
+
+### `search`
+
+Initiates a pathfinding animation with the specified parameters.
 
 | Method                     | Description                                                              |
 | -------------------------- | ------------------------------------------------------------------------ |
-| search                     | Initiates a pathfinding animation with the specified parameters.         |
 | `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout. |
 | `Location startLocation`   | The starting Location for the pathfinding operation.                     |
 | `Location targetLocation`  | The target Location to reach.                                            |
