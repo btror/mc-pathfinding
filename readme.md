@@ -2,6 +2,10 @@
 
 The mc-pathfinding library provides pathfinding and animation capabilities for your Minecraft server plugins. This README will guide you on how to use this library in your server plugins.
 
+Example use case: [repository](https://github.com/btror/mc-lightning-strike/tree/main)
+
+<img src="src/main/resources/example.gif" width="400" height="350">
+
 ## Table of Contents
 
 - [Installation](#installation)
