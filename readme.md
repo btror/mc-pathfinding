@@ -24,6 +24,7 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
    - You can add the mc-pathfinding library as a dependency in your project's build configuration (e.g., Maven or Gradle) by specifying the repository and the library version.
    - Example for Maven:
+
      ```xml
      <dependencies>
        <dependency>
@@ -33,7 +34,9 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
        </dependency>
      </dependencies>
      ```
+
    - Example for Gradle:
+
      ```groovy
      dependencies {
          implementation 'com.example:mc-pathfinding:1.0.0' // Replace with the actual version
