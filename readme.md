@@ -124,7 +124,7 @@ Here's a simple example scenario of how the library can be used.
 
 ```java
 // Create a snapshot of an area in your Minecraft world based on the location of a Player.
-Location[][][]snapshot=new Location[20][20][20];
+Location[][][] snapshot = new Location[20][20][20];
 
 for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
@@ -140,11 +140,11 @@ for(int i = 0; i < 20; i++){
 }
 
 // Choose a start and target location in the snapshot.
-Location snapshotStartLocation=snapshot[0][0][5];
-Location snapshotTargetLocation=snapshot[10][15][8];
+Location snapshotStartLocation = snapshot[0][0][5];
+Location snapshotTargetLocation = snapshot[10][15][8];
 
 // Use a pathfinding method to find a path from start to target. A path of gold blocks with electric spark particle effects will be generated to show where the path is.
-plugin.astar(snapshot,snapshotStartLocation,snapshotTargetLocation,Material.GOLD_BLOCK,Particle.ELECTRIC_SPARK,true);
+McPathfinding.astar(plugin, snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.ELECTRIC_SPARK, true);
 ```
 
 Feel free to explore more customization options and use different pathfinding methods provided by the plugin to create
