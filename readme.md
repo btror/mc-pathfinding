@@ -252,7 +252,7 @@ git push origin feature-or-bug-fix-name
 
 ### Coding Guidelines
 
-Please adhere to our coding guidelines and style conventions when contributing code. You can find our coding guidelines in the CONTRIBUTING.md file in the repository.
+Please adhere to our coding guidelines and style conventions when contributing code. You can find our coding guidelines in the [CONTRIBUTING.md](https://github.com/btror/mc-pathfinding/blob/main/CONTRIBUTING.md) file in the repository.
 
 ### Development Environment
 
