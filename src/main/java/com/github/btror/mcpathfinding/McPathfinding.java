@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 public final class McPathfinding extends JavaPlugin {
 
     @Override
@@ -19,12 +18,14 @@ public final class McPathfinding extends JavaPlugin {
         getLogger().info("mc-pathfinding disabled...");
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Material material) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -36,12 +37,14 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Particle particle) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -53,7 +56,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -61,6 +65,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -72,7 +77,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -80,6 +86,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -91,13 +98,15 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Material material,
             boolean diagonalMovement) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -109,13 +118,15 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Particle particle,
             boolean diagonalMovement) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -127,7 +138,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -135,6 +147,7 @@ public final class McPathfinding extends JavaPlugin {
             Particle particle,
             boolean diagonalMovement) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -146,7 +159,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -155,6 +169,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -166,7 +181,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -175,6 +191,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -186,13 +203,15 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Material material,
             Particle particle) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -204,7 +223,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -213,6 +233,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -224,7 +245,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void astar(
+    public static void astar(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -234,6 +256,7 @@ public final class McPathfinding extends JavaPlugin {
             int delay,
             int period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -245,12 +268,14 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Material material) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -262,12 +287,14 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Particle particle) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -279,7 +306,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -287,6 +315,7 @@ public final class McPathfinding extends JavaPlugin {
             Particle particle,
             boolean diagonalMovement) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -298,7 +327,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -306,6 +336,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -317,7 +348,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -325,6 +357,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -336,13 +369,15 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Material material,
             boolean diagonalMovement) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -354,13 +389,15 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Particle particle,
             boolean diagonalMovement) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -372,7 +409,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -381,6 +419,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -392,7 +431,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -401,6 +441,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -412,13 +453,15 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
             Material material,
             Particle particle) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -430,7 +473,8 @@ public final class McPathfinding extends JavaPlugin {
                 10);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -439,6 +483,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -450,7 +495,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void greedyBestFirstSearch(
+    public static void greedyBestFirstSearch(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -460,6 +506,7 @@ public final class McPathfinding extends JavaPlugin {
             int delay,
             int period) {
         search(
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,
@@ -471,7 +518,8 @@ public final class McPathfinding extends JavaPlugin {
                 period);
     }
 
-    public void search(
+    public static void search(
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
@@ -482,7 +530,7 @@ public final class McPathfinding extends JavaPlugin {
             long delay,
             long period) {
         new Animation(
-                this,
+                plugin,
                 snapshot,
                 startLocation,
                 targetLocation,

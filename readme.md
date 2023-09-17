@@ -1,8 +1,9 @@
 # Spigot Pathfinding Library
 
-The mc-pathfinding library provides pathfinding and animation capabilities for your Minecraft server plugins. This README will guide you on how to use this library in your server plugins.
+The mc-pathfinding library provides pathfinding and animation capabilities for your Minecraft server plugins. This
+README will guide you on how to use this library in your server plugins.
 
-Example use case: [repository](https://github.com/btror/mc-lightning-strike/tree/main)
+Example use case: mc-lightning-strike [repository](https://github.com/btror/mc-lightning-strike/tree/btror)
 
 <img src="src/main/resources/example.gif" width="400" height="350">
 
@@ -26,30 +27,18 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
 1. **Download the Plugin JAR**:
 
-   - Obtain the JAR file from the [Releases](https://github.com/btror/McPathfinding/releases) section of this repository.
+   - Obtain the JAR file from the [Releases](https://github.com/btror/McPathfinding/releases) section of this
+     repository.
 
 2. **Add the Dependency to Your Project**:
 
-   - You can add the mc-pathfinding library as a dependency in your project's build configuration (e.g., Maven or Gradle) by specifying the repository and the library version.
-   - Example for Maven:
+   - Add the mc-pathfinding library as a dependency in your project's plugin.yml:
 
-     ```xml
-     <dependencies>
-       <dependency>
-         <groupId>com.github.btror</groupId>
-         <artifactId>mc-pathfinding</artifactId>
-         <version>1.0.0</version> <!-- Replace with the actual version -->
-       </dependency>
-     </dependencies>
+     ```yml
+     depend: [mc-pathfinding]
      ```
 
-   - Example for Gradle:
-
-     ```groovy
-     dependencies {
-         implementation 'com.github.btror:mc-pathfinding:1.0.0' // Replace with the actual version
-     }
-     ```
+   - Add the mc-pathfinding jar file in the server plugin folder.
 
 3. **Reload Your Project**:
    - After adding the dependency, reload your project to ensure that the library is properly integrated.
@@ -58,7 +47,9 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
 ### Pathfinding Methods
 
-The plugin provides various pathfinding algorithms that you can use to create animations in your Minecraft world. These algorithms can be triggered using the `astar` and `greedyBestFirstSearch` methods with different parameters. You can use the `search` method to better customize the pathfinding animation.
+The plugin provides various pathfinding algorithms that you can use to create animations in your Minecraft world. These
+algorithms can be triggered using the `astar` and `greedyBestFirstSearch` methods with different parameters. You can use
+the `search` method to better customize the pathfinding animation.
 
 Here is a list of methods available in the McPathfinding library:
 
@@ -68,6 +59,7 @@ Performs A\* pathfinding with the specified parameters.
 
 | Parameter                  | Description                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------- |
+| `JavaPlugin plugin`        | The plugin containing the pathfinding dependency.                             |
 | `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
 | `Location startLocation`   | The starting Location for the pathfinding operation.                          |
 | `Location targetLocation`  | The target Location to reach.                                                 |
@@ -83,6 +75,7 @@ Performs Greedy Best First Search pathfinding with the specified parameters.
 
 | Parameter                  | Description                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------- |
+| `JavaPlugin plugin`        | The plugin containing the pathfinding dependency.                             |
 | `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
 | `Location startLocation`   | The starting Location for the pathfinding operation.                          |
 | `Location targetLocation`  | The target Location to reach.                                                 |
@@ -98,6 +91,7 @@ Initiates a pathfinding animation with the specified parameters.
 
 | Method                     | Description                                                              |
 | -------------------------- | ------------------------------------------------------------------------ |
+| `JavaPlugin plugin`        | The plugin containing the pathfinding dependency.                        |
 | `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout. |
 | `Location startLocation`   | The starting Location for the pathfinding operation.                     |
 | `Location targetLocation`  | The target Location to reach.                                            |
@@ -110,49 +104,51 @@ Initiates a pathfinding animation with the specified parameters.
 
 ### Examples
 
-You can customize the pathfinding animations by adjusting the method parameters, such as the material, particle, delay, and period. Experiment with different values to achieve the desired visual effect.
+You can customize the pathfinding animations by adjusting the method parameters, such as the material, particle, delay,
+and period. Experiment with different values to achieve the desired visual effect.
 
 ```java
 // Examples of a few ways to use the astar and greedyBestFirstSearch methods.
-McPathfinding.astar(snapshot, startLocation, targetLocation, material);
-McPathfinding.astar(snapshot, startLocation, targetLocation, particle);
-McPathfinding.astar(snapshot, startLocation, targetLocation, material, diagonalMovement);
-McPathfinding.greedyBestFirstSearch(snapshot, startLocation, targetLocation, material, particle, diagonalMovement);
-McPathfinding.greedyBestFirstSearch(snapshot, startLocation, targetLocation, material, delay, period);
-McPathfinding.greedyBestFirstSearch(snapshot, startLocation, targetLocation, material, particle, diagonalMovement, delay, period);
+McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, material);
+McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, particle);
+McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, material, diagonalMovement);
+McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, particle, diagonalMovement);
+McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, delay, period);
+McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, particle, diagonalMovement, delay, period);
 
 // Example of how to use the search method.
-McPathfinding.search(snapshot, startLocation, targetLocation, material, particle, algorithm, diagonalMovement, delay, period);
+McPathfinding.search(plugin, snapshot,startLocation,targetLocation,material,particle,algorithm,diagonalMovement,delay,period);
 ```
 
 Here's a simple example scenario of how the library can be used.
 
 ```java
 // Create a snapshot of an area in your Minecraft world based on the location of a Player.
-Location[][][] snapshot = new Location[20][20][20];
+Location[][][]snapshot=new Location[20][20][20];
 
-for (int i = 0; i < 20; i++) {
-      for (int j = 0; j < 20; j++) {
-            for (int k = 0; k < 20; k++) {
-                  snapshot[i][j][k] = new Location(
-                        player.getLocation().getWorld(),
-                        player.getLocation().getX() + i,
-                        player.getLocation().getY() + j,
-                        player.getLocation().getZ() + k
-                  );
-            }
-      }
+for(int i = 0; i < 20; i++){
+        for(int j = 0; j < 20; j++){
+                for(int k = 0; k < 20; k++){
+                        snapshot[i][j][k] = new Location(
+                                player.getLocation().getWorld(),
+                                player.getLocation().getX() + i,
+                                player.getLocation().getY() + j,
+                                player.getLocation().getZ() + k
+                        );
+                }
+        }
 }
 
 // Choose a start and target location in the snapshot.
-Location snapshotStartLocation = snapshot[0][0][5];
-Location snapshotTargetLocation = snapshot[10][15][8];
+Location snapshotStartLocation=snapshot[0][0][5];
+Location snapshotTargetLocation=snapshot[10][15][8];
 
 // Use a pathfinding method to find a path from start to target. A path of gold blocks with electric spark particle effects will be generated to show where the path is.
-plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.ELECTRIC_SPARK, true);
+plugin.astar(snapshot,snapshotStartLocation,snapshotTargetLocation,Material.GOLD_BLOCK,Particle.ELECTRIC_SPARK,true);
 ```
 
-Feel free to explore more customization options and use different pathfinding methods provided by the plugin to create engaging animations in your Minecraft server.
+Feel free to explore more customization options and use different pathfinding methods provided by the plugin to create
+engaging animations in your Minecraft server.
 
 ## Data Model
 
@@ -205,15 +201,18 @@ Class `Animation`
 
 - Manages the visualization of the pathfinding process in Minecraft.
 - Animates the pathfinding steps, including block changes and particle effects.
+
 </details>
 
 ## Contributing
 
-We welcome contributions from the community! Whether you want to report a bug, request a feature, or submit a code improvement, please follow these guidelines to make the process smooth and efficient.
+We welcome contributions from the community! Whether you want to report a bug, request a feature, or submit a code
+improvement, please follow these guidelines to make the process smooth and efficient.
 
 ### Reporting Issues
 
-If you encounter a bug, have a feature request, or have questions about the project, please open an issue on our GitHub repository. When reporting an issue, be sure to:
+If you encounter a bug, have a feature request, or have questions about the project, please open an issue on our GitHub
+repository. When reporting an issue, be sure to:
 
 - Provide a descriptive title and clear description of the issue.
 - Specify the steps to reproduce the problem, if applicable.
@@ -258,7 +257,8 @@ If you'd like to contribute code to this project, please follow these steps:
 
 ### Coding Guidelines
 
-Please adhere to our coding guidelines and style conventions when contributing code. You can find our coding guidelines in the [CONTRIBUTING.md](https://github.com/btror/mc-pathfinding/blob/main/CONTRIBUTING.md) file in the repository.
+Please adhere to our coding guidelines and style conventions when contributing code. You can find our coding guidelines
+in the [CONTRIBUTING.md](https://github.com/btror/mc-pathfinding/blob/main/CONTRIBUTING.md) file in the repository.
 
 ### Development Environment
 

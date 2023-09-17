@@ -1,15 +1,15 @@
 package com.github.btror.mcpathfinding.animation;
 
-import com.github.btror.mcpathfinding.McPathfinding;
 import com.github.btror.mcpathfinding.simulation.Simulation;
 import com.github.btror.mcpathfinding.simulation.SimulationFactory;
 import org.bukkit.*;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
 public class Animation {
-    private final McPathfinding plugin;
+    private final JavaPlugin plugin;
     private final Location[][][] snapshot;
     private final Location snapshotStart;
     private final Location snapshotTarget;
@@ -33,7 +33,7 @@ public class Animation {
      * @param period           animation speed (TaskTimer period param)
      */
     public Animation(
-            McPathfinding plugin,
+            JavaPlugin plugin,
             Location[][][] snapshot,
             Location snapshotStart,
             Location snapshotTarget,
@@ -72,7 +72,26 @@ public class Animation {
     }
 
     private void animate() {
-        new Path().runTaskTimer(plugin, delay, period);
+        if (period == 0) {
+            for (Location location : snapshotPath) {
+                World world = location.getWorld();
+                assert world != null;
+                world.spawnParticle(
+                        Particle.FIREWORKS_SPARK,
+                        location.getX(),
+                        location.getY(),
+                        location.getZ(),
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        null,
+                        true);
+            }
+        } else {
+            new Path().runTaskTimer(plugin, delay, period);
+        }
     }
 
     /**
