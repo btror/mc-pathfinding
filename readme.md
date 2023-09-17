@@ -53,42 +53,42 @@ The plugin provides various pathfinding algorithms that you can use to create an
 
 Here is a list of methods available in the McPathfinding library:
 
-| &emsp;&emsp;Method                     | &emsp;&emsp;Description                                                                   |
-| -------------------------------------- | ----------------------------------------------------------------------------------------- |
-| &emsp;&emsp;astar                      | &emsp;&emsp;Performs A\* pathfinding with the specified parameters.                       |
-| &emsp;&emsp;`Location[][][] snapshot`  | &emsp;&emsp;3D array of Location objects representing your Minecraft world's layout.      |
-| &emsp;&emsp;`Location startLocation`   | &emsp;&emsp;The starting Location for the pathfinding operation.                          |
-| &emsp;&emsp;`Location targetLocation`  | &emsp;&emsp;The target Location to reach.                                                 |
-| &emsp;&emsp;`Material material`        | &emsp;&emsp;(optional) A block type that you want to use for visualization.               |
-| &emsp;&emsp;`Particle particle`        | &emsp;&emsp;(optional) A visual particle effect to enhance the animation.                 |
-| &emsp;&emsp;`boolean diagonalMovement` | &emsp;&emsp;(optional) Indicates whether diagonal movement is allowed during pathfinding. |
-| &emsp;&emsp;`long delay`               | &emsp;&emsp;(optional) The delay (in ticks) before starting the animation.                |
-| &emsp;&emsp;`long period`              | &emsp;&emsp;(optional) The period (in ticks) at which the animation updates.              |
+| Method                     | Description                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| astar                      | Performs A\* pathfinding with the specified parameters.                       |
+| `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
+| `Location startLocation`   | The starting Location for the pathfinding operation.                          |
+| `Location targetLocation`  | The target Location to reach.                                                 |
+| `Material material`        | (optional) A block type that you want to use for visualization.               |
+| `Particle particle`        | (optional) A visual particle effect to enhance the animation.                 |
+| `boolean diagonalMovement` | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
+| `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
+| `long period`              | (optional) The period (in ticks) at which the animation updates.              |
 
-| &emsp;&emsp;Method                     | &emsp;&emsp;Description                                                                   |
-| -------------------------------------- | ----------------------------------------------------------------------------------------- |
-| &emsp;&emsp;greedyBestFirstSearch      | &emsp;&emsp;Performs Greedy Best First Search pathfinding with the specified parameters.  |
-| &emsp;&emsp;`Location[][][] snapshot`  | &emsp;&emsp;3D array of Location objects representing your Minecraft world's layout.      |
-| &emsp;&emsp;`Location startLocation`   | &emsp;&emsp;The starting Location for the pathfinding operation.                          |
-| &emsp;&emsp;`Location targetLocation`  | &emsp;&emsp;The target Location to reach.                                                 |
-| &emsp;&emsp;`Material material`        | &emsp;&emsp;(optional) A block type that you want to use for visualization.               |
-| &emsp;&emsp;`Particle particle`        | &emsp;&emsp;(optional) A visual particle effect to enhance the animation.                 |
-| &emsp;&emsp;`boolean diagonalMovement` | &emsp;&emsp;(optional) Indicates whether diagonal movement is allowed during pathfinding. |
-| &emsp;&emsp;`long delay`               | &emsp;&emsp;(optional) The delay (in ticks) before starting the animation.                |
-| &emsp;&emsp;`long period`              | &emsp;&emsp;(optional) The period (in ticks) at which the animation updates.              |
+| Method                     | Description                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| greedyBestFirstSearch      | Performs Greedy Best First Search pathfinding with the specified parameters.  |
+| `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
+| `Location startLocation`   | The starting Location for the pathfinding operation.                          |
+| `Location targetLocation`  | The target Location to reach.                                                 |
+| `Material material`        | (optional) A block type that you want to use for visualization.               |
+| `Particle particle`        | (optional) A visual particle effect to enhance the animation.                 |
+| `boolean diagonalMovement` | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
+| `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
+| `long period`              | (optional) The period (in ticks) at which the animation updates.              |
 
-| &emsp;&emsp;Method                     | &emsp;&emsp;Description                                                              |
-| -------------------------------------- | ------------------------------------------------------------------------------------ |
-| &emsp;&emsp;search                     | &emsp;&emsp;Initiates a pathfinding animation with the specified parameters.         |
-| &emsp;&emsp;`Location[][][] snapshot`  | &emsp;&emsp;3D array of Location objects representing your Minecraft world's layout. |
-| &emsp;&emsp;`Location startLocation`   | &emsp;&emsp;The starting Location for the pathfinding operation.                     |
-| &emsp;&emsp;`Location targetLocation`  | &emsp;&emsp;The target Location to reach.                                            |
-| &emsp;&emsp;`Material material`        | &emsp;&emsp;A block type that you want to use for visualization.                     |
-| &emsp;&emsp;`Particle particle`        | &emsp;&emsp;A visual particle effect to enhance the animation.                       |
-| &emsp;&emsp;`String algorithm`         | &emsp;&emsp;The pathfinding algorithm to use (e.g., "astar" or "gbfs").              |
-| &emsp;&emsp;`boolean diagonalMovement` | &emsp;&emsp;Indicates whether diagonal movement is allowed during pathfinding.       |
-| &emsp;&emsp;`long delay`               | &emsp;&emsp;The delay (in ticks) before starting the animation.                      |
-| &emsp;&emsp;`long period`              | &emsp;&emsp;The period (in ticks) at which the animation updates.                    |
+| Method                     | Description                                                              |
+| -------------------------- | ------------------------------------------------------------------------ |
+| search                     | Initiates a pathfinding animation with the specified parameters.         |
+| `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout. |
+| `Location startLocation`   | The starting Location for the pathfinding operation.                     |
+| `Location targetLocation`  | The target Location to reach.                                            |
+| `Material material`        | A block type that you want to use for visualization.                     |
+| `Particle particle`        | A visual particle effect to enhance the animation.                       |
+| `String algorithm`         | The pathfinding algorithm to use (e.g., "astar" or "gbfs").              |
+| `boolean diagonalMovement` | Indicates whether diagonal movement is allowed during pathfinding.       |
+| `long delay`               | The delay (in ticks) before starting the animation.                      |
+| `long period`              | The period (in ticks) at which the animation updates.                    |
 
 ### Examples
 
