@@ -152,9 +152,58 @@ Feel free to explore more customization options and use different pathfinding me
 
 If you'd like to contribute to the development of this library or report issues, please check out the GitHub repository for more information.
 
-## Data model
+## Data Model
 
-TODO: Create a data model section to describe any relevant data structures used in the library.
+Here's an overview of the key classes and components, along with their roles and relationships.
+
+<details>
+<summary>Library Structure</summary>
+
+### `com.github.btror.mcpathfinding`
+
+Main Class `McPathfinding`
+
+- Contains [Pathfinding Methods](#pathfinding-methods) to be used.
+
+### `com.github.btror.mcpathfinding.simulation`
+
+Abstract Class `Simulation`
+
+- Structure for pathfinding algorithm simulations.
+- Abstract base class for different pathfinding algorithms.
+
+Class `SimulationFactory`
+
+- Factory class for creating different pathfinding simulations.
+
+### `com.github.btror.mcpathfinding.simulation.pathfinding`
+
+Class `AStar`
+
+- Implementation of the A\* pathfinding algorithm.
+
+Class `GreedyBestFirstSearch`
+
+- Implementation of the Greedy Best-First Search pathfinding algorithm.
+
+### `com.github.btror.mcpathfinding.simulation.util`
+
+Class `Node`
+
+- Represents a node in the pathfinding simulation.
+- Stores information about a grid cell, including its position and type.
+
+Class `NodeComparator`
+
+- Implements a comparator for nodes, used for sorting in pathfinding algorithms.
+
+### `com.github.btror.mcpathfinding.animation`
+
+Class `Animation`
+
+- Manages the visualization of the pathfinding process in Minecraft.
+- Animates the pathfinding steps, including block changes and particle effects.
+</details>
 
 ## License
 
