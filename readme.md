@@ -204,18 +204,13 @@ Class `Animation`
 
 </details>
 
-<br>
-
 <details>
 <summary>UML Diagram</summary>
 <br>
 
 [Lucidchart link](https://lucid.app/lucidchart/ff59dc30-19c4-4c85-8b49-0015e833c6c8/edit?viewport_loc=-1711%2C-1383%2C4042%2C2110%2C0_0&invitationId=inv_5760d042-41fd-4531-af6a-7d3142470512)
 
-
-<div style="background-color: #F0F0F0; padding: 20px;">
-   <img src="src/main/resources/mc-pathfinding-uml.png" width="540" height="600">
-</div>
+<img src="src/main/resources/mc-pathfinding-uml.jpeg" width="540" height="600">
 </details>
 
 ## Contributing
