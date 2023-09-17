@@ -47,6 +47,9 @@ public record McPathfindingCommand(McPathfinding plugin) implements CommandExecu
 
             plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK,
                     Particle.CAMPFIRE_SIGNAL_SMOKE, true, 0, 10);
+            plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.CAMPFIRE_SIGNAL_SMOKE);
+            plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.CAMPFIRE_SIGNAL_SMOKE, true);
+            plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Particle.CAMPFIRE_SIGNAL_SMOKE, true);
 
             return true;
 
