@@ -9,6 +9,10 @@ The mc-pathfinding library provides pathfinding and animation capabilities for y
   - [Pathfinding Methods](#pathfinding-methods)
   - [Examples](#examples)
 - [Contributing](#contributing)
+  - [Reporting Issues](#reporting-issues)
+  - [Code Contributions](#code-contributions)
+  - [Coding Guidelines](#coding-guidelines)
+  - [Development Environment](#development-environment)
 - [Data Model](#data-model)
 - [License](#license)
 
@@ -52,11 +56,9 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
 The plugin provides various pathfinding algorithms that you can use to create animations in your Minecraft world. These algorithms can be triggered using the `astar` and `greedyBestFirstSearch` methods with different parameters. You can use the `search` method to better customize the pathfinding animation.
 
-## Methods
-
 Here is a list of methods available in the McPathfinding library:
 
-### `astar`
+#### `astar`
 
 Performs A\* pathfinding with the specified parameters.
 
@@ -71,7 +73,7 @@ Performs A\* pathfinding with the specified parameters.
 | `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
 | `long period`              | (optional) The period (in ticks) at which the animation updates.              |
 
-### `greedyBestFirstSearch`
+#### `greedyBestFirstSearch`
 
 Performs Greedy Best First Search pathfinding with the specified parameters.
 
@@ -86,7 +88,7 @@ Performs Greedy Best First Search pathfinding with the specified parameters.
 | `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
 | `long period`              | (optional) The period (in ticks) at which the animation updates.              |
 
-### `search`
+#### `search`
 
 Initiates a pathfinding animation with the specified parameters.
 
