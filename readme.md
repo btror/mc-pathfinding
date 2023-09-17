@@ -36,7 +36,7 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
      ```xml
      <dependencies>
        <dependency>
-         <groupId>com.example</groupId>
+         <groupId>com.github.btror</groupId>
          <artifactId>mc-pathfinding</artifactId>
          <version>1.0.0</version> <!-- Replace with the actual version -->
        </dependency>
@@ -47,7 +47,7 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
      ```groovy
      dependencies {
-         implementation 'com.example:mc-pathfinding:1.0.0' // Replace with the actual version
+         implementation 'com.github.btror:mc-pathfinding:1.0.0' // Replace with the actual version
      }
      ```
 
