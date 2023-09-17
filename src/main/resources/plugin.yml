@@ -5,7 +5,3 @@ api-version: 1.13
 authors: [btror]
 description: Spigot pathfinding plugin.
 website: https://github.com/btror
-commands:
-  mcpathfinding:
-    description: starts pathfinding
-    usage: /mcpathfinding
