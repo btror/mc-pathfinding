@@ -18,7 +18,7 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
 1. **Download the Plugin JAR**:
 
-   - Obtain the JAR file from the [Releases](https://github.com/yourusername/McPathfinding/releases) section of this repository.
+   - Obtain the JAR file from the [Releases](https://github.com/btror/McPathfinding/releases) section of this repository.
 
 2. **Add the Dependency to Your Project**:
 
@@ -148,10 +148,6 @@ plugin.astar(snapshot, snapshotStartLocation, snapshotTargetLocation, Material.G
 
 Feel free to explore more customization options and use different pathfinding methods provided by the plugin to create engaging animations in your Minecraft server.
 
-## Contributing
-
-If you'd like to contribute to the development of this library or report issues, please check out the GitHub repository for more information.
-
 ## Data Model
 
 Here's an overview of the key classes and components, along with their roles and relationships.
@@ -204,6 +200,68 @@ Class `Animation`
 - Manages the visualization of the pathfinding process in Minecraft.
 - Animates the pathfinding steps, including block changes and particle effects.
 </details>
+
+## Contributing
+
+We welcome contributions from the community! Whether you want to report a bug, request a feature, or submit a code improvement, please follow these guidelines to make the process smooth and efficient.
+
+### Reporting Issues
+
+If you encounter a bug, have a feature request, or have questions about the project, please open an issue on our GitHub repository. When reporting an issue, be sure to:
+
+- Provide a descriptive title and clear description of the issue.
+- Specify the steps to reproduce the problem, if applicable.
+- Include any relevant error messages or screenshots.
+
+### Code Contributions
+
+If you'd like to contribute code to this project, please follow these steps:
+
+1. Fork the repository to your GitHub account.
+2. Clone the forked repository to your local machine:
+
+```bash
+git clone https://github.com/your-username/repository-name.git
+```
+
+3. Create a new branch for your feature or bug fix:
+
+```bash
+git checkout -b feature-or-bug-fix-name
+```
+
+4. Make your changes and commit them:
+
+```bash
+git commit -m "Description of your changes"
+```
+
+5. Push your changes to your GitHub fork:
+
+```bash
+git push origin feature-or-bug-fix-name
+```
+
+6. Create a pull request (PR) from your fork to the main repository.
+
+7. In your PR, provide a detailed description of your changes, why they are necessary, and any relevant information.
+
+8. Ensure your code follows our coding conventions and standards.
+
+9. Be responsive to feedback and be willing to make changes if necessary.
+
+### Coding Guidelines
+
+Please adhere to our coding guidelines and style conventions when contributing code. You can find our coding guidelines in the CONTRIBUTING.md file in the repository.
+
+### Development Environment
+
+To set up a development environment for this project, follow these steps:
+
+1. Clone the repository to your local machine (if you haven't already, see "Code Contributions" above).
+2. Install the required dependencies (if any). You can find instructions in the project's README or documentation.
+3. Configure any environment variables, secrets, or configuration files as needed.
+4. Run the project locally to test your changes.
 
 ## License
 
