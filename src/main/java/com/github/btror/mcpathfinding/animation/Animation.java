@@ -66,8 +66,51 @@ public class Animation {
     }
 
     private void createPath() {
-        for (Integer[] space : simulation.getSimulationPath()) {
-            snapshotPath.add(snapshot[space[0]][space[1]][space[2]]);
+        if (material != null) {
+            // old
+            for (Integer[] space : simulation.getSimulationPath()) {
+                snapshotPath.add(snapshot[space[0]][space[1]][space[2]]);
+            }
+        } else {
+            // new (particles only - make them tighter)
+            snapshotPath.add(
+                    snapshot[
+                            simulation.getSimulationPath().get(0)[0]]
+                            [
+                            simulation.getSimulationPath().get(0)[1]
+                            ][
+                            simulation.getSimulationPath().get(0)[2]
+                            ]
+            );
+
+            for (int i = 1; i < simulation.getSimulationPath().size() - 1; i++) {
+                Integer[] currentSpace = simulation.getSimulationPath().get(i);
+                Integer[] previousSpace = simulation.getSimulationPath().get(i - 1);
+                Integer[] nextSpace = simulation.getSimulationPath().get(i + 1);
+
+                Location currentLocation = snapshot[currentSpace[0]][currentSpace[1]][currentSpace[2]];
+                Location previousLocation = snapshot[previousSpace[0]][previousSpace[1]][previousSpace[2]];
+                Location nextLocation = snapshot[nextSpace[0]][nextSpace[1]][nextSpace[2]];
+
+                Location delta = new Location(
+                        currentLocation.getWorld(),
+                        (previousLocation.getX() + currentLocation.getX() + nextLocation.getX()) / 3.0,
+                        (previousLocation.getY() + currentLocation.getY() + nextLocation.getY()) / 3.0,
+                        (previousLocation.getZ() + currentLocation.getZ() + nextLocation.getZ()) / 3.0
+                );
+
+                snapshotPath.add(currentLocation);
+                snapshotPath.add(delta);
+            }
+
+            snapshotPath.add(
+                    snapshot[
+                            simulation.getSimulationPath().get(simulation.getSimulationPath().size() - 1)[0]
+                            ][
+                            simulation.getSimulationPath().get(simulation.getSimulationPath().size() - 1)[1]
+                            ][
+                            simulation.getSimulationPath().get(simulation.getSimulationPath().size() - 1)[2]
+                            ]);
         }
     }
 
