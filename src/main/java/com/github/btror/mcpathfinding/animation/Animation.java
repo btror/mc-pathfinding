@@ -15,22 +15,25 @@ public class Animation {
     private final Location snapshotTarget;
     private final Material material;
     private final Particle particle;
+    private final boolean tightParticleSpawning;
     private final ArrayList<Location> snapshotPath;
+    private final ArrayList<Location> snapshotParticlePath;
     private final Simulation simulation;
     private final long delay;
     private final long period;
 
     /**
-     * @param plugin           plugin instance
-     * @param snapshot         worldly area
-     * @param snapshotStart    pathfinding start location
-     * @param snapshotTarget   pathfinding target location
-     * @param material         pathfinding path block type
-     * @param particle         pathfinding particle effect
-     * @param algorithm        pathfinding algorithm to use
-     * @param diagonalMovement pathfinding algorithm using diagonal movement in calculations
-     * @param delay            animation delay (TaskTimer delay param)
-     * @param period           animation speed (TaskTimer period param)
+     * @param plugin                plugin instance
+     * @param snapshot              worldly area
+     * @param snapshotStart         pathfinding start location
+     * @param snapshotTarget        pathfinding target location
+     * @param material              pathfinding path block type
+     * @param particle              pathfinding particle effect
+     * @param tightParticleSpawning spawn particles tightly together
+     * @param algorithm             pathfinding algorithm to use
+     * @param diagonalMovement      pathfinding algorithm using diagonal movement in calculations
+     * @param delay                 animation delay (TaskTimer delay param)
+     * @param period                animation speed (TaskTimer period param)
      */
     public Animation(
             JavaPlugin plugin,
@@ -39,6 +42,7 @@ public class Animation {
             Location snapshotTarget,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             String algorithm,
             boolean diagonalMovement,
             long delay,
@@ -49,7 +53,9 @@ public class Animation {
         this.snapshotTarget = snapshotTarget;
         this.material = material;
         this.particle = particle;
+        this.tightParticleSpawning = tightParticleSpawning;
         this.snapshotPath = new ArrayList<>();
+        this.snapshotParticlePath = new ArrayList<>();
         this.simulation = SimulationFactory.getSimulation(algorithm);
         assert this.simulation != null;
         this.simulation.setDiagonalMovement(diagonalMovement);
@@ -66,28 +72,68 @@ public class Animation {
     }
 
     private void createPath() {
-        for (Integer[] space : simulation.getSimulationPath()) {
-            snapshotPath.add(snapshot[space[0]][space[1]][space[2]]);
+        if (simulation.getSimulationPath().size() > 0) {
+            if (material != null) {
+                for (Integer[] space : simulation.getSimulationPath()) {
+                    snapshotPath.add(snapshot[space[0]][space[1]][space[2]]);
+                }
+            } else {
+                snapshotParticlePath.add(
+                        snapshot[
+                                simulation.getSimulationPath().get(0)[0]]
+                                [
+                                simulation.getSimulationPath().get(0)[1]
+                                ][
+                                simulation.getSimulationPath().get(0)[2]
+                                ]
+                );
+
+                for (int i = 1; i < simulation.getSimulationPath().size(); i++) {
+                    Integer[] currentSpace = simulation.getSimulationPath().get(i);
+                    Integer[] previousSpace = simulation.getSimulationPath().get(i - 1);
+
+                    Location currentLocation = snapshot[currentSpace[0]][currentSpace[1]][currentSpace[2]];
+
+                    if (tightParticleSpawning) {
+                        Location previousLocation = snapshot[previousSpace[0]][previousSpace[1]][previousSpace[2]];
+                        Location delta = new Location(
+                                currentLocation.getWorld(),
+                                (previousLocation.getX() + currentLocation.getX()) / 2.0,
+                                (previousLocation.getY() + currentLocation.getY()) / 2.0,
+                                (previousLocation.getZ() + currentLocation.getZ()) / 2.0
+                        );
+                        snapshotParticlePath.add(delta);
+                    }
+                    snapshotParticlePath.add(currentLocation);
+                }
+            }
         }
     }
 
     private void animate() {
         if (period == 0) {
-            for (Location location : snapshotPath) {
-                World world = location.getWorld();
-                assert world != null;
-                world.spawnParticle(
-                        Particle.FIREWORKS_SPARK,
-                        location.getX(),
-                        location.getY(),
-                        location.getZ(),
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        null,
-                        true);
+            if (material != null) {
+                for (Location location : snapshotPath) {
+                    location.getBlock().setType(material);
+                }
+            }
+            if (particle != null) {
+                for (Location location : snapshotParticlePath) {
+                    World world = location.getWorld();
+                    assert world != null;
+                    world.spawnParticle(
+                            particle,
+                            location.getX(),
+                            location.getY(),
+                            location.getZ(),
+                            1,
+                            0,
+                            0,
+                            0,
+                            0,
+                            null,
+                            true);
+                }
             }
         } else {
             new Path().runTaskTimer(plugin, delay, period);
@@ -103,7 +149,7 @@ public class Animation {
      * 4 = start space
      * 5 = target space
      */
-    private void createSimulation() {
+    private void createSimulation() { // TODO: error might be here
         int[][][] simulationSnapshot = new int[snapshot.length][snapshot[0].length][snapshot[0][0].length];
         int[] simulationStart = new int[3];
         int[] simulationTarget = new int[3];
@@ -153,7 +199,7 @@ public class Animation {
                 World world = snapshotPath.get(counter).getWorld();
                 assert world != null;
                 world.spawnParticle(
-                        Particle.FIREWORKS_SPARK,
+                        particle,
                         snapshotPath.get(counter).getX(),
                         snapshotPath.get(counter).getY(),
                         snapshotPath.get(counter).getZ(),

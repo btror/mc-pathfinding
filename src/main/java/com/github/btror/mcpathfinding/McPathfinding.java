@@ -31,6 +31,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "astar",
                 false,
                 0,
@@ -50,6 +51,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                false,
                 "astar",
                 false,
                 0,
@@ -71,6 +73,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "astar",
                 false,
                 delay,
@@ -92,6 +95,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                false,
                 "astar",
                 false,
                 delay,
@@ -112,6 +116,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "astar",
                 diagonalMovement,
                 0,
@@ -124,6 +129,7 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement) {
         search(
                 plugin,
@@ -132,6 +138,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                tightParticleSpawning,
                 "astar",
                 diagonalMovement,
                 0,
@@ -145,6 +152,7 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement) {
         search(
                 plugin,
@@ -153,6 +161,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "astar",
                 diagonalMovement,
                 0,
@@ -175,6 +184,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "astar",
                 diagonalMovement,
                 delay,
@@ -187,6 +197,7 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement,
             long delay,
             long period) {
@@ -197,6 +208,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                tightParticleSpawning,
                 "astar",
                 diagonalMovement,
                 delay,
@@ -209,7 +221,8 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Material material,
-            Particle particle) {
+            Particle particle,
+            boolean tightParticleSpawning) {
         search(
                 plugin,
                 snapshot,
@@ -217,6 +230,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "astar",
                 false,
                 0,
@@ -230,6 +244,7 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             long delay,
             long period) {
         search(
@@ -239,6 +254,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "astar",
                 false,
                 delay,
@@ -252,9 +268,10 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement,
-            int delay,
-            int period) {
+            long delay,
+            long period) {
         search(
                 plugin,
                 snapshot,
@@ -262,6 +279,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "astar",
                 diagonalMovement,
                 delay,
@@ -281,6 +299,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "gbfs",
                 false,
                 0,
@@ -292,7 +311,8 @@ public final class McPathfinding extends JavaPlugin {
             Location[][][] snapshot,
             Location startLocation,
             Location targetLocation,
-            Particle particle) {
+            Particle particle,
+            boolean tightParticleSpawning) {
         search(
                 plugin,
                 snapshot,
@@ -300,6 +320,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 false,
                 0,
@@ -313,6 +334,7 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement) {
         search(
                 plugin,
@@ -321,6 +343,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 diagonalMovement,
                 0,
@@ -342,6 +365,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "gbfs",
                 false,
                 delay,
@@ -354,6 +378,7 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Particle particle,
+            boolean tightParticleSpawning,
             long delay,
             long period) {
         search(
@@ -363,6 +388,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 false,
                 delay,
@@ -383,6 +409,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "gbfs",
                 diagonalMovement,
                 0,
@@ -395,6 +422,7 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement) {
         search(
                 plugin,
@@ -403,6 +431,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 diagonalMovement,
                 0,
@@ -425,6 +454,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 null,
+                false,
                 "gbfs",
                 diagonalMovement,
                 delay,
@@ -437,6 +467,7 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement,
             long delay,
             long period) {
@@ -447,6 +478,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 null,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 diagonalMovement,
                 delay,
@@ -459,7 +491,8 @@ public final class McPathfinding extends JavaPlugin {
             Location startLocation,
             Location targetLocation,
             Material material,
-            Particle particle) {
+            Particle particle,
+            boolean tightParticleSpawning) {
         search(
                 plugin,
                 snapshot,
@@ -467,6 +500,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 false,
                 0,
@@ -480,6 +514,7 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             long delay,
             long period) {
         search(
@@ -489,6 +524,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 false,
                 delay,
@@ -502,9 +538,10 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             boolean diagonalMovement,
-            int delay,
-            int period) {
+            long delay,
+            long period) {
         search(
                 plugin,
                 snapshot,
@@ -512,6 +549,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 "gbfs",
                 diagonalMovement,
                 delay,
@@ -525,6 +563,7 @@ public final class McPathfinding extends JavaPlugin {
             Location targetLocation,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             String algorithm,
             boolean diagonalMovement,
             long delay,
@@ -536,6 +575,7 @@ public final class McPathfinding extends JavaPlugin {
                 targetLocation,
                 material,
                 particle,
+                tightParticleSpawning,
                 algorithm,
                 diagonalMovement,
                 delay,

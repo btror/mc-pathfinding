@@ -57,50 +57,53 @@ Here is a list of methods available in the McPathfinding library:
 
 Performs A\* pathfinding with the specified parameters.
 
-| Parameter                  | Description                                                                   |
-| -------------------------- | ----------------------------------------------------------------------------- |
-| `JavaPlugin plugin`        | The plugin containing the pathfinding dependency.                             |
-| `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
-| `Location startLocation`   | The starting Location for the pathfinding operation.                          |
-| `Location targetLocation`  | The target Location to reach.                                                 |
-| `Material material`        | (optional) A block type that you want to use for visualization.               |
-| `Particle particle`        | (optional) A visual particle effect to enhance the animation.                 |
-| `boolean diagonalMovement` | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
-| `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
-| `long period`              | (optional) The period (in ticks) at which the animation updates.              |
+| Parameter                       | Description                                                                   |
+| ------------------------------- | ----------------------------------------------------------------------------- |
+| `JavaPlugin plugin`             | The plugin containing the pathfinding dependency.                             |
+| `Location[][][] snapshot`       | 3D array of Location objects representing your Minecraft world's layout.      |
+| `Location startLocation`        | The starting Location for the pathfinding operation.                          |
+| `Location targetLocation`       | The target Location to reach.                                                 |
+| `Material material`             | (optional) A block type that you want to use for visualization.               |
+| `Particle particle`             | (optional) A visual particle effect to enhance the animation.                 |
+| `boolean tightParticleSpawning` | (optional) Spawn particle effects closer together than a normal block space.  |
+| `boolean diagonalMovement`      | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
+| `long delay`                    | (optional) The delay (in ticks) before starting the animation.                |
+| `long period`                   | (optional) The period (in ticks) at which the animation updates.              |
 
 #### `greedyBestFirstSearch`
 
 Performs Greedy Best First Search pathfinding with the specified parameters.
 
-| Parameter                  | Description                                                                   |
-| -------------------------- | ----------------------------------------------------------------------------- |
-| `JavaPlugin plugin`        | The plugin containing the pathfinding dependency.                             |
-| `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout.      |
-| `Location startLocation`   | The starting Location for the pathfinding operation.                          |
-| `Location targetLocation`  | The target Location to reach.                                                 |
-| `Material material`        | (optional) A block type that you want to use for visualization.               |
-| `Particle particle`        | (optional) A visual particle effect to enhance the animation.                 |
-| `boolean diagonalMovement` | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
-| `long delay`               | (optional) The delay (in ticks) before starting the animation.                |
-| `long period`              | (optional) The period (in ticks) at which the animation updates.              |
+| Parameter                       | Description                                                                   |
+| ------------------------------- | ----------------------------------------------------------------------------- |
+| `JavaPlugin plugin`             | The plugin containing the pathfinding dependency.                             |
+| `Location[][][] snapshot`       | 3D array of Location objects representing your Minecraft world's layout.      |
+| `Location startLocation`        | The starting Location for the pathfinding operation.                          |
+| `Location targetLocation`       | The target Location to reach.                                                 |
+| `Material material`             | (optional) A block type that you want to use for visualization.               |
+| `Particle particle`             | (optional) A visual particle effect to enhance the animation.                 |
+| `boolean tightParticleSpawning` | (optional) Spawn particle effects closer together than a normal block space.  |
+| `boolean diagonalMovement`      | (optional) Indicates whether diagonal movement is allowed during pathfinding. |
+| `long delay`                    | (optional) The delay (in ticks) before starting the animation.                |
+| `long period`                   | (optional) The period (in ticks) at which the animation updates.              |
 
 #### `search`
 
 Initiates a pathfinding animation with the specified parameters.
 
-| Method                     | Description                                                              |
-| -------------------------- | ------------------------------------------------------------------------ |
-| `JavaPlugin plugin`        | The plugin containing the pathfinding dependency.                        |
-| `Location[][][] snapshot`  | 3D array of Location objects representing your Minecraft world's layout. |
-| `Location startLocation`   | The starting Location for the pathfinding operation.                     |
-| `Location targetLocation`  | The target Location to reach.                                            |
-| `Material material`        | A block type that you want to use for visualization.                     |
-| `Particle particle`        | A visual particle effect to enhance the animation.                       |
-| `String algorithm`         | The pathfinding algorithm to use (e.g., "astar" or "gbfs").              |
-| `boolean diagonalMovement` | Indicates whether diagonal movement is allowed during pathfinding.       |
-| `long delay`               | The delay (in ticks) before starting the animation.                      |
-| `long period`              | The period (in ticks) at which the animation updates.                    |
+| Method                          | Description                                                                  |
+| ------------------------------- | ---------------------------------------------------------------------------- |
+| `JavaPlugin plugin`             | The plugin containing the pathfinding dependency.                            |
+| `Location[][][] snapshot`       | 3D array of Location objects representing your Minecraft world's layout.     |
+| `Location startLocation`        | The starting Location for the pathfinding operation.                         |
+| `Location targetLocation`       | The target Location to reach.                                                |
+| `Material material`             | A block type that you want to use for visualization.                         |
+| `Particle particle`             | A visual particle effect to enhance the animation.                           |
+| `boolean tightParticleSpawning` | (optional) Spawn particle effects closer together than a normal block space. |
+| `String algorithm`              | The pathfinding algorithm to use (e.g., "astar" or "gbfs").                  |
+| `boolean diagonalMovement`      | Indicates whether diagonal movement is allowed during pathfinding.           |
+| `long delay`                    | The delay (in ticks) before starting the animation.                          |
+| `long period`                   | The period (in ticks) at which the animation updates.                        |
 
 ### Examples
 
@@ -110,14 +113,14 @@ and period. Experiment with different values to achieve the desired visual effec
 ```java
 // Examples of a few ways to use the astar and greedyBestFirstSearch methods.
 McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, material);
-McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, particle);
+McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, particle, tightParticleSpawning);
 McPathfinding.astar(plugin, snapshot, startLocation, targetLocation, material, diagonalMovement);
-McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, particle, diagonalMovement);
+McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, particle, tightParticleSpawning, diagonalMovement);
 McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, delay, period);
-McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, particle, diagonalMovement, delay, period);
+McPathfinding.greedyBestFirstSearch(plugin, snapshot, startLocation, targetLocation, material, particle, tightParticleSpawning, diagonalMovement, delay, period);
 
 // Example of how to use the search method.
-McPathfinding.search(plugin, snapshot,startLocation,targetLocation,material,particle,algorithm,diagonalMovement,delay,period);
+McPathfinding.search(plugin, snapshot, startLocation, targetLocation, material, particle, tightParticleSpawning, algorithm, diagonalMovement, delay, period);
 ```
 
 Here's a simple example scenario of how the library can be used.
@@ -144,7 +147,7 @@ Location snapshotStartLocation = snapshot[0][0][5];
 Location snapshotTargetLocation = snapshot[10][15][8];
 
 // Use a pathfinding method to find a path from start to target. A path of gold blocks with electric spark particle effects will be generated to show where the path is.
-McPathfinding.astar(plugin, snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.ELECTRIC_SPARK, true);
+McPathfinding.astar(plugin, snapshot, snapshotStartLocation, snapshotTargetLocation, Material.GOLD_BLOCK, Particle.ELECTRIC_SPARK, true, true);
 ```
 
 Feel free to explore more customization options and use different pathfinding methods provided by the plugin to create
