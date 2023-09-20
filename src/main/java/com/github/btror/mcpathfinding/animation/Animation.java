@@ -15,6 +15,7 @@ public class Animation {
     private final Location snapshotTarget;
     private final Material material;
     private final Particle particle;
+    private final boolean tightParticleSpawning;
     private final ArrayList<Location> snapshotPath;
     private final ArrayList<Location> snapshotParticlePath;
     private final Simulation simulation;
@@ -22,16 +23,17 @@ public class Animation {
     private final long period;
 
     /**
-     * @param plugin           plugin instance
-     * @param snapshot         worldly area
-     * @param snapshotStart    pathfinding start location
-     * @param snapshotTarget   pathfinding target location
-     * @param material         pathfinding path block type
-     * @param particle         pathfinding particle effect
-     * @param algorithm        pathfinding algorithm to use
-     * @param diagonalMovement pathfinding algorithm using diagonal movement in calculations
-     * @param delay            animation delay (TaskTimer delay param)
-     * @param period           animation speed (TaskTimer period param)
+     * @param plugin                plugin instance
+     * @param snapshot              worldly area
+     * @param snapshotStart         pathfinding start location
+     * @param snapshotTarget        pathfinding target location
+     * @param material              pathfinding path block type
+     * @param particle              pathfinding particle effect
+     * @param tightParticleSpawning spawn particles tightly together
+     * @param algorithm             pathfinding algorithm to use
+     * @param diagonalMovement      pathfinding algorithm using diagonal movement in calculations
+     * @param delay                 animation delay (TaskTimer delay param)
+     * @param period                animation speed (TaskTimer period param)
      */
     public Animation(
             JavaPlugin plugin,
@@ -40,6 +42,7 @@ public class Animation {
             Location snapshotTarget,
             Material material,
             Particle particle,
+            boolean tightParticleSpawning,
             String algorithm,
             boolean diagonalMovement,
             long delay,
@@ -50,6 +53,7 @@ public class Animation {
         this.snapshotTarget = snapshotTarget;
         this.material = material;
         this.particle = particle;
+        this.tightParticleSpawning = tightParticleSpawning;
         this.snapshotPath = new ArrayList<>();
         this.snapshotParticlePath = new ArrayList<>();
         this.simulation = SimulationFactory.getSimulation(algorithm);
@@ -89,17 +93,18 @@ public class Animation {
                     Integer[] previousSpace = simulation.getSimulationPath().get(i - 1);
 
                     Location currentLocation = snapshot[currentSpace[0]][currentSpace[1]][currentSpace[2]];
-                    Location previousLocation = snapshot[previousSpace[0]][previousSpace[1]][previousSpace[2]];
 
-                    Location delta = new Location(
-                            currentLocation.getWorld(),
-                            (previousLocation.getX() + currentLocation.getX()) / 2.0,
-                            (previousLocation.getY() + currentLocation.getY()) / 2.0,
-                            (previousLocation.getZ() + currentLocation.getZ()) / 2.0
-                    );
-
+                    if (tightParticleSpawning) {
+                        Location previousLocation = snapshot[previousSpace[0]][previousSpace[1]][previousSpace[2]];
+                        Location delta = new Location(
+                                currentLocation.getWorld(),
+                                (previousLocation.getX() + currentLocation.getX()) / 2.0,
+                                (previousLocation.getY() + currentLocation.getY()) / 2.0,
+                                (previousLocation.getZ() + currentLocation.getZ()) / 2.0
+                        );
+                        snapshotParticlePath.add(delta);
+                    }
                     snapshotParticlePath.add(currentLocation);
-                    snapshotParticlePath.add(delta);
                 }
             }
         }
