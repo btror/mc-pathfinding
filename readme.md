@@ -99,7 +99,7 @@ Initiates a pathfinding animation with the specified parameters.
 | `Location targetLocation`       | The target Location to reach.                                                |
 | `Material material`             | A block type that you want to use for visualization.                         |
 | `Particle particle`             | A visual particle effect to enhance the animation.                           |
-| `boolean tightParticleSpawning` | (optional) Spawn particle effects closer together than a normal block space. |
+| `boolean tightParticleSpawning` | Spawn particle effects closer together than a normal block space. |
 | `String algorithm`              | The pathfinding algorithm to use (e.g., "astar" or "gbfs").                  |
 | `boolean diagonalMovement`      | Indicates whether diagonal movement is allowed during pathfinding.           |
 | `long delay`                    | The delay (in ticks) before starting the animation.                          |
