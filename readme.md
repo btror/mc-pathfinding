@@ -91,19 +91,19 @@ Performs Greedy Best First Search pathfinding with the specified parameters.
 
 Initiates a pathfinding animation with the specified parameters.
 
-| Method                          | Description                                                                  |
-| ------------------------------- | ---------------------------------------------------------------------------- |
-| `JavaPlugin plugin`             | The plugin containing the pathfinding dependency.                            |
-| `Location[][][] snapshot`       | 3D array of Location objects representing your Minecraft world's layout.     |
-| `Location startLocation`        | The starting Location for the pathfinding operation.                         |
-| `Location targetLocation`       | The target Location to reach.                                                |
-| `Material material`             | A block type that you want to use for visualization.                         |
-| `Particle particle`             | A visual particle effect to enhance the animation.                           |
-| `boolean tightParticleSpawning` | (optional) Spawn particle effects closer together than a normal block space. |
-| `String algorithm`              | The pathfinding algorithm to use (e.g., "astar" or "gbfs").                  |
-| `boolean diagonalMovement`      | Indicates whether diagonal movement is allowed during pathfinding.           |
-| `long delay`                    | The delay (in ticks) before starting the animation.                          |
-| `long period`                   | The period (in ticks) at which the animation updates.                        |
+| Method                          | Description                                                              |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| `JavaPlugin plugin`             | The plugin containing the pathfinding dependency.                        |
+| `Location[][][] snapshot`       | 3D array of Location objects representing your Minecraft world's layout. |
+| `Location startLocation`        | The starting Location for the pathfinding operation.                     |
+| `Location targetLocation`       | The target Location to reach.                                            |
+| `Material material`             | A block type that you want to use for visualization.                     |
+| `Particle particle`             | A visual particle effect to enhance the animation.                       |
+| `boolean tightParticleSpawning` | Spawn particle effects closer together than a normal block space.        |
+| `String algorithm`              | The pathfinding algorithm to use (e.g., "astar" or "gbfs").              |
+| `boolean diagonalMovement`      | Indicates whether diagonal movement is allowed during pathfinding.       |
+| `long delay`                    | The delay (in ticks) before starting the animation.                      |
+| `long period`                   | The period (in ticks) at which the animation updates.                    |
 
 ### Examples
 
