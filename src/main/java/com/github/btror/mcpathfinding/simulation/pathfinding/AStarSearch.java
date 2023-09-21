@@ -48,7 +48,7 @@ public class AStarSearch extends Simulation {
         int h = calculateH(nodeCurrent);
         nodeCurrent.setH(h);
 
-        nodeCurrent.setF();
+        nodeCurrent.setAStarSearchF();
         nodeStart = nodeCurrent;
         openList.add(nodeCurrent);
     }
@@ -83,7 +83,7 @@ public class AStarSearch extends Simulation {
             grid[row][col][zNum - 1].setG(g);
             int h = calculateH(grid[row][col][zNum - 1]);
             grid[row][col][zNum - 1].setH(h);
-            grid[row][col][zNum - 1].setF();
+            grid[row][col][zNum - 1].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row][col][zNum - 1]);
             simulationSnapshot[row][col][zNum - 1] = 2;
@@ -98,7 +98,7 @@ public class AStarSearch extends Simulation {
                 grid[row][col + 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row][col + 1][zNum - 1]);
                 grid[row][col + 1][zNum - 1].setH(h);
-                grid[row][col + 1][zNum - 1].setF();
+                grid[row][col + 1][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row][col + 1][zNum - 1]);
                 simulationSnapshot[row][col + 1][zNum - 1] = 2;
@@ -113,7 +113,7 @@ public class AStarSearch extends Simulation {
                 grid[row - 1][col + 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row - 1][col + 1][zNum - 1]);
                 grid[row - 1][col + 1][zNum - 1].setH(h);
-                grid[row - 1][col + 1][zNum - 1].setF();
+                grid[row - 1][col + 1][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row - 1][col + 1][zNum - 1]);
                 simulationSnapshot[row - 1][col + 1][zNum - 1] = 2;
@@ -127,7 +127,7 @@ public class AStarSearch extends Simulation {
                 grid[row - 1][col][zNum - 1].setG(g);
                 int h = calculateH(grid[row - 1][col][zNum - 1]);
                 grid[row - 1][col][zNum - 1].setH(h);
-                grid[row - 1][col][zNum - 1].setF();
+                grid[row - 1][col][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row - 1][col][zNum - 1]);
                 simulationSnapshot[row - 1][col][zNum - 1] = 2;
@@ -141,7 +141,7 @@ public class AStarSearch extends Simulation {
                 grid[row - 1][col - 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row - 1][col - 1][zNum - 1]);
                 grid[row - 1][col - 1][zNum - 1].setH(h);
-                grid[row - 1][col - 1][zNum - 1].setF();
+                grid[row - 1][col - 1][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row - 1][col - 1][zNum - 1]);
                 simulationSnapshot[row - 1][col - 1][zNum - 1] = 2;
@@ -155,7 +155,7 @@ public class AStarSearch extends Simulation {
                 grid[row][col - 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row][col - 1][zNum - 1]);
                 grid[row][col - 1][zNum - 1].setH(h);
-                grid[row][col - 1][zNum - 1].setF();
+                grid[row][col - 1][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row][col - 1][zNum - 1]);
                 simulationSnapshot[row][col - 1][zNum - 1] = 2;
@@ -170,7 +170,7 @@ public class AStarSearch extends Simulation {
                 grid[row + 1][col - 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row + 1][col - 1][zNum - 1]);
                 grid[row + 1][col - 1][zNum - 1].setH(h);
-                grid[row + 1][col - 1][zNum - 1].setF();
+                grid[row + 1][col - 1][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row + 1][col - 1][zNum - 1]);
                 simulationSnapshot[row + 1][col - 1][zNum - 1] = 2;
@@ -184,7 +184,7 @@ public class AStarSearch extends Simulation {
                 grid[row + 1][col][zNum - 1].setG(g);
                 int h = calculateH(grid[row + 1][col][zNum - 1]);
                 grid[row + 1][col][zNum - 1].setH(h);
-                grid[row + 1][col][zNum - 1].setF();
+                grid[row + 1][col][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row + 1][col][zNum - 1]);
                 simulationSnapshot[row + 1][col][zNum - 1] = 2;
@@ -199,7 +199,7 @@ public class AStarSearch extends Simulation {
                 grid[row + 1][col + 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row + 1][col + 1][zNum - 1]);
                 grid[row + 1][col + 1][zNum - 1].setH(h);
-                grid[row + 1][col + 1][zNum - 1].setF();
+                grid[row + 1][col + 1][zNum - 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row + 1][col + 1][zNum - 1]);
                 simulationSnapshot[row + 1][col + 1][zNum - 1] = 2;
@@ -219,7 +219,7 @@ public class AStarSearch extends Simulation {
             grid[row][col + 1][zNum].setG(g);
             int h = calculateH(grid[row][col + 1][zNum]);
             grid[row][col + 1][zNum].setH(h);
-            grid[row][col + 1][zNum].setF();
+            grid[row][col + 1][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row][col + 1][zNum]);
             simulationSnapshot[row][col + 1][zNum] = 2;
@@ -234,7 +234,7 @@ public class AStarSearch extends Simulation {
             grid[row - 1][col + 1][zNum].setG(g);
             int h = calculateH(grid[row - 1][col + 1][zNum]);
             grid[row - 1][col + 1][zNum].setH(h);
-            grid[row - 1][col + 1][zNum].setF();
+            grid[row - 1][col + 1][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row - 1][col + 1][zNum]);
             simulationSnapshot[row - 1][col + 1][zNum] = 2;
@@ -248,7 +248,7 @@ public class AStarSearch extends Simulation {
             grid[row - 1][col][zNum].setG(g);
             int h = calculateH(grid[row - 1][col][zNum]);
             grid[row - 1][col][zNum].setH(h);
-            grid[row - 1][col][zNum].setF();
+            grid[row - 1][col][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row - 1][col][zNum]);
             simulationSnapshot[row - 1][col][zNum] = 2;
@@ -262,7 +262,7 @@ public class AStarSearch extends Simulation {
             grid[row - 1][col - 1][zNum].setG(g);
             int h = calculateH(grid[row - 1][col - 1][zNum]);
             grid[row - 1][col - 1][zNum].setH(h);
-            grid[row - 1][col - 1][zNum].setF();
+            grid[row - 1][col - 1][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row - 1][col - 1][zNum]);
             simulationSnapshot[row - 1][col - 1][zNum] = 2;
@@ -276,7 +276,7 @@ public class AStarSearch extends Simulation {
             grid[row][col - 1][zNum].setG(g);
             int h = calculateH(grid[row][col - 1][zNum]);
             grid[row][col - 1][zNum].setH(h);
-            grid[row][col - 1][zNum].setF();
+            grid[row][col - 1][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row][col - 1][zNum]);
             simulationSnapshot[row][col - 1][zNum] = 2;
@@ -291,7 +291,7 @@ public class AStarSearch extends Simulation {
             grid[row + 1][col - 1][zNum].setG(g);
             int h = calculateH(grid[row + 1][col - 1][zNum]);
             grid[row + 1][col - 1][zNum].setH(h);
-            grid[row + 1][col - 1][zNum].setF();
+            grid[row + 1][col - 1][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row + 1][col - 1][zNum]);
             simulationSnapshot[row + 1][col - 1][zNum] = 2;
@@ -305,7 +305,7 @@ public class AStarSearch extends Simulation {
             grid[row + 1][col][zNum].setG(g);
             int h = calculateH(grid[row + 1][col][zNum]);
             grid[row + 1][col][zNum].setH(h);
-            grid[row + 1][col][zNum].setF();
+            grid[row + 1][col][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row + 1][col][zNum]);
             simulationSnapshot[row + 1][col][zNum] = 2;
@@ -320,7 +320,7 @@ public class AStarSearch extends Simulation {
             grid[row + 1][col + 1][zNum].setG(g);
             int h = calculateH(grid[row + 1][col + 1][zNum]);
             grid[row + 1][col + 1][zNum].setH(h);
-            grid[row + 1][col + 1][zNum].setF();
+            grid[row + 1][col + 1][zNum].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row + 1][col + 1][zNum]);
             simulationSnapshot[row + 1][col + 1][zNum] = 2;
@@ -339,7 +339,7 @@ public class AStarSearch extends Simulation {
             grid[row][col][zNum + 1].setG(g);
             int h = calculateH(grid[row][col][zNum + 1]);
             grid[row][col][zNum + 1].setH(h);
-            grid[row][col][zNum + 1].setF();
+            grid[row][col][zNum + 1].setAStarSearchF();
             nodeSnapshot = grid;
             openList.add(grid[row][col][zNum + 1]);
             simulationSnapshot[row][col][zNum + 1] = 2;
@@ -355,7 +355,7 @@ public class AStarSearch extends Simulation {
                 grid[row][col + 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row][col + 1][zNum + 1]);
                 grid[row][col + 1][zNum + 1].setH(h);
-                grid[row][col + 1][zNum + 1].setF();
+                grid[row][col + 1][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row][col + 1][zNum + 1]);
                 simulationSnapshot[row][col + 1][zNum + 1] = 2;
@@ -370,7 +370,7 @@ public class AStarSearch extends Simulation {
                 grid[row - 1][col + 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row - 1][col + 1][zNum + 1]);
                 grid[row - 1][col + 1][zNum + 1].setH(h);
-                grid[row - 1][col + 1][zNum + 1].setF();
+                grid[row - 1][col + 1][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row - 1][col + 1][zNum + 1]);
                 simulationSnapshot[row - 1][col + 1][zNum + 1] = 2;
@@ -384,7 +384,7 @@ public class AStarSearch extends Simulation {
                 grid[row - 1][col][zNum + 1].setG(g);
                 int h = calculateH(grid[row - 1][col][zNum + 1]);
                 grid[row - 1][col][zNum + 1].setH(h);
-                grid[row - 1][col][zNum + 1].setF();
+                grid[row - 1][col][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row - 1][col][zNum + 1]);
                 simulationSnapshot[row - 1][col][zNum + 1] = 2;
@@ -399,7 +399,7 @@ public class AStarSearch extends Simulation {
                 grid[row - 1][col - 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row - 1][col - 1][zNum + 1]);
                 grid[row - 1][col - 1][zNum + 1].setH(h);
-                grid[row - 1][col - 1][zNum + 1].setF();
+                grid[row - 1][col - 1][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row - 1][col - 1][zNum + 1]);
                 simulationSnapshot[row - 1][col - 1][zNum + 1] = 2;
@@ -413,7 +413,7 @@ public class AStarSearch extends Simulation {
                 grid[row][col - 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row][col - 1][zNum + 1]);
                 grid[row][col - 1][zNum + 1].setH(h);
-                grid[row][col - 1][zNum + 1].setF();
+                grid[row][col - 1][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row][col - 1][zNum + 1]);
                 simulationSnapshot[row][col - 1][zNum + 1] = 2;
@@ -428,7 +428,7 @@ public class AStarSearch extends Simulation {
                 grid[row + 1][col - 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row + 1][col - 1][zNum + 1]);
                 grid[row + 1][col - 1][zNum + 1].setH(h);
-                grid[row + 1][col - 1][zNum + 1].setF();
+                grid[row + 1][col - 1][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row + 1][col - 1][zNum + 1]);
                 simulationSnapshot[row + 1][col - 1][zNum + 1] = 2;
@@ -443,7 +443,7 @@ public class AStarSearch extends Simulation {
                 grid[row + 1][col][zNum + 1].setG(g);
                 int h = calculateH(grid[row + 1][col][zNum + 1]);
                 grid[row + 1][col][zNum + 1].setH(h);
-                grid[row + 1][col][zNum + 1].setF();
+                grid[row + 1][col][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row + 1][col][zNum + 1]);
                 simulationSnapshot[row + 1][col][zNum + 1] = 2;
@@ -458,7 +458,7 @@ public class AStarSearch extends Simulation {
                 grid[row + 1][col + 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row + 1][col + 1][zNum + 1]);
                 grid[row + 1][col + 1][zNum + 1].setH(h);
-                grid[row + 1][col + 1][zNum + 1].setF();
+                grid[row + 1][col + 1][zNum + 1].setAStarSearchF();
                 nodeSnapshot = grid;
                 openList.add(grid[row + 1][col + 1][zNum + 1]);
                 simulationSnapshot[row + 1][col + 1][zNum + 1] = 2;

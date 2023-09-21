@@ -3,8 +3,6 @@ package com.github.btror.mcpathfinding.simulation.pathfinding;
 import com.github.btror.mcpathfinding.simulation.Simulation;
 import com.github.btror.mcpathfinding.simulation.util.Node;
 
-import java.util.PriorityQueue;
-
 public class UniformCostSearch extends Simulation {
 
     public UniformCostSearch() {

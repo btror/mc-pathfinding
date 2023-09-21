@@ -42,9 +42,6 @@ public class GreedyBestFirstSearch extends Simulation {
             }
         }
 
-        int g = calculateG(nodeCurrent);
-        nodeCurrent.setG(g);
-
         int h = calculateH(nodeCurrent);
         nodeCurrent.setH(h);
 
@@ -79,8 +76,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row][col][zNum - 1])) {
             Node[][][] grid = nodeSnapshot;
             grid[row][col][zNum - 1].setParent(nodeCurrent);
-            int g = calculateG(grid[row][col][zNum - 1]);
-            grid[row][col][zNum - 1].setG(g);
             int h = calculateH(grid[row][col][zNum - 1]);
             grid[row][col][zNum - 1].setH(h);
             grid[row][col][zNum - 1].setBfsF();
@@ -94,8 +89,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row][col + 1][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row][col + 1][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row][col + 1][zNum - 1]);
-                grid[row][col + 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row][col + 1][zNum - 1]);
                 grid[row][col + 1][zNum - 1].setH(h);
                 grid[row][col + 1][zNum - 1].setBfsF();
@@ -109,8 +102,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row - 1][col + 1][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row - 1][col + 1][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row - 1][col + 1][zNum - 1]);
-                grid[row - 1][col + 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row - 1][col + 1][zNum - 1]);
                 grid[row - 1][col + 1][zNum - 1].setH(h);
                 grid[row - 1][col + 1][zNum - 1].setBfsF();
@@ -123,8 +114,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row - 1][col][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row - 1][col][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row - 1][col][zNum - 1]);
-                grid[row - 1][col][zNum - 1].setG(g);
                 int h = calculateH(grid[row - 1][col][zNum - 1]);
                 grid[row - 1][col][zNum - 1].setH(h);
                 grid[row - 1][col][zNum - 1].setBfsF();
@@ -137,8 +126,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row - 1][col - 1][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row - 1][col - 1][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row - 1][col - 1][zNum - 1]);
-                grid[row - 1][col - 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row - 1][col - 1][zNum - 1]);
                 grid[row - 1][col - 1][zNum - 1].setH(h);
                 grid[row - 1][col - 1][zNum - 1].setBfsF();
@@ -151,8 +138,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row][col - 1][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row][col - 1][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row][col - 1][zNum - 1]);
-                grid[row][col - 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row][col - 1][zNum - 1]);
                 grid[row][col - 1][zNum - 1].setH(h);
                 grid[row][col - 1][zNum - 1].setBfsF();
@@ -166,8 +151,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row + 1][col - 1][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row + 1][col - 1][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row + 1][col - 1][zNum - 1]);
-                grid[row + 1][col - 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row + 1][col - 1][zNum - 1]);
                 grid[row + 1][col - 1][zNum - 1].setH(h);
                 grid[row + 1][col - 1][zNum - 1].setBfsF();
@@ -180,8 +163,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row + 1][col][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row + 1][col][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row + 1][col][zNum - 1]);
-                grid[row + 1][col][zNum - 1].setG(g);
                 int h = calculateH(grid[row + 1][col][zNum - 1]);
                 grid[row + 1][col][zNum - 1].setH(h);
                 grid[row + 1][col][zNum - 1].setBfsF();
@@ -195,8 +176,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row + 1][col + 1][zNum - 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row + 1][col + 1][zNum - 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row + 1][col + 1][zNum - 1]);
-                grid[row + 1][col + 1][zNum - 1].setG(g);
                 int h = calculateH(grid[row + 1][col + 1][zNum - 1]);
                 grid[row + 1][col + 1][zNum - 1].setH(h);
                 grid[row + 1][col + 1][zNum - 1].setBfsF();
@@ -215,8 +194,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row][col + 1][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row][col + 1][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row][col + 1][zNum]);
-            grid[row][col + 1][zNum].setG(g);
             int h = calculateH(grid[row][col + 1][zNum]);
             grid[row][col + 1][zNum].setH(h);
             grid[row][col + 1][zNum].setBfsF();
@@ -230,8 +207,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row - 1][col + 1][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row - 1][col + 1][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row - 1][col + 1][zNum]);
-            grid[row - 1][col + 1][zNum].setG(g);
             int h = calculateH(grid[row - 1][col + 1][zNum]);
             grid[row - 1][col + 1][zNum].setH(h);
             grid[row - 1][col + 1][zNum].setBfsF();
@@ -244,8 +219,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row - 1][col][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row - 1][col][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row - 1][col][zNum]);
-            grid[row - 1][col][zNum].setG(g);
             int h = calculateH(grid[row - 1][col][zNum]);
             grid[row - 1][col][zNum].setH(h);
             grid[row - 1][col][zNum].setBfsF();
@@ -258,8 +231,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row - 1][col - 1][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row - 1][col - 1][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row - 1][col - 1][zNum]);
-            grid[row - 1][col - 1][zNum].setG(g);
             int h = calculateH(grid[row - 1][col - 1][zNum]);
             grid[row - 1][col - 1][zNum].setH(h);
             grid[row - 1][col - 1][zNum].setBfsF();
@@ -272,8 +243,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row][col - 1][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row][col - 1][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row][col - 1][zNum]);
-            grid[row][col - 1][zNum].setG(g);
             int h = calculateH(grid[row][col - 1][zNum]);
             grid[row][col - 1][zNum].setH(h);
             grid[row][col - 1][zNum].setBfsF();
@@ -287,8 +256,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row + 1][col - 1][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row + 1][col - 1][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row + 1][col - 1][zNum]);
-            grid[row + 1][col - 1][zNum].setG(g);
             int h = calculateH(grid[row + 1][col - 1][zNum]);
             grid[row + 1][col - 1][zNum].setH(h);
             grid[row + 1][col - 1][zNum].setBfsF();
@@ -301,8 +268,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row + 1][col][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row + 1][col][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row + 1][col][zNum]);
-            grid[row + 1][col][zNum].setG(g);
             int h = calculateH(grid[row + 1][col][zNum]);
             grid[row + 1][col][zNum].setH(h);
             grid[row + 1][col][zNum].setBfsF();
@@ -316,8 +281,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row + 1][col + 1][zNum])) {
             Node[][][] grid = nodeSnapshot;
             grid[row + 1][col + 1][zNum].setParent(nodeCurrent);
-            int g = calculateG(grid[row + 1][col + 1][zNum]);
-            grid[row + 1][col + 1][zNum].setG(g);
             int h = calculateH(grid[row + 1][col + 1][zNum]);
             grid[row + 1][col + 1][zNum].setH(h);
             grid[row + 1][col + 1][zNum].setBfsF();
@@ -335,8 +298,6 @@ public class GreedyBestFirstSearch extends Simulation {
                 && !closedList.contains(nodeSnapshot[row][col][zNum + 1])) {
             Node[][][] grid = nodeSnapshot;
             grid[row][col][zNum + 1].setParent(nodeCurrent);
-            int g = calculateG(grid[row][col][zNum + 1]);
-            grid[row][col][zNum + 1].setG(g);
             int h = calculateH(grid[row][col][zNum + 1]);
             grid[row][col][zNum + 1].setH(h);
             grid[row][col][zNum + 1].setBfsF();
@@ -351,8 +312,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row][col + 1][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row][col + 1][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row][col + 1][zNum + 1]);
-                grid[row][col + 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row][col + 1][zNum + 1]);
                 grid[row][col + 1][zNum + 1].setH(h);
                 grid[row][col + 1][zNum + 1].setBfsF();
@@ -366,8 +325,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row - 1][col + 1][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row - 1][col + 1][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row - 1][col + 1][zNum + 1]);
-                grid[row - 1][col + 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row - 1][col + 1][zNum + 1]);
                 grid[row - 1][col + 1][zNum + 1].setH(h);
                 grid[row - 1][col + 1][zNum + 1].setBfsF();
@@ -380,8 +337,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row - 1][col][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row - 1][col][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row - 1][col][zNum + 1]);
-                grid[row - 1][col][zNum + 1].setG(g);
                 int h = calculateH(grid[row - 1][col][zNum + 1]);
                 grid[row - 1][col][zNum + 1].setH(h);
                 grid[row - 1][col][zNum + 1].setBfsF();
@@ -395,8 +350,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row - 1][col - 1][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row - 1][col - 1][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row - 1][col - 1][zNum + 1]);
-                grid[row - 1][col - 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row - 1][col - 1][zNum + 1]);
                 grid[row - 1][col - 1][zNum + 1].setH(h);
                 grid[row - 1][col - 1][zNum + 1].setBfsF();
@@ -409,8 +362,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row][col - 1][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row][col - 1][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row][col - 1][zNum + 1]);
-                grid[row][col - 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row][col - 1][zNum + 1]);
                 grid[row][col - 1][zNum + 1].setH(h);
                 grid[row][col - 1][zNum + 1].setBfsF();
@@ -424,8 +375,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row + 1][col - 1][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row + 1][col - 1][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row + 1][col - 1][zNum + 1]);
-                grid[row + 1][col - 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row + 1][col - 1][zNum + 1]);
                 grid[row + 1][col - 1][zNum + 1].setH(h);
                 grid[row + 1][col - 1][zNum + 1].setBfsF();
@@ -439,8 +388,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row + 1][col][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row + 1][col][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row + 1][col][zNum + 1]);
-                grid[row + 1][col][zNum + 1].setG(g);
                 int h = calculateH(grid[row + 1][col][zNum + 1]);
                 grid[row + 1][col][zNum + 1].setH(h);
                 grid[row + 1][col][zNum + 1].setBfsF();
@@ -454,8 +401,6 @@ public class GreedyBestFirstSearch extends Simulation {
                     && !closedList.contains(nodeSnapshot[row + 1][col + 1][zNum + 1])) {
                 Node[][][] grid = nodeSnapshot;
                 grid[row + 1][col + 1][zNum + 1].setParent(nodeCurrent);
-                int g = calculateG(grid[row + 1][col + 1][zNum + 1]);
-                grid[row + 1][col + 1][zNum + 1].setG(g);
                 int h = calculateH(grid[row + 1][col + 1][zNum + 1]);
                 grid[row + 1][col + 1][zNum + 1].setH(h);
                 grid[row + 1][col + 1][zNum + 1].setBfsF();

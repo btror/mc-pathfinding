@@ -18,11 +18,15 @@ public class Node {
         this.parent = null;
     }
 
-    public void setF() {
+    public void setAStarSearchF() {
         f = g + h;
     }
 
     public void setBfsF() {
+        f = h;
+    }
+
+    public void setBeamSearchF() {
         f = h;
     }
 

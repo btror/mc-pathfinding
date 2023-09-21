@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class BreadthFirstSearch extends Simulation {
 
-    private Queue<Node> queue;
+    private final Queue<Node> queue;
 
     public BreadthFirstSearch() {
         queue = new LinkedList<>();
@@ -72,11 +72,4 @@ public class BreadthFirstSearch extends Simulation {
             }
         }
     }
-
-//    // Helper method to check if a cell is within bounds
-//    private boolean isValid(int row, int col, int z) {
-//        return row >= 0 && row < simulationSnapshot.length &&
-//                col >= 0 && col < simulationSnapshot[0].length &&
-//                z >= 0 && z < simulationSnapshot[0][0].length;
-//    }
 }
