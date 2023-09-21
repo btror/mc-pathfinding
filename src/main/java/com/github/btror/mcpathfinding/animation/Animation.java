@@ -34,6 +34,7 @@ public class Animation {
      * @param diagonalMovement      pathfinding algorithm using diagonal movement in calculations
      * @param delay                 animation delay (TaskTimer delay param)
      * @param period                animation speed (TaskTimer period param)
+     * @param beamWidth               beam search algorithm beam width (smaller values (1-5) are for more focused searches with lower diversity, while larger values (50+ are less focused and use more computing power but have greater diversity))
      */
     public Animation(
             JavaPlugin plugin,
@@ -46,7 +47,8 @@ public class Animation {
             String algorithm,
             boolean diagonalMovement,
             long delay,
-            long period) {
+            long period,
+            int beamWidth) {
         this.plugin = plugin;
         this.snapshot = snapshot;
         this.snapshotStart = snapshotStart;
@@ -61,6 +63,7 @@ public class Animation {
         this.simulation.setDiagonalMovement(diagonalMovement);
         this.delay = delay;
         this.period = period;
+        this.simulation.setBeamWidth(beamWidth);
     }
 
     public void start() {

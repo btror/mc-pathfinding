@@ -38,6 +38,10 @@ public class Node {
         return f;
     }
 
+    public int getH() {
+        return h;
+    }
+
     public int getG() {
         return g;
     }

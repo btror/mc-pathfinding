@@ -21,6 +21,7 @@ public abstract class Simulation {
     protected ArrayList<Node> closedList;
 
     protected boolean diagonalMovement;
+    protected int beamWidth;
 
     public Simulation() {
         this.openList = new PriorityQueue<>(10, new NodeComparator());
@@ -181,6 +182,12 @@ public abstract class Simulation {
         return path;
     }
 
+    protected boolean isValid(int row, int col, int z) {
+        return row >= 0 && row < simulationSnapshot.length &&
+                col >= 0 && col < simulationSnapshot[0].length &&
+                z >= 0 && z < simulationSnapshot[0][0].length;
+    }
+
     public void setSimulationSnapshot(int[][][] simulationSnapshot) {
         this.nodeSnapshot = new Node[simulationSnapshot.length][simulationSnapshot[0].length][simulationSnapshot[0][0].length];
         this.simulationSnapshot = simulationSnapshot;
@@ -196,6 +203,10 @@ public abstract class Simulation {
 
     public void setDiagonalMovement(boolean diagonalMovement) {
         this.diagonalMovement = diagonalMovement;
+    }
+
+    public void setBeamWidth(int beamWidth) {
+        this.beamWidth = beamWidth;
     }
 
     public int[][][] getSimulationSnapshot() {

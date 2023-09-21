@@ -18,7 +18,7 @@ public final class McPathfinding extends JavaPlugin {
         getLogger().info("mc-pathfinding disabled...");
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -35,10 +35,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 false,
                 0,
-                10);
+                10,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -55,10 +56,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 false,
                 0,
-                10);
+                10,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -77,10 +79,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 false,
                 delay,
-                period);
+                period,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -99,10 +102,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 false,
                 delay,
-                period);
+                period,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -120,10 +124,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 diagonalMovement,
                 0,
-                10);
+                10,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -142,10 +147,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 diagonalMovement,
                 0,
-                10);
+                10,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -165,10 +171,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 diagonalMovement,
                 0,
-                10);
+                10,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -188,10 +195,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 diagonalMovement,
                 delay,
-                period);
+                period,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -212,10 +220,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 diagonalMovement,
                 delay,
-                period);
+                period,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -234,10 +243,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 false,
                 0,
-                10);
+                10,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -258,10 +268,11 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 false,
                 delay,
-                period);
+                period,
+                0);
     }
 
-    public static void astar(
+    public static void astarSearch(
             JavaPlugin plugin,
             Location[][][] snapshot,
             Location startLocation,
@@ -283,7 +294,1145 @@ public final class McPathfinding extends JavaPlugin {
                 "astar",
                 diagonalMovement,
                 delay,
-                period);
+                period,
+                0);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "beam",
+                false,
+                0,
+                10,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                false,
+                "beam",
+                false,
+                0,
+                10,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            long delay,
+            long period,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "beam",
+                false,
+                delay,
+                period,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            long delay,
+            long period,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                false,
+                "beam",
+                false,
+                delay,
+                period,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "beam",
+                diagonalMovement,
+                0,
+                10,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "beam",
+                diagonalMovement,
+                0,
+                10,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "beam",
+                diagonalMovement,
+                0,
+                10,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement,
+            long delay,
+            long period,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "beam",
+                diagonalMovement,
+                delay,
+                period,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "beam",
+                diagonalMovement,
+                delay,
+                period,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "beam",
+                false,
+                0,
+                10,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "beam",
+                false,
+                delay,
+                period,
+                beamWidth);
+    }
+
+    public static void beamSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period,
+            int beamWidth) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "beam",
+                diagonalMovement,
+                delay,
+                period,
+                beamWidth);
+    }
+
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "bfs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "bfs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "bfs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "bfs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void breadthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "bfs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dfs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dfs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dfs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dfs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void depthFirstSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dfs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dijkstra",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                false,
+                "dijkstra",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dijkstra",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                false,
+                "dijkstra",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dijkstra",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "dijkstra",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dijkstra",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "dijkstra",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "dijkstra",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dijkstra",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dijkstra",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void dijkstraSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "dijkstra",
+                diagonalMovement,
+                delay,
+                period,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -303,7 +1452,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 false,
                 0,
-                10);
+                10,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -324,7 +1474,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 false,
                 0,
-                10);
+                10,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -347,7 +1498,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 diagonalMovement,
                 0,
-                10);
+                10,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -369,7 +1521,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 false,
                 delay,
-                period);
+                period,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -392,7 +1545,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 false,
                 delay,
-                period);
+                period,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -413,7 +1567,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 diagonalMovement,
                 0,
-                10);
+                10,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -435,7 +1590,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 diagonalMovement,
                 0,
-                10);
+                10,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -458,7 +1614,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 diagonalMovement,
                 delay,
-                period);
+                period,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -482,7 +1639,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 diagonalMovement,
                 delay,
-                period);
+                period,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -504,7 +1662,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 false,
                 0,
-                10);
+                10,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -528,7 +1687,8 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 false,
                 delay,
-                period);
+                period,
+                0);
     }
 
     public static void greedyBestFirstSearch(
@@ -553,7 +1713,290 @@ public final class McPathfinding extends JavaPlugin {
                 "gbfs",
                 diagonalMovement,
                 delay,
-                period);
+                period,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "ucs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "ucs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "ucs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                diagonalMovement,
+                0,
+                10,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                null,
+                false,
+                "ucs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                null,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                false,
+                0,
+                10,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                false,
+                delay,
+                period,
+                0);
+    }
+
+    public static void uniformCostSearch(
+            JavaPlugin plugin,
+            Location[][][] snapshot,
+            Location startLocation,
+            Location targetLocation,
+            Material material,
+            Particle particle,
+            boolean tightParticleSpawning,
+            boolean diagonalMovement,
+            long delay,
+            long period) {
+        search(
+                plugin,
+                snapshot,
+                startLocation,
+                targetLocation,
+                material,
+                particle,
+                tightParticleSpawning,
+                "ucs",
+                diagonalMovement,
+                delay,
+                period,
+                0);
     }
 
     public static void search(
@@ -567,7 +2010,8 @@ public final class McPathfinding extends JavaPlugin {
             String algorithm,
             boolean diagonalMovement,
             long delay,
-            long period) {
+            long period,
+            int beamWidth) {
         new Animation(
                 plugin,
                 snapshot,
@@ -579,6 +2023,7 @@ public final class McPathfinding extends JavaPlugin {
                 algorithm,
                 diagonalMovement,
                 delay,
-                period).start();
+                period,
+                beamWidth).start();
     }
 }

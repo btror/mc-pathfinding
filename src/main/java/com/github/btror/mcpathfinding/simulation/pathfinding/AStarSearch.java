@@ -3,12 +3,12 @@ package com.github.btror.mcpathfinding.simulation.pathfinding;
 import com.github.btror.mcpathfinding.simulation.Simulation;
 import com.github.btror.mcpathfinding.simulation.util.Node;
 
-public class AStar extends Simulation {
+public class AStarSearch extends Simulation {
 
-    public AStar() {
+    public AStarSearch() {
     }
 
-    public AStar(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
+    public AStarSearch(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
         super(simulationSnapshot, simulationStart, simulationTarget);
     }
 
