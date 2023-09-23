@@ -32,11 +32,12 @@ jobs:
         run: |
           mvn package --file pom.xml
 
-      - name: Capture Maven Version
+      - name: Set Maven Version
         id: maven_version
         run: |
-          export MAVEN_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec | grep -v '^\[' | awk '{$1=$1;print}')
-          echo "::set-env name=MAVEN_VERSION::$MAVEN_VERSION"
+          # Use XMLStarlet to extract the version from the pom.xml file
+          MAVEN_VERSION=$(xmlstarlet sel -t -v "/project/version" pom.xml)
+          echo "MAVEN_VERSION=${MAVEN_VERSION}" >> $GITHUB_ENV
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
