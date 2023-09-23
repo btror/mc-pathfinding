@@ -31,9 +31,15 @@ public class Animation {
      * @param particle              pathfinding particle effect
      * @param tightParticleSpawning spawn particles tightly together
      * @param algorithm             pathfinding algorithm to use
-     * @param diagonalMovement      pathfinding algorithm using diagonal movement in calculations
+     * @param diagonalMovement      pathfinding algorithm using diagonal movement in
+     *                              calculations
      * @param delay                 animation delay (TaskTimer delay param)
      * @param period                animation speed (TaskTimer period param)
+     * @param beamWidth             beam search algorithm beam width (smaller values
+     *                              (1-5) are for more focused searches with lower
+     *                              diversity, while larger values (50+ are less
+     *                              focused and use more computing power but have
+     *                              greater diversity))
      */
     public Animation(
             JavaPlugin plugin,
@@ -46,7 +52,8 @@ public class Animation {
             String algorithm,
             boolean diagonalMovement,
             long delay,
-            long period) {
+            long period,
+            int beamWidth) {
         this.plugin = plugin;
         this.snapshot = snapshot;
         this.snapshotStart = snapshotStart;
@@ -61,6 +68,7 @@ public class Animation {
         this.simulation.setDiagonalMovement(diagonalMovement);
         this.delay = delay;
         this.period = period;
+        this.simulation.setBeamWidth(beamWidth);
     }
 
     public void start() {
@@ -79,14 +87,8 @@ public class Animation {
                 }
             } else {
                 snapshotParticlePath.add(
-                        snapshot[
-                                simulation.getSimulationPath().get(0)[0]]
-                                [
-                                simulation.getSimulationPath().get(0)[1]
-                                ][
-                                simulation.getSimulationPath().get(0)[2]
-                                ]
-                );
+                        snapshot[simulation.getSimulationPath().get(0)[0]][simulation.getSimulationPath()
+                                .get(0)[1]][simulation.getSimulationPath().get(0)[2]]);
 
                 for (int i = 1; i < simulation.getSimulationPath().size(); i++) {
                     Integer[] currentSpace = simulation.getSimulationPath().get(i);
@@ -100,8 +102,7 @@ public class Animation {
                                 currentLocation.getWorld(),
                                 (previousLocation.getX() + currentLocation.getX()) / 2.0,
                                 (previousLocation.getY() + currentLocation.getY()) / 2.0,
-                                (previousLocation.getZ() + currentLocation.getZ()) / 2.0
-                        );
+                                (previousLocation.getZ() + currentLocation.getZ()) / 2.0);
                         snapshotParticlePath.add(delta);
                     }
                     snapshotParticlePath.add(currentLocation);

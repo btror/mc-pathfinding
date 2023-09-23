@@ -3,12 +3,12 @@ package com.github.btror.mcpathfinding.simulation.pathfinding;
 import com.github.btror.mcpathfinding.simulation.Simulation;
 import com.github.btror.mcpathfinding.simulation.util.Node;
 
-public class GreedyBestFirstSearch extends Simulation {
+public class AStarSearch extends Simulation {
 
-    public GreedyBestFirstSearch() {
+    public AStarSearch() {
     }
 
-    public GreedyBestFirstSearch(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
+    public AStarSearch(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
         super(simulationSnapshot, simulationStart, simulationTarget);
     }
 
@@ -42,10 +42,13 @@ public class GreedyBestFirstSearch extends Simulation {
             }
         }
 
+        int g = calculateG(nodeCurrent);
+        nodeCurrent.setG(g);
+
         int h = calculateH(nodeCurrent);
         nodeCurrent.setH(h);
 
-        nodeCurrent.setBfsF();
+        nodeCurrent.setAStarSearchF();
         nodeStart = nodeCurrent;
         openList.add(nodeCurrent);
     }
@@ -68,161 +71,161 @@ public class GreedyBestFirstSearch extends Simulation {
         int zNum = nodeCurrent.getZ();
 
         // bottom
-        if (validateNeighbor(row, col, zNum - 1, false, true)) {
-            nodeSnapshot[row][col][zNum - 1].setBfsF();
+        if (validateNeighbor(row, col, zNum - 1, true, true)) {
+            nodeSnapshot[row][col][zNum - 1].setAStarSearchF();
             openList.add(nodeSnapshot[row][col][zNum - 1]);
             simulationSnapshot[row][col][zNum - 1] = 2;
         }
         if (this.diagonalMovement) {
             // bottom right
-            if (validateNeighbor(row, col + 1, zNum - 1, false, true)) {
-                nodeSnapshot[row][col + 1][zNum - 1].setBfsF();
+            if (validateNeighbor(row, col + 1, zNum - 1, true, true)) {
+                nodeSnapshot[row][col + 1][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row][col + 1][zNum - 1]);
                 simulationSnapshot[row][col + 1][zNum - 1] = 2;
             }
             // bottom front-right
-            if (validateNeighbor(row - 1, col + 1, zNum - 1, false, true)) {
-                nodeSnapshot[row - 1][col + 1][zNum - 1].setBfsF();
+            if (validateNeighbor(row - 1, col + 1, zNum - 1, true, true)) {
+                nodeSnapshot[row - 1][col + 1][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row - 1][col + 1][zNum - 1]);
                 simulationSnapshot[row - 1][col + 1][zNum - 1] = 2;
             }
             // bottom front
-            if (validateNeighbor(row - 1, col, zNum - 1, false, true)) {
-                nodeSnapshot[row - 1][col][zNum - 1].setBfsF();
+            if (validateNeighbor(row - 1, col, zNum - 1, true, true)) {
+                nodeSnapshot[row - 1][col][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row - 1][col][zNum - 1]);
                 simulationSnapshot[row - 1][col][zNum - 1] = 2;
             }
             // bottom front-left
-            if (validateNeighbor(row - 1, col - 1, zNum - 1, false, true)) {
-                nodeSnapshot[row - 1][col - 1][zNum - 1].setBfsF();
+            if (validateNeighbor(row - 1, col - 1, zNum - 1, true, true)) {
+                nodeSnapshot[row - 1][col - 1][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row - 1][col - 1][zNum - 1]);
                 simulationSnapshot[row - 1][col - 1][zNum - 1] = 2;
             }
             // bottom left
-            if (validateNeighbor(row, col - 1, zNum - 1, false, true)) {
-                nodeSnapshot[row][col - 1][zNum - 1].setBfsF();
+            if (validateNeighbor(row, col - 1, zNum - 1, true, true)) {
+                nodeSnapshot[row][col - 1][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row][col - 1][zNum - 1]);
                 simulationSnapshot[row][col - 1][zNum - 1] = 2;
             }
             // bottom back-left
-            if (validateNeighbor(row + 1, col - 1, zNum - 1, false, true)) {
-                nodeSnapshot[row + 1][col - 1][zNum - 1].setBfsF();
+            if (validateNeighbor(row + 1, col - 1, zNum - 1, true, true)) {
+                nodeSnapshot[row + 1][col - 1][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row + 1][col - 1][zNum - 1]);
                 simulationSnapshot[row + 1][col - 1][zNum - 1] = 2;
             }
             // bottom back
-            if (validateNeighbor(row + 1, col, zNum - 1, false, true)) {
-                nodeSnapshot[row + 1][col][zNum - 1].setBfsF();
+            if (validateNeighbor(row + 1, col, zNum - 1, true, true)) {
+                nodeSnapshot[row + 1][col][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row + 1][col][zNum - 1]);
                 simulationSnapshot[row + 1][col][zNum - 1] = 2;
             }
             // bottom back-right
-            if (validateNeighbor(row + 1, col + 1, zNum - 1, false, true)) {
-                nodeSnapshot[row + 1][col + 1][zNum - 1].setBfsF();
+            if (validateNeighbor(row + 1, col + 1, zNum - 1, true, true)) {
+                nodeSnapshot[row + 1][col + 1][zNum - 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row + 1][col + 1][zNum - 1]);
                 simulationSnapshot[row + 1][col + 1][zNum - 1] = 2;
             }
         }
         // middle right
-        if (validateNeighbor(row, col + 1, zNum, false, true)) {
-            nodeSnapshot[row][col + 1][zNum].setBfsF();
+        if (validateNeighbor(row, col + 1, zNum, true, true)) {
+            nodeSnapshot[row][col + 1][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row][col + 1][zNum]);
             simulationSnapshot[row][col + 1][zNum] = 2;
         }
         // middle front-right
-        if (this.diagonalMovement && validateNeighbor(row - 1, col + 1, zNum, false, true)) {
-            nodeSnapshot[row - 1][col + 1][zNum].setBfsF();
+        if (this.diagonalMovement && validateNeighbor(row - 1, col + 1, zNum, true, true)) {
+            nodeSnapshot[row - 1][col + 1][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row - 1][col + 1][zNum]);
             simulationSnapshot[row - 1][col + 1][zNum] = 2;
         }
         // middle front
-        if (validateNeighbor(row - 1, col, zNum, false, true)) {
-            nodeSnapshot[row - 1][col][zNum].setBfsF();
+        if (validateNeighbor(row - 1, col, zNum, true, true)) {
+            nodeSnapshot[row - 1][col][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row - 1][col][zNum]);
             simulationSnapshot[row - 1][col][zNum] = 2;
         }
         // middle front-left
-        if (this.diagonalMovement && validateNeighbor(row - 1, col - 1, zNum, false, true)) {
-            nodeSnapshot[row - 1][col - 1][zNum].setBfsF();
+        if (this.diagonalMovement && validateNeighbor(row - 1, col - 1, zNum, true, true)) {
+            nodeSnapshot[row - 1][col - 1][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row - 1][col - 1][zNum]);
             simulationSnapshot[row - 1][col - 1][zNum] = 2;
         }
         // middle left
-        if (validateNeighbor(row, col - 1, zNum, false, true)) {
-            nodeSnapshot[row][col - 1][zNum].setBfsF();
+        if (validateNeighbor(row, col - 1, zNum, true, true)) {
+            nodeSnapshot[row][col - 1][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row][col - 1][zNum]);
             simulationSnapshot[row][col - 1][zNum] = 2;
         }
         // middle back-left
-        if (this.diagonalMovement && validateNeighbor(row + 1, col - 1, zNum, false, true)) {
-            nodeSnapshot[row + 1][col - 1][zNum].setBfsF();
+        if (this.diagonalMovement && validateNeighbor(row + 1, col - 1, zNum, true, true)) {
+            nodeSnapshot[row + 1][col - 1][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row + 1][col - 1][zNum]);
             simulationSnapshot[row + 1][col - 1][zNum] = 2;
         }
         // middle back
-        if (validateNeighbor(row + 1, col, zNum, false, true)) {
-            nodeSnapshot[row + 1][col][zNum].setBfsF();
+        if (validateNeighbor(row + 1, col, zNum, true, true)) {
+            nodeSnapshot[row + 1][col][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row + 1][col][zNum]);
             simulationSnapshot[row + 1][col][zNum] = 2;
         }
         // middle back-right
-        if (this.diagonalMovement && validateNeighbor(row + 1, col + 1, zNum, false, true)) {
-            nodeSnapshot[row + 1][col + 1][zNum].setBfsF();
+        if (this.diagonalMovement && validateNeighbor(row + 1, col + 1, zNum, true, true)) {
+            nodeSnapshot[row + 1][col + 1][zNum].setAStarSearchF();
             openList.add(nodeSnapshot[row + 1][col + 1][zNum]);
             simulationSnapshot[row + 1][col + 1][zNum] = 2;
         }
         // top
-        if (validateNeighbor(row, col, zNum + 1, false, true)) {
-            nodeSnapshot[row][col][zNum + 1].setBfsF();
+        if (validateNeighbor(row, col, zNum + 1, true, true)) {
+            nodeSnapshot[row][col][zNum + 1].setAStarSearchF();
             openList.add(nodeSnapshot[row][col][zNum + 1]);
             simulationSnapshot[row][col][zNum + 1] = 2;
         }
         if (this.diagonalMovement) {
             // top right
-            if (validateNeighbor(row, col + 1, zNum + 1, false, true)) {
-                nodeSnapshot[row][col + 1][zNum + 1].setBfsF();
+            if (validateNeighbor(row, col + 1, zNum + 1, true, true)) {
+                nodeSnapshot[row][col + 1][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row][col + 1][zNum + 1]);
                 simulationSnapshot[row][col + 1][zNum + 1] = 2;
             }
             // top front-right
-            if (validateNeighbor(row - 1, col + 1, zNum + 1, false, true)) {
-                nodeSnapshot[row - 1][col + 1][zNum + 1].setBfsF();
+            if (validateNeighbor(row - 1, col + 1, zNum + 1, true, true)) {
+                nodeSnapshot[row - 1][col + 1][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row - 1][col + 1][zNum + 1]);
                 simulationSnapshot[row - 1][col + 1][zNum + 1] = 2;
             }
             // top front
-            if (validateNeighbor(row - 1, col, zNum + 1, false, true)) {
-                nodeSnapshot[row - 1][col][zNum + 1].setBfsF();
+            if (validateNeighbor(row - 1, col, zNum + 1, true, true)) {
+                nodeSnapshot[row - 1][col][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row - 1][col][zNum + 1]);
                 simulationSnapshot[row - 1][col][zNum + 1] = 2;
             }
             // top front-left
-            if (validateNeighbor(row - 1, col - 1, zNum + 1, false, true)) {
-                nodeSnapshot[row - 1][col - 1][zNum + 1].setBfsF();
+            if (validateNeighbor(row - 1, col - 1, zNum + 1, true, true)) {
+                nodeSnapshot[row - 1][col - 1][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row - 1][col - 1][zNum + 1]);
                 simulationSnapshot[row - 1][col - 1][zNum + 1] = 2;
             }
             // top left
-            if (validateNeighbor(row, col - 1, zNum + 1, false, true)) {
-                nodeSnapshot[row][col - 1][zNum + 1].setBfsF();
+            if (validateNeighbor(row, col - 1, zNum + 1, true, true)) {
+                nodeSnapshot[row][col - 1][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row][col - 1][zNum + 1]);
                 simulationSnapshot[row][col - 1][zNum + 1] = 2;
             }
             // top back-left
-            if (validateNeighbor(row + 1, col - 1, zNum + 1, false, true)) {
-                nodeSnapshot[row + 1][col - 1][zNum + 1].setBfsF();
+            if (validateNeighbor(row + 1, col - 1, zNum + 1, true, true)) {
+                nodeSnapshot[row + 1][col - 1][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row + 1][col - 1][zNum + 1]);
                 simulationSnapshot[row + 1][col - 1][zNum + 1] = 2;
             }
             // top back
-            if (validateNeighbor(row + 1, col, zNum + 1, false, true)) {
-                nodeSnapshot[row + 1][col][zNum + 1].setBfsF();
+            if (validateNeighbor(row + 1, col, zNum + 1, true, true)) {
+                nodeSnapshot[row + 1][col][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row + 1][col][zNum + 1]);
                 simulationSnapshot[row + 1][col][zNum + 1] = 2;
             }
             // top back-right
-            if (validateNeighbor(row + 1, col + 1, zNum + 1, false, true)) {
-                nodeSnapshot[row + 1][col + 1][zNum + 1].setBfsF();
+            if (validateNeighbor(row + 1, col + 1, zNum + 1, true, true)) {
+                nodeSnapshot[row + 1][col + 1][zNum + 1].setAStarSearchF();
                 openList.add(nodeSnapshot[row + 1][col + 1][zNum + 1]);
                 simulationSnapshot[row + 1][col + 1][zNum + 1] = 2;
             }

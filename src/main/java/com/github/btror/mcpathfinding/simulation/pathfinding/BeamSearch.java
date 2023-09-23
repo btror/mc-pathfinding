@@ -2,13 +2,16 @@ package com.github.btror.mcpathfinding.simulation.pathfinding;
 
 import com.github.btror.mcpathfinding.simulation.Simulation;
 import com.github.btror.mcpathfinding.simulation.util.Node;
+import com.github.btror.mcpathfinding.simulation.util.NodeComparator;
 
-public class GreedyBestFirstSearch extends Simulation {
+import java.util.ArrayList;
 
-    public GreedyBestFirstSearch() {
+public class BeamSearch extends Simulation {
+
+    public BeamSearch() {
     }
 
-    public GreedyBestFirstSearch(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
+    public BeamSearch(int[][][] simulationSnapshot, int[] simulationStart, int[] simulationTarget) {
         super(simulationSnapshot, simulationStart, simulationTarget);
     }
 
@@ -45,7 +48,7 @@ public class GreedyBestFirstSearch extends Simulation {
         int h = calculateH(nodeCurrent);
         nodeCurrent.setH(h);
 
-        nodeCurrent.setBfsF();
+        nodeCurrent.setBeamSearchF();
         nodeStart = nodeCurrent;
         openList.add(nodeCurrent);
     }
@@ -69,163 +72,170 @@ public class GreedyBestFirstSearch extends Simulation {
 
         // bottom
         if (validateNeighbor(row, col, zNum - 1, false, true)) {
-            nodeSnapshot[row][col][zNum - 1].setBfsF();
+            nodeSnapshot[row][col][zNum - 1].setBeamSearchF();
             openList.add(nodeSnapshot[row][col][zNum - 1]);
             simulationSnapshot[row][col][zNum - 1] = 2;
         }
         if (this.diagonalMovement) {
             // bottom right
             if (validateNeighbor(row, col + 1, zNum - 1, false, true)) {
-                nodeSnapshot[row][col + 1][zNum - 1].setBfsF();
+                nodeSnapshot[row][col + 1][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row][col + 1][zNum - 1]);
                 simulationSnapshot[row][col + 1][zNum - 1] = 2;
             }
             // bottom front-right
             if (validateNeighbor(row - 1, col + 1, zNum - 1, false, true)) {
-                nodeSnapshot[row - 1][col + 1][zNum - 1].setBfsF();
+                nodeSnapshot[row - 1][col + 1][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row - 1][col + 1][zNum - 1]);
                 simulationSnapshot[row - 1][col + 1][zNum - 1] = 2;
             }
             // bottom front
             if (validateNeighbor(row - 1, col, zNum - 1, false, true)) {
-                nodeSnapshot[row - 1][col][zNum - 1].setBfsF();
+                nodeSnapshot[row - 1][col][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row - 1][col][zNum - 1]);
                 simulationSnapshot[row - 1][col][zNum - 1] = 2;
             }
             // bottom front-left
             if (validateNeighbor(row - 1, col - 1, zNum - 1, false, true)) {
-                nodeSnapshot[row - 1][col - 1][zNum - 1].setBfsF();
+                nodeSnapshot[row - 1][col - 1][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row - 1][col - 1][zNum - 1]);
                 simulationSnapshot[row - 1][col - 1][zNum - 1] = 2;
             }
             // bottom left
             if (validateNeighbor(row, col - 1, zNum - 1, false, true)) {
-                nodeSnapshot[row][col - 1][zNum - 1].setBfsF();
+                nodeSnapshot[row][col - 1][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row][col - 1][zNum - 1]);
                 simulationSnapshot[row][col - 1][zNum - 1] = 2;
             }
             // bottom back-left
             if (validateNeighbor(row + 1, col - 1, zNum - 1, false, true)) {
-                nodeSnapshot[row + 1][col - 1][zNum - 1].setBfsF();
+                nodeSnapshot[row + 1][col - 1][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row + 1][col - 1][zNum - 1]);
                 simulationSnapshot[row + 1][col - 1][zNum - 1] = 2;
             }
             // bottom back
             if (validateNeighbor(row + 1, col, zNum - 1, false, true)) {
-                nodeSnapshot[row + 1][col][zNum - 1].setBfsF();
+                nodeSnapshot[row + 1][col][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row + 1][col][zNum - 1]);
                 simulationSnapshot[row + 1][col][zNum - 1] = 2;
             }
             // bottom back-right
             if (validateNeighbor(row + 1, col + 1, zNum - 1, false, true)) {
-                nodeSnapshot[row + 1][col + 1][zNum - 1].setBfsF();
+                nodeSnapshot[row + 1][col + 1][zNum - 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row + 1][col + 1][zNum - 1]);
                 simulationSnapshot[row + 1][col + 1][zNum - 1] = 2;
             }
         }
         // middle right
         if (validateNeighbor(row, col + 1, zNum, false, true)) {
-            nodeSnapshot[row][col + 1][zNum].setBfsF();
+            nodeSnapshot[row][col + 1][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row][col + 1][zNum]);
             simulationSnapshot[row][col + 1][zNum] = 2;
         }
         // middle front-right
         if (this.diagonalMovement && validateNeighbor(row - 1, col + 1, zNum, false, true)) {
-            nodeSnapshot[row - 1][col + 1][zNum].setBfsF();
+            nodeSnapshot[row - 1][col + 1][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row - 1][col + 1][zNum]);
             simulationSnapshot[row - 1][col + 1][zNum] = 2;
         }
         // middle front
         if (validateNeighbor(row - 1, col, zNum, false, true)) {
-            nodeSnapshot[row - 1][col][zNum].setBfsF();
+            nodeSnapshot[row - 1][col][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row - 1][col][zNum]);
             simulationSnapshot[row - 1][col][zNum] = 2;
         }
         // middle front-left
         if (this.diagonalMovement && validateNeighbor(row - 1, col - 1, zNum, false, true)) {
-            nodeSnapshot[row - 1][col - 1][zNum].setBfsF();
+            nodeSnapshot[row - 1][col - 1][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row - 1][col - 1][zNum]);
             simulationSnapshot[row - 1][col - 1][zNum] = 2;
         }
         // middle left
         if (validateNeighbor(row, col - 1, zNum, false, true)) {
-            nodeSnapshot[row][col - 1][zNum].setBfsF();
+            nodeSnapshot[row][col - 1][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row][col - 1][zNum]);
             simulationSnapshot[row][col - 1][zNum] = 2;
         }
         // middle back-left
         if (this.diagonalMovement && validateNeighbor(row + 1, col - 1, zNum, false, true)) {
-            nodeSnapshot[row + 1][col - 1][zNum].setBfsF();
+            nodeSnapshot[row + 1][col - 1][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row + 1][col - 1][zNum]);
             simulationSnapshot[row + 1][col - 1][zNum] = 2;
         }
         // middle back
         if (validateNeighbor(row + 1, col, zNum, false, true)) {
-            nodeSnapshot[row + 1][col][zNum].setBfsF();
+            nodeSnapshot[row + 1][col][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row + 1][col][zNum]);
             simulationSnapshot[row + 1][col][zNum] = 2;
         }
         // middle back-right
         if (this.diagonalMovement && validateNeighbor(row + 1, col + 1, zNum, false, true)) {
-            nodeSnapshot[row + 1][col + 1][zNum].setBfsF();
+            nodeSnapshot[row + 1][col + 1][zNum].setBeamSearchF();
             openList.add(nodeSnapshot[row + 1][col + 1][zNum]);
             simulationSnapshot[row + 1][col + 1][zNum] = 2;
         }
         // top
         if (validateNeighbor(row, col, zNum + 1, false, true)) {
-            nodeSnapshot[row][col][zNum + 1].setBfsF();
+            nodeSnapshot[row][col][zNum + 1].setBeamSearchF();
             openList.add(nodeSnapshot[row][col][zNum + 1]);
             simulationSnapshot[row][col][zNum + 1] = 2;
         }
         if (this.diagonalMovement) {
             // top right
             if (validateNeighbor(row, col + 1, zNum + 1, false, true)) {
-                nodeSnapshot[row][col + 1][zNum + 1].setBfsF();
+                nodeSnapshot[row][col + 1][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row][col + 1][zNum + 1]);
                 simulationSnapshot[row][col + 1][zNum + 1] = 2;
             }
             // top front-right
             if (validateNeighbor(row - 1, col + 1, zNum + 1, false, true)) {
-                nodeSnapshot[row - 1][col + 1][zNum + 1].setBfsF();
+                nodeSnapshot[row - 1][col + 1][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row - 1][col + 1][zNum + 1]);
                 simulationSnapshot[row - 1][col + 1][zNum + 1] = 2;
             }
             // top front
             if (validateNeighbor(row - 1, col, zNum + 1, false, true)) {
-                nodeSnapshot[row - 1][col][zNum + 1].setBfsF();
+                nodeSnapshot[row - 1][col][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row - 1][col][zNum + 1]);
                 simulationSnapshot[row - 1][col][zNum + 1] = 2;
             }
             // top front-left
             if (validateNeighbor(row - 1, col - 1, zNum + 1, false, true)) {
-                nodeSnapshot[row - 1][col - 1][zNum + 1].setBfsF();
+                nodeSnapshot[row - 1][col - 1][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row - 1][col - 1][zNum + 1]);
                 simulationSnapshot[row - 1][col - 1][zNum + 1] = 2;
             }
             // top left
             if (validateNeighbor(row, col - 1, zNum + 1, false, true)) {
-                nodeSnapshot[row][col - 1][zNum + 1].setBfsF();
+                nodeSnapshot[row][col - 1][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row][col - 1][zNum + 1]);
                 simulationSnapshot[row][col - 1][zNum + 1] = 2;
             }
             // top back-left
             if (validateNeighbor(row + 1, col - 1, zNum + 1, false, true)) {
-                nodeSnapshot[row + 1][col - 1][zNum + 1].setBfsF();
+                nodeSnapshot[row + 1][col - 1][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row + 1][col - 1][zNum + 1]);
                 simulationSnapshot[row + 1][col - 1][zNum + 1] = 2;
             }
             // top back
             if (validateNeighbor(row + 1, col, zNum + 1, false, true)) {
-                nodeSnapshot[row + 1][col][zNum + 1].setBfsF();
+                nodeSnapshot[row + 1][col][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row + 1][col][zNum + 1]);
                 simulationSnapshot[row + 1][col][zNum + 1] = 2;
             }
             // top back-right
             if (validateNeighbor(row + 1, col + 1, zNum + 1, false, true)) {
-                nodeSnapshot[row + 1][col + 1][zNum + 1].setBfsF();
+                nodeSnapshot[row + 1][col + 1][zNum + 1].setBeamSearchF();
                 openList.add(nodeSnapshot[row + 1][col + 1][zNum + 1]);
                 simulationSnapshot[row + 1][col + 1][zNum + 1] = 2;
             }
+        }
+
+        ArrayList<Node> tempList = new ArrayList<>(openList);
+        openList.clear();
+        tempList.sort(new NodeComparator());
+        for (int i = 0; i < Math.min(beamWidth, tempList.size()); i++) {
+            openList.add(tempList.get(i));
         }
     }
 }

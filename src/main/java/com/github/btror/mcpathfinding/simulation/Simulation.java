@@ -21,6 +21,7 @@ public abstract class Simulation {
     protected ArrayList<Node> closedList;
 
     protected boolean diagonalMovement;
+    protected int beamWidth;
 
     public Simulation() {
         this.openList = new PriorityQueue<>(10, new NodeComparator());
@@ -54,41 +55,24 @@ public abstract class Simulation {
 
     protected abstract void calculateNeighborValues();
 
-    public void findPath() {
-        while (!openList.isEmpty() && !nodeCurrent.equals(nodeTarget)) {
-            nodeCurrent = openList.peek();
-            openList.remove(openList.peek());
+    protected boolean validateNeighbor(int row, int col, int zNum, boolean usesG, boolean usesH) {
+        if (row > -1 && col > -1 && zNum > -1
+                && row < nodeSnapshot.length && col < nodeSnapshot[0].length && zNum < nodeSnapshot[0][0].length
+                && nodeSnapshot[row][col][zNum].getType() == 0
+                && !closedList.contains(nodeSnapshot[row][col][zNum])) {
+            nodeSnapshot[row][col][zNum].setParent(nodeCurrent);
 
-            if (nodeCurrent.equals(nodeTarget)) {
-                closedList.add(nodeCurrent);
-
-                ArrayList<Node> path = generatePath();
-
-                for (int i = path.size() - 1; i > -1; i--) {
-                    int row = path.get(i).getRow();
-                    int col = path.get(i).getCol();
-                    int zNum = path.get(i).getZ();
-                    if (simulationSnapshot[row][col][zNum] == 2) {
-                        simulationSnapshot[row][col][zNum] = 3;
-                        simulationPath.add(new Integer[] { row, col, zNum });
-                    }
-                }
-                break;
-            } else {
-                try {
-                    calculateNeighborValues();
-                } catch (NullPointerException e) {
-                    System.out.println(e.getMessage());
-                }
-                simulationSnapshot[nodeStart.getRow()][nodeStart.getCol()][nodeStart.getZ()] = 4;
-                simulationSnapshot[nodeTarget.getRow()][nodeTarget.getCol()][nodeTarget.getZ()] = 5;
-                try {
-                    assert openList.peek() != null;
-                } catch (NullPointerException ignored) {
-                }
-                closedList.add(nodeCurrent);
+            if (usesG) {
+                nodeSnapshot[row][col][zNum].setG(calculateG(nodeSnapshot[row][col][zNum]));
             }
+            if (usesH) {
+                nodeSnapshot[row][col][zNum].setH(calculateH(nodeSnapshot[row][col][zNum]));
+            }
+
+            return true;
         }
+
+        return false;
     }
 
     protected int calculateG(Node node) {
@@ -132,12 +116,14 @@ public abstract class Simulation {
         int row = node.getRow();
         int col = node.getCol();
         int zNum = node.getZ();
+
         int x = 0;
         int y = 0;
         int z = 0;
 
         while (col < nodeTarget.getCol() || col > nodeTarget.getCol()) {
             x += 10;
+
             if (col < nodeTarget.getCol()) {
                 col++;
             }
@@ -145,9 +131,9 @@ public abstract class Simulation {
                 col--;
             }
         }
-
         while (row < nodeTarget.getRow() || row > nodeTarget.getRow()) {
             y += 10;
+
             if (row < nodeTarget.getRow()) {
                 row++;
             }
@@ -155,9 +141,9 @@ public abstract class Simulation {
                 row--;
             }
         }
-
         while (zNum < nodeTarget.getZ() || zNum > nodeTarget.getZ()) {
             z += 10;
+
             if (zNum < nodeTarget.getZ()) {
                 zNum++;
             }
@@ -167,6 +153,48 @@ public abstract class Simulation {
         }
 
         return x + y + z;
+    }
+
+    public void findPath() {
+        while (!openList.isEmpty() && !nodeCurrent.equals(nodeTarget)) {
+            nodeCurrent = openList.peek();
+            openList.remove(openList.peek());
+
+            if (nodeCurrent.equals(nodeTarget)) {
+                closedList.add(nodeCurrent);
+
+                ArrayList<Node> path = generatePath();
+
+                for (int i = path.size() - 1; i > -1; i--) {
+                    int row = path.get(i).getRow();
+                    int col = path.get(i).getCol();
+                    int zNum = path.get(i).getZ();
+
+                    if (simulationSnapshot[row][col][zNum] == 2) {
+                        simulationSnapshot[row][col][zNum] = 3;
+                        simulationPath.add(new Integer[] { row, col, zNum });
+                    }
+                }
+
+                break;
+            } else {
+                try {
+                    calculateNeighborValues();
+                } catch (NullPointerException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                simulationSnapshot[nodeStart.getRow()][nodeStart.getCol()][nodeStart.getZ()] = 4;
+                simulationSnapshot[nodeTarget.getRow()][nodeTarget.getCol()][nodeTarget.getZ()] = 5;
+
+                try {
+                    assert openList.peek() != null;
+                } catch (NullPointerException ignored) {
+                }
+
+                closedList.add(nodeCurrent);
+            }
+        }
     }
 
     private ArrayList<Node> generatePath() {
@@ -196,6 +224,10 @@ public abstract class Simulation {
 
     public void setDiagonalMovement(boolean diagonalMovement) {
         this.diagonalMovement = diagonalMovement;
+    }
+
+    public void setBeamWidth(int beamWidth) {
+        this.beamWidth = beamWidth;
     }
 
     public int[][][] getSimulationSnapshot() {
