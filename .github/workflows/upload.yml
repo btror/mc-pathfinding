@@ -28,27 +28,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      #      - name: Install xmllint
-      #        run: |
-      #          sudo apt-get update -q
-      #          sudo apt-get install -y libxml2-utils
-
       - name: Build with Maven
         run: |
           mvn package --file pom.xml
-
-#      - name: Extract Maven Version
-#        id: maven_version
-#        run: |
-#          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-#          echo "MAVEN_VERSION=${MAVEN_VERSION}"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          run: |
-            MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-            echo "MAVEN_VERSION=${MAVEN_VERSION}"
-          path: mc-pathfinding/target/mc-pathfinding-${MAVEN_VERSION}.jar
-#          path: mc-pathfinding/out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar
+          path: out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar
+
+      - name: Create Release
+        if: success()
+        run: |
+          git config --global user.name ${{ secrets.GIT_USERNAME }}
+          git config --global user.email ${{ secrets.GIT_EMAIL }}
+          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "creating tag ${MAVEN_VERSION}"
+          git tag -a "${MAVEN_VERSION}" -m "Version ${MAVEN_VERSION}"
+          git push origin "${MAVEN_VERSION}"
