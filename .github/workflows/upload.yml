@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Setup
         uses: actions/checkout@v3
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: JDK setup
         uses: actions/setup-java@v3
