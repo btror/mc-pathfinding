@@ -44,11 +44,11 @@ jobs:
           name: mc-pathfinding
           path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{ steps.set_maven_version.outputs.MAVEN_VERSION }}.jar
 
-      - name: Install GitHub CLI
-        run: |
-          curl -sSL https://github.com/cli/cli/releases/latest/download/gh_linux_amd64.tar.gz | sudo tar xz -C /usr/local/bin gh
-          gh --version
-          gh auth login --with-token ${{ secrets.GH_TOKEN }}
+      #      - name: Install GitHub CLI
+      #        run: |
+      #          curl -sSL https://github.com/cli/cli/releases/latest/download/gh_linux_amd64.tar.gz | sudo tar xz -C /usr/local/bin gh
+      #          gh --version
+      #          gh auth login --with-token ${{ secrets.GH_TOKEN }}
 
       - name: Create Tag and Release
         if: success()
@@ -63,3 +63,5 @@ jobs:
 
           gh release create "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}" "/home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{ steps.set_maven_version.outputs.MAVEN_VERSION }}.jar"
           gh release download ${{ github.repository }} ${{ github.event.release.tag_name }} --pattern "*.jar
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
