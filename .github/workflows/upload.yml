@@ -28,6 +28,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Install xmlstarlet
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y xmlstarlet
+
       - name: Build with Maven
         run: |
           mvn package --file pom.xml
