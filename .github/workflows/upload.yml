@@ -32,8 +32,16 @@ jobs:
         run: |
           mvn package --file pom.xml
 
+      - name: Capture Maven Version
+        id: maven_version
+        run: |
+          export MAVEN_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec | grep -v '^\[' | awk '{$1=$1;print}')
+          echo "::set-env name=MAVEN_VERSION::$MAVEN_VERSION"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          path: mc-pathfinding/out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar
+          run: echo "${{ env.MAVEN_VERSION }}"
+          path: mc-pathfinding/target/mc-pathfinding-${{ env.MAVEN_VERSION }}.jar
+#          path: mc-pathfinding/out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar
