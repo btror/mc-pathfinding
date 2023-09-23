@@ -30,6 +30,10 @@ public class Node {
         f = h;
     }
 
+    public void setUcsF() {
+        f = g;
+    }
+
     public void setG(int value) {
         g = value;
     }

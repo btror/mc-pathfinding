@@ -67,345 +67,163 @@ public class GreedyBestFirstSearch extends Simulation {
         int col = nodeCurrent.getCol();
         int zNum = nodeCurrent.getZ();
 
-        /*
-         * bottom layer (z - 1)
-         */
-
         // bottom
-        if (zNum - 1 > -1 && nodeSnapshot[row][col][zNum - 1].getType() == 0
-                && !closedList.contains(nodeSnapshot[row][col][zNum - 1])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row][col][zNum - 1].setParent(nodeCurrent);
-            int h = calculateH(grid[row][col][zNum - 1]);
-            grid[row][col][zNum - 1].setH(h);
-            grid[row][col][zNum - 1].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row][col][zNum - 1]);
+        if (validateNeighbor(row, col, zNum - 1, false, true)) {
+            nodeSnapshot[row][col][zNum - 1].setBfsF();
+            openList.add(nodeSnapshot[row][col][zNum - 1]);
             simulationSnapshot[row][col][zNum - 1] = 2;
         }
         if (this.diagonalMovement) {
             // bottom right
-            if (zNum - 1 > -1 && col + 1 < nodeSnapshot.length && nodeSnapshot[row][col + 1][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row][col + 1][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row][col + 1][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row][col + 1][zNum - 1]);
-                grid[row][col + 1][zNum - 1].setH(h);
-                grid[row][col + 1][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row][col + 1][zNum - 1]);
+            if (validateNeighbor(row, col + 1, zNum - 1, false, true)) {
+                nodeSnapshot[row][col + 1][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row][col + 1][zNum - 1]);
                 simulationSnapshot[row][col + 1][zNum - 1] = 2;
             }
             // bottom front-right
-            if (zNum - 1 > -1 && col + 1 < nodeSnapshot.length && row - 1 > -1
-                    && nodeSnapshot[row - 1][col + 1][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row - 1][col + 1][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row - 1][col + 1][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row - 1][col + 1][zNum - 1]);
-                grid[row - 1][col + 1][zNum - 1].setH(h);
-                grid[row - 1][col + 1][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row - 1][col + 1][zNum - 1]);
+            if (validateNeighbor(row - 1, col + 1, zNum - 1, false, true)) {
+                nodeSnapshot[row - 1][col + 1][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row - 1][col + 1][zNum - 1]);
                 simulationSnapshot[row - 1][col + 1][zNum - 1] = 2;
             }
             // bottom front
-            if (zNum - 1 > -1 && row - 1 > -1 && nodeSnapshot[row - 1][col][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row - 1][col][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row - 1][col][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row - 1][col][zNum - 1]);
-                grid[row - 1][col][zNum - 1].setH(h);
-                grid[row - 1][col][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row - 1][col][zNum - 1]);
+            if (validateNeighbor(row - 1, col, zNum - 1, false, true)) {
+                nodeSnapshot[row - 1][col][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row - 1][col][zNum - 1]);
                 simulationSnapshot[row - 1][col][zNum - 1] = 2;
             }
             // bottom front-left
-            if (zNum - 1 > -1 && col - 1 > -1 && row - 1 > -1 && nodeSnapshot[row - 1][col - 1][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row - 1][col - 1][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row - 1][col - 1][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row - 1][col - 1][zNum - 1]);
-                grid[row - 1][col - 1][zNum - 1].setH(h);
-                grid[row - 1][col - 1][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row - 1][col - 1][zNum - 1]);
+            if (validateNeighbor(row - 1, col - 1, zNum - 1, false, true)) {
+                nodeSnapshot[row - 1][col - 1][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row - 1][col - 1][zNum - 1]);
                 simulationSnapshot[row - 1][col - 1][zNum - 1] = 2;
             }
             // bottom left
-            if (zNum - 1 > -1 && col - 1 > -1 && nodeSnapshot[row][col - 1][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row][col - 1][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row][col - 1][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row][col - 1][zNum - 1]);
-                grid[row][col - 1][zNum - 1].setH(h);
-                grid[row][col - 1][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row][col - 1][zNum - 1]);
+            if (validateNeighbor(row, col - 1, zNum - 1, false, true)) {
+                nodeSnapshot[row][col - 1][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row][col - 1][zNum - 1]);
                 simulationSnapshot[row][col - 1][zNum - 1] = 2;
             }
             // bottom back-left
-            if (zNum - 1 > -1 && col - 1 > -1 && row + 1 < nodeSnapshot.length
-                    && nodeSnapshot[row + 1][col - 1][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row + 1][col - 1][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row + 1][col - 1][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row + 1][col - 1][zNum - 1]);
-                grid[row + 1][col - 1][zNum - 1].setH(h);
-                grid[row + 1][col - 1][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row + 1][col - 1][zNum - 1]);
+            if (validateNeighbor(row + 1, col - 1, zNum - 1, false, true)) {
+                nodeSnapshot[row + 1][col - 1][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row + 1][col - 1][zNum - 1]);
                 simulationSnapshot[row + 1][col - 1][zNum - 1] = 2;
             }
             // bottom back
-            if (zNum - 1 > -1 && row + 1 < nodeSnapshot.length && nodeSnapshot[row + 1][col][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row + 1][col][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row + 1][col][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row + 1][col][zNum - 1]);
-                grid[row + 1][col][zNum - 1].setH(h);
-                grid[row + 1][col][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row + 1][col][zNum - 1]);
+            if (validateNeighbor(row + 1, col, zNum - 1, false, true)) {
+                nodeSnapshot[row + 1][col][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row + 1][col][zNum - 1]);
                 simulationSnapshot[row + 1][col][zNum - 1] = 2;
             }
             // bottom back-right
-            if (zNum - 1 > -1 && col + 1 < nodeSnapshot.length && row + 1 < nodeSnapshot.length
-                    && nodeSnapshot[row + 1][col + 1][zNum - 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row + 1][col + 1][zNum - 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row + 1][col + 1][zNum - 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row + 1][col + 1][zNum - 1]);
-                grid[row + 1][col + 1][zNum - 1].setH(h);
-                grid[row + 1][col + 1][zNum - 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row + 1][col + 1][zNum - 1]);
+            if (validateNeighbor(row + 1, col + 1, zNum - 1, false, true)) {
+                nodeSnapshot[row + 1][col + 1][zNum - 1].setBfsF();
+                openList.add(nodeSnapshot[row + 1][col + 1][zNum - 1]);
                 simulationSnapshot[row + 1][col + 1][zNum - 1] = 2;
             }
         }
-
-        /*
-         * middle layer (z - 1)
-         */
-
         // middle right
-        if (col + 1 < nodeSnapshot.length && nodeSnapshot[row][col + 1][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row][col + 1][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row][col + 1][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row][col + 1][zNum]);
-            grid[row][col + 1][zNum].setH(h);
-            grid[row][col + 1][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row][col + 1][zNum]);
+        if (validateNeighbor(row, col + 1, zNum, false, true)) {
+            nodeSnapshot[row][col + 1][zNum].setBfsF();
+            openList.add(nodeSnapshot[row][col + 1][zNum]);
             simulationSnapshot[row][col + 1][zNum] = 2;
         }
         // middle front-right
-        if (this.diagonalMovement && col + 1 < nodeSnapshot.length && row - 1 > -1
-                && nodeSnapshot[row - 1][col + 1][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row - 1][col + 1][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row - 1][col + 1][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row - 1][col + 1][zNum]);
-            grid[row - 1][col + 1][zNum].setH(h);
-            grid[row - 1][col + 1][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row - 1][col + 1][zNum]);
+        if (this.diagonalMovement && validateNeighbor(row - 1, col + 1, zNum, false, true)) {
+            nodeSnapshot[row - 1][col + 1][zNum].setBfsF();
+            openList.add(nodeSnapshot[row - 1][col + 1][zNum]);
             simulationSnapshot[row - 1][col + 1][zNum] = 2;
         }
         // middle front
-        if (row - 1 > -1 && nodeSnapshot[row - 1][col][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row - 1][col][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row - 1][col][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row - 1][col][zNum]);
-            grid[row - 1][col][zNum].setH(h);
-            grid[row - 1][col][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row - 1][col][zNum]);
+        if (validateNeighbor(row - 1, col, zNum, false, true)) {
+            nodeSnapshot[row - 1][col][zNum].setBfsF();
+            openList.add(nodeSnapshot[row - 1][col][zNum]);
             simulationSnapshot[row - 1][col][zNum] = 2;
         }
         // middle front-left
-        if (this.diagonalMovement && col - 1 > -1 && row - 1 > -1 && nodeSnapshot[row - 1][col - 1][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row - 1][col - 1][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row - 1][col - 1][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row - 1][col - 1][zNum]);
-            grid[row - 1][col - 1][zNum].setH(h);
-            grid[row - 1][col - 1][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row - 1][col - 1][zNum]);
+        if (this.diagonalMovement && validateNeighbor(row - 1, col - 1, zNum, false, true)) {
+            nodeSnapshot[row - 1][col - 1][zNum].setBfsF();
+            openList.add(nodeSnapshot[row - 1][col - 1][zNum]);
             simulationSnapshot[row - 1][col - 1][zNum] = 2;
         }
         // middle left
-        if (col - 1 > -1 && nodeSnapshot[row][col - 1][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row][col - 1][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row][col - 1][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row][col - 1][zNum]);
-            grid[row][col - 1][zNum].setH(h);
-            grid[row][col - 1][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row][col - 1][zNum]);
+        if (validateNeighbor(row, col - 1, zNum, false, true)) {
+            nodeSnapshot[row][col - 1][zNum].setBfsF();
+            openList.add(nodeSnapshot[row][col - 1][zNum]);
             simulationSnapshot[row][col - 1][zNum] = 2;
         }
         // middle back-left
-        if (this.diagonalMovement && col - 1 > -1 && row + 1 < nodeSnapshot.length
-                && nodeSnapshot[row + 1][col - 1][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row + 1][col - 1][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row + 1][col - 1][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row + 1][col - 1][zNum]);
-            grid[row + 1][col - 1][zNum].setH(h);
-            grid[row + 1][col - 1][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row + 1][col - 1][zNum]);
+        if (this.diagonalMovement && validateNeighbor(row + 1, col - 1, zNum, false, true)) {
+            nodeSnapshot[row + 1][col - 1][zNum].setBfsF();
+            openList.add(nodeSnapshot[row + 1][col - 1][zNum]);
             simulationSnapshot[row + 1][col - 1][zNum] = 2;
         }
         // middle back
-        if (row + 1 < nodeSnapshot.length && nodeSnapshot[row + 1][col][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row + 1][col][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row + 1][col][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row + 1][col][zNum]);
-            grid[row + 1][col][zNum].setH(h);
-            grid[row + 1][col][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row + 1][col][zNum]);
+        if (validateNeighbor(row + 1, col, zNum, false, true)) {
+            nodeSnapshot[row + 1][col][zNum].setBfsF();
+            openList.add(nodeSnapshot[row + 1][col][zNum]);
             simulationSnapshot[row + 1][col][zNum] = 2;
         }
         // middle back-right
-        if (this.diagonalMovement && col + 1 < nodeSnapshot.length && row + 1 < nodeSnapshot.length
-                && nodeSnapshot[row + 1][col + 1][zNum].getType() == 0
-                && !closedList.contains(nodeSnapshot[row + 1][col + 1][zNum])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row + 1][col + 1][zNum].setParent(nodeCurrent);
-            int h = calculateH(grid[row + 1][col + 1][zNum]);
-            grid[row + 1][col + 1][zNum].setH(h);
-            grid[row + 1][col + 1][zNum].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row + 1][col + 1][zNum]);
+        if (this.diagonalMovement && validateNeighbor(row + 1, col + 1, zNum, false, true)) {
+            nodeSnapshot[row + 1][col + 1][zNum].setBfsF();
+            openList.add(nodeSnapshot[row + 1][col + 1][zNum]);
             simulationSnapshot[row + 1][col + 1][zNum] = 2;
         }
-
-        /*
-         * top layer (z + 1)
-         */
-
         // top
-        if (zNum + 1 < nodeSnapshot.length && nodeSnapshot[row][col][zNum + 1].getType() == 0
-                && !closedList.contains(nodeSnapshot[row][col][zNum + 1])) {
-            Node[][][] grid = nodeSnapshot;
-            grid[row][col][zNum + 1].setParent(nodeCurrent);
-            int h = calculateH(grid[row][col][zNum + 1]);
-            grid[row][col][zNum + 1].setH(h);
-            grid[row][col][zNum + 1].setBfsF();
-            nodeSnapshot = grid;
-            openList.add(grid[row][col][zNum + 1]);
+        if (validateNeighbor(row, col, zNum + 1, false, true)) {
+            nodeSnapshot[row][col][zNum + 1].setBfsF();
+            openList.add(nodeSnapshot[row][col][zNum + 1]);
             simulationSnapshot[row][col][zNum + 1] = 2;
         }
         if (this.diagonalMovement) {
             // top right
-            if (zNum + 1 < nodeSnapshot.length && col + 1 < nodeSnapshot.length
-                    && nodeSnapshot[row][col + 1][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row][col + 1][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row][col + 1][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row][col + 1][zNum + 1]);
-                grid[row][col + 1][zNum + 1].setH(h);
-                grid[row][col + 1][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row][col + 1][zNum + 1]);
+            if (validateNeighbor(row, col + 1, zNum + 1, false, true)) {
+                nodeSnapshot[row][col + 1][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row][col + 1][zNum + 1]);
                 simulationSnapshot[row][col + 1][zNum + 1] = 2;
             }
             // top front-right
-            if (zNum + 1 < nodeSnapshot.length && col + 1 < nodeSnapshot.length && row - 1 > -1
-                    && nodeSnapshot[row - 1][col + 1][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row - 1][col + 1][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row - 1][col + 1][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row - 1][col + 1][zNum + 1]);
-                grid[row - 1][col + 1][zNum + 1].setH(h);
-                grid[row - 1][col + 1][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row - 1][col + 1][zNum + 1]);
+            if (validateNeighbor(row - 1, col + 1, zNum + 1, false, true)) {
+                nodeSnapshot[row - 1][col + 1][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row - 1][col + 1][zNum + 1]);
                 simulationSnapshot[row - 1][col + 1][zNum + 1] = 2;
             }
             // top front
-            if (zNum + 1 < nodeSnapshot.length && row - 1 > -1 && nodeSnapshot[row - 1][col][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row - 1][col][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row - 1][col][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row - 1][col][zNum + 1]);
-                grid[row - 1][col][zNum + 1].setH(h);
-                grid[row - 1][col][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row - 1][col][zNum + 1]);
+            if (validateNeighbor(row - 1, col, zNum + 1, false, true)) {
+                nodeSnapshot[row - 1][col][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row - 1][col][zNum + 1]);
                 simulationSnapshot[row - 1][col][zNum + 1] = 2;
             }
             // top front-left
-            if (zNum + 1 < nodeSnapshot.length && col - 1 > -1 && row - 1 > -1
-                    && nodeSnapshot[row - 1][col - 1][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row - 1][col - 1][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row - 1][col - 1][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row - 1][col - 1][zNum + 1]);
-                grid[row - 1][col - 1][zNum + 1].setH(h);
-                grid[row - 1][col - 1][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row - 1][col - 1][zNum + 1]);
+            if (validateNeighbor(row - 1, col - 1, zNum + 1, false, true)) {
+                nodeSnapshot[row - 1][col - 1][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row - 1][col - 1][zNum + 1]);
                 simulationSnapshot[row - 1][col - 1][zNum + 1] = 2;
             }
             // top left
-            if (zNum + 1 < nodeSnapshot.length && col - 1 > -1 && nodeSnapshot[row][col - 1][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row][col - 1][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row][col - 1][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row][col - 1][zNum + 1]);
-                grid[row][col - 1][zNum + 1].setH(h);
-                grid[row][col - 1][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row][col - 1][zNum + 1]);
+            if (validateNeighbor(row, col - 1, zNum + 1, false, true)) {
+                nodeSnapshot[row][col - 1][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row][col - 1][zNum + 1]);
                 simulationSnapshot[row][col - 1][zNum + 1] = 2;
             }
             // top back-left
-            if (zNum + 1 < nodeSnapshot.length && col - 1 > -1 && row + 1 < nodeSnapshot.length
-                    && nodeSnapshot[row + 1][col - 1][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row + 1][col - 1][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row + 1][col - 1][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row + 1][col - 1][zNum + 1]);
-                grid[row + 1][col - 1][zNum + 1].setH(h);
-                grid[row + 1][col - 1][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row + 1][col - 1][zNum + 1]);
+            if (validateNeighbor(row + 1, col - 1, zNum + 1, false, true)) {
+                nodeSnapshot[row + 1][col - 1][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row + 1][col - 1][zNum + 1]);
                 simulationSnapshot[row + 1][col - 1][zNum + 1] = 2;
             }
             // top back
-            if (zNum + 1 < nodeSnapshot.length && row + 1 < nodeSnapshot.length
-                    && nodeSnapshot[row + 1][col][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row + 1][col][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row + 1][col][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row + 1][col][zNum + 1]);
-                grid[row + 1][col][zNum + 1].setH(h);
-                grid[row + 1][col][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row + 1][col][zNum + 1]);
+            if (validateNeighbor(row + 1, col, zNum + 1, false, true)) {
+                nodeSnapshot[row + 1][col][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row + 1][col][zNum + 1]);
                 simulationSnapshot[row + 1][col][zNum + 1] = 2;
             }
             // top back-right
-            if (zNum + 1 < nodeSnapshot.length && col + 1 < nodeSnapshot.length && row + 1 < nodeSnapshot.length
-                    && nodeSnapshot[row + 1][col + 1][zNum + 1].getType() == 0
-                    && !closedList.contains(nodeSnapshot[row + 1][col + 1][zNum + 1])) {
-                Node[][][] grid = nodeSnapshot;
-                grid[row + 1][col + 1][zNum + 1].setParent(nodeCurrent);
-                int h = calculateH(grid[row + 1][col + 1][zNum + 1]);
-                grid[row + 1][col + 1][zNum + 1].setH(h);
-                grid[row + 1][col + 1][zNum + 1].setBfsF();
-                nodeSnapshot = grid;
-                openList.add(grid[row + 1][col + 1][zNum + 1]);
+            if (validateNeighbor(row + 1, col + 1, zNum + 1, false, true)) {
+                nodeSnapshot[row + 1][col + 1][zNum + 1].setBfsF();
+                openList.add(nodeSnapshot[row + 1][col + 1][zNum + 1]);
                 simulationSnapshot[row + 1][col + 1][zNum + 1] = 2;
             }
         }
