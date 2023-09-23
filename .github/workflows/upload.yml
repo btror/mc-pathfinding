@@ -34,19 +34,25 @@ jobs:
         run: |
           mvn package --file pom.xml
 
-      - name: Capture Maven Version
-        id: capture_maven_version
-        run: echo "maven_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+      - name: Set Maven Version
+        id: set_maven_version
+        run: echo "MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
+
+      - name: Get Maven Version
+        env:
+          MAVEN_VERSION: ${{ steps.set_maven_version.outputs.MAVEN_VERSION }}
+        run: echo "The maven version is $MAVEN_VERSION"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{steps.capture_maven_version.maven_version}}.jar
+          path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-$MAVEN_VERSION.jar
 
       - name: Create Release
         if: success()
         run: |
+          echo "TEST: $MAVEN_VERSION"
           git config --global user.name ${{ secrets.GIT_USERNAME }}
           git config --global user.email ${{ secrets.GIT_EMAIL }}
           MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
