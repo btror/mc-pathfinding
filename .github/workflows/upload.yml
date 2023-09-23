@@ -36,4 +36,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          path: mc-pathfinding/target/mc-pathfinding.jar
+          path: mc-pathfinding/out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar

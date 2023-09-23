@@ -16,5 +16,12 @@ jobs:
           server-id: github
           cache: 'maven'
 
+      - name: Check pom.xml Version
+        run: |
+          git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
+          git diff --quiet ${{ github.base_ref }} -- pom.xml || (echo "pom.xml has changed." && exit 0)
+          echo "No changes detected in pom.xml."
+          exit 1
+
       - name: Build with Maven
         run: mvn clean package --file pom.xml
