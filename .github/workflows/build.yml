@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+        uses: actions/checkout@v4.1.0
+
+      - name: JDK setup
+        uses: actions/setup-java@v3.13.0
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          java-package: jdk
+          cache: 'maven'
+
+      - name: Build with Maven
+        run: | 
+          mvn clean install
+          mvn -V -B clean package --file pom.xml
+
+      - name: Get version from pom.xml
+        id: get_version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "::set-output name=version::$VERSION"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v0.1.15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Version ${{ steps.get_version.outputs.version }}
+          tag_name: ${{ steps.get_version.outputs.version }}
+          files: target/mc-pathfinding.jar
+          generate_release_notes: true
