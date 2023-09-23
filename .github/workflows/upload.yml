@@ -39,7 +39,6 @@ jobs:
         run: echo "maven_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
       - name: Upload Artifact
-        needs:
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
