@@ -37,16 +37,18 @@ jobs:
         run: |
           mvn package --file pom.xml
 
-      - name: Extract Maven Version
-        id: maven_version
-        run: |
-          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "MAVEN_VERSION=${MAVEN_VERSION}"
+#      - name: Extract Maven Version
+#        id: maven_version
+#        run: |
+#          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+#          echo "MAVEN_VERSION=${MAVEN_VERSION}"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          run: echo "${{ env.MAVEN_VERSION }}"
-          path: mc-pathfinding/target/mc-pathfinding-${{ env.MAVEN_VERSION }}.jar
+          run: |
+            MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+            echo "MAVEN_VERSION=${MAVEN_VERSION}"
+          path: mc-pathfinding/target/mc-pathfinding-${MAVEN_VERSION}.jar
 #          path: mc-pathfinding/out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar
