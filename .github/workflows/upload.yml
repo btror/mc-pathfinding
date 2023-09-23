@@ -38,7 +38,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          path: out/artifacts/mc_pathfinding_jar/mc-pathfinding.jar
+          run: |
+            MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+            echo "MAVEN_VERSION=${MAVEN_VERSION}"
+          path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${MAVEN_VERSION}.jar
 
       - name: Create Release
         if: success()
