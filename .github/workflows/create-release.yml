@@ -1,4 +1,4 @@
-name: Build and Upload
+name: Create Release
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup
+      - name: Check out Code
         uses: actions/checkout@v3
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -38,25 +38,28 @@ jobs:
         id: set_maven_version
         run: echo "MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
 
-      - name: Get Maven Version
-        env:
-          MAVEN_VERSION: ${{ steps.set_maven_version.outputs.MAVEN_VERSION }}
-        run: echo "The maven version is $MAVEN_VERSION"
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
           path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{ steps.set_maven_version.outputs.MAVEN_VERSION }}.jar
 
-      - name: Create Release
+      - name: Install GitHub CLI
+        run: |
+          curl -sSL https://github.com/cli/cli/releases/latest/download/gh_linux_amd64.tar.gz | sudo tar xz -C /usr/local/bin gh
+          gh --version
+          gh auth login --with-token ${{ secrets.GH_TOKEN }}
+
+      - name: Create Tag and Release
         if: success()
         run: |
-          echo "TEST: ${{ steps.set_maven_version.outputs.MAVEN_VERSION }}"
           git config --global user.name ${{ secrets.GIT_USERNAME }}
           git config --global user.email ${{ secrets.GIT_EMAIL }}
-          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "creating tag ${MAVEN_VERSION}"
-          echo "env maven version: ${{ env.MAVEN_VERSION }}"
-          git tag -a "${MAVEN_VERSION}" -m "Version ${MAVEN_VERSION}"
-          git push origin "${MAVEN_VERSION}"
+
+          echo "creating tag ${{ steps.set_maven_version.outputs.MAVEN_VERSION }}"
+
+          git tag -a "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}" -m "Version ${{ steps.set_maven_version.outputs.MAVEN_VERSION }}"
+          git push origin "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}"
+
+          gh release create "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}" "/home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{ steps.set_maven_version.outputs.MAVEN_VERSION }}.jar"
+          gh release download ${{ github.repository }} ${{ github.event.release.tag_name }} --pattern "*.jar
