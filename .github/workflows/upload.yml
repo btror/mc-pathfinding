@@ -40,7 +40,7 @@ jobs:
       - name: Extract Maven Version
         id: maven_version
         run: |
-          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "MAVEN_VERSION=${MAVEN_VERSION}"
 
       - name: Upload Artifact
