@@ -35,19 +35,14 @@ jobs:
           mvn package --file pom.xml
 
       - name: Capture Maven Version
-        id: maven_version
-        run: |
-          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "maven version ${MAVEN_VERSION}"
-        shell: bash
-        env:
-          MAVEN_VERSION: "${MAVEN_VERSION}"
+        id: capture_maven_version
+        run: echo "maven_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: mc-pathfinding
-          path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{ env.MAVEN_VERSION }}.jar
+          path: /home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{steps.capture_maven_version.maven_version}}.jar
 
       - name: Create Release
         if: success()

@@ -16,6 +16,7 @@ jobs:
           server-id: github
           cache: 'maven'
 
+      # TODO: compare new pom version to old pom version correctly
       - name: Check pom.xml Version
         run: |
           git fetch origin ${{ github.base_ref }}
