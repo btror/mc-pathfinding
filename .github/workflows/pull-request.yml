@@ -6,6 +6,7 @@ on:
 jobs:
   cleanup-and-build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17.0.2
@@ -29,13 +30,13 @@ jobs:
 
       - name: Compare Maven Versions
         run: |
-          pr_maven_version = ${{ steps.set_pr_maven_version.outputs.PR_MAVEN_VERSION }}
-          main_maven_version = ${{ steps.set_main_maven_version.outputs.MAIN_MAVEN_VERSION }}
+          export pr_maven_version = ${{ steps.set_pr_maven_version.outputs.PR_MAVEN_VERSION }}
+          export main_maven_version = ${{ steps.set_main_maven_version.outputs.MAIN_MAVEN_VERSION }}
           
           if [ "$pr_maven_version" != "$main_maven_version" ]; then
             echo "New pom.xml version detected ($main_maven_version -> $pr_maven_version)."
           else
-            echo "Invalid pom.xml version - a release already exists with this version."
+            echo "Invalid pom.xml version - release already exists with this version."
             exit 1
           fi
 
