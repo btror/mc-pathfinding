@@ -56,6 +56,6 @@ jobs:
           git push origin "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}"
 
           gh release create "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}" "/home/runner/work/mc-pathfinding/mc-pathfinding/target/mc-pathfinding-${{ steps.set_maven_version.outputs.MAVEN_VERSION }}.jar"
-          gh release download ${{ github.repository }} "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}" --pattern "*.jar"
+          gh release download --repo "${{ github.repository }}" "${{ steps.set_maven_version.outputs.MAVEN_VERSION }}" --pattern "*.jar"
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
