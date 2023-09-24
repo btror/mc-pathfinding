@@ -25,6 +25,30 @@ Example use case: mc-lightning-strike [repository](https://github.com/btror/mc-l
 
 To use this library in your Spigot plugin, you should add it as a dependency. Here's how to do it:
 
+### Option 1 - Add Maven Dependency
+
+1. **Add dependency to dependencies list in pom.xml**:
+
+     ```yml
+     <dependency>
+        <groupId>com.github.btror</groupId>
+        <artifactId>mc-pathfinding</artifactId>
+        <version>1.3.28</version>
+        <scope>provided</scope>
+     </dependency>
+     ```
+   
+2. **Add repository to repositories list in pom.xml**:
+
+    ```yml
+     <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/btror/mc-pathfinding</url>
+     </repository>
+     ```
+
+### Option 2 - Locally Install Jar File
+
 1. **Download the Plugin JAR**:
 
    - Obtain the JAR file from the [Releases](https://github.com/btror/mc-pathfinding/releases) section of this
