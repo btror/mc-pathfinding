@@ -43,3 +43,5 @@ jobs:
       - name: Build with Maven
         if: success()
         run: mvn clean package --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
