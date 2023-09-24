@@ -30,8 +30,8 @@ jobs:
 
       - name: Compare Maven Versions
         run: |
-          export pr_maven_version = ${{ steps.set_pr_maven_version.outputs.PR_MAVEN_VERSION }}
-          export main_maven_version = ${{ steps.set_main_maven_version.outputs.MAIN_MAVEN_VERSION }}
+          export pr_maven_version = "${{ steps.set_pr_maven_version.outputs.PR_MAVEN_VERSION }}"
+          export main_maven_version = "${{ steps.set_main_maven_version.outputs.MAIN_MAVEN_VERSION }}"
           
           if [ "$pr_maven_version" != "$main_maven_version" ]; then
             echo "New pom.xml version detected ($main_maven_version -> $pr_maven_version)."
