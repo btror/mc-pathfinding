@@ -6,7 +6,7 @@
 
     <groupId>com.github.btror</groupId>
     <artifactId>mc-pathfinding</artifactId>
-    <version>1.3.23</version>
+    <version>1.3.24</version>
     <packaging>jar</packaging>
 
     <name>mc-pathfinding</name>
