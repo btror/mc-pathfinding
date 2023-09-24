@@ -4,37 +4,39 @@ Welcome to mc-pathfinding! We're thrilled that you're interested in contributing
 
 ## How to Contribute
 
-1. **Fork the Repository:** Click the "Fork" button at the top right of the repository's page on GitHub. This will create a copy of the repository in your GitHub account.
-
-2. **Clone Your Fork:** Clone your forked repository to your local machine using `git clone`.
+1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/btror/mc-pathfinding.git
    ```
 
-3. **Create a Branch:** Create a new branch for your work. Use a descriptive name that summarizes your feature or bug fix.
+2. Create a new branch for your feature or bug fix:
 
    ```bash
-   git checkout -b feature/my-new-feature
+   git checkout -b feature-or-bug-fix-name
    ```
 
-4. **Make Changes:** Make your changes, following the coding conventions and guidelines described in the project.
+3. Work on your changes. Ensure that any new features work as expected. Also make sure to increase the project version in pom.xml using the MAJOR.MINOR.PATCH convention.
 
-5. **Test Your Changes:** Ensure that your changes work as expected and that you have added tests if necessary.
-
-6. **Commit Your Changes:** Commit your changes with a clear and concise commit message.
+4. Commit your changes (make sure to increase pom.xml version):
 
    ```bash
-   git commit -m "Add my new feature"
+   git commit -m "Description of your changes"
    ```
 
-7. **Push to Your Fork:** Push your changes to your fork on GitHub.
+5. Push to your branch and open a pull request.
 
    ```bash
    git push origin feature/my-new-feature
    ```
 
-8. Create a Pull Request: Go to the GitHub page of your forked repository, switch to the branch with your changes, and click the "New Pull Request" button. Provide a clear title and description for your pull request.
+6. Create a Pull Request: Go to the GitHub page of this repository, switch to the branch with your changes, and click the "New Pull Request" button. Provide a clear title and description for your pull request.
+
+7. Pull requests require 2 reviews before merging and they must pass CI (see pull-request.yml). Merge when CI passes and the required reviews are met (or ask [btror](https://github.com/btror) to merge).
+
+8. Once merged, a new release will be created automatically.
+
+
 
 ## Code Style and Guidelines
 When adding new classes or files make sure to follow the [data model](#data-model).
@@ -65,7 +67,7 @@ Class `SimulationFactory`
 
 ### `com.github.btror.mcpathfinding.simulation.pathfinding`
 
-Class `AStar`
+Class `AStarSearch`
 
 - Implementation of the A\* pathfinding algorithm.
 
