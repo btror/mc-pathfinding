@@ -150,7 +150,7 @@ public class Animation {
      * 4 = start space
      * 5 = target space
      */
-    private void createSimulation() { // TODO: error might be here
+    private void createSimulation() {
         int[][][] simulationSnapshot = new int[snapshot.length][snapshot[0].length][snapshot[0][0].length];
         int[] simulationStart = new int[3];
         int[] simulationTarget = new int[3];
