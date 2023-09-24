@@ -32,6 +32,8 @@ jobs:
 
       - name: Build with Maven
         run: mvn package --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set Maven Version
         id: set_maven_version
