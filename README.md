@@ -27,7 +27,7 @@ To use this library in your Spigot plugin, you should add it as a dependency. He
 
 1. **Download the Plugin JAR**:
 
-   - Obtain the JAR file from the [Releases](https://github.com/btror/McPathfinding/releases) section of this
+   - Obtain the JAR file from the [Releases](https://github.com/btror/mc-pathfinding/releases) section of this
      repository.
 
 2. **Add the Dependency to Your Project**:
@@ -205,7 +205,7 @@ Class `SimulationFactory`
 
 ### `com.github.btror.mcpathfinding.simulation.pathfinding`
 
-Class `AStar`
+Class `AStarSearch`
 
 - Implementation of the A\* pathfinding algorithm.
 
@@ -264,11 +264,10 @@ repository. When reporting an issue, be sure to:
 
 If you'd like to contribute code to this project, please follow these steps:
 
-1. Fork the repository to your GitHub account.
-2. Clone the forked repository to your local machine:
+1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/repository-name.git
+   git clone https://github.com/btror/mc-pathfinding.git
    ```
 
 3. Create a new branch for your feature or bug fix:
@@ -277,25 +276,19 @@ If you'd like to contribute code to this project, please follow these steps:
    git checkout -b feature-or-bug-fix-name
    ```
 
-4. Make your changes and commit them:
+4. Make your changes and commit them (make sure to increase pom.xml version):
 
    ```bash
    git commit -m "Description of your changes"
    ```
 
-5. Push your changes to your GitHub fork:
+5. Open a pull request on your branch:
 
-   ```bash
-   git push origin feature-or-bug-fix-name
-   ```
+6. In your PR, provide a detailed description of your changes, why they are necessary, and any relevant information.
 
-6. Create a pull request (PR) from your fork to the main repository.
+7. Ensure your code follows our coding conventions and standards.
 
-7. In your PR, provide a detailed description of your changes, why they are necessary, and any relevant information.
-
-8. Ensure your code follows our coding conventions and standards.
-
-9. Be responsive to feedback and be willing to make changes if necessary.
+8. Be responsive to feedback and be willing to make changes if necessary.
 
 ### Coding Guidelines
 
