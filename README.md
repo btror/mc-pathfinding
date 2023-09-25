@@ -288,31 +288,31 @@ repository. When reporting an issue, be sure to:
 
 If you'd like to contribute code to this project, please follow these steps:
 
-1. Clone this repository to your local machine:
+1. **Fork the Repository:** Click the "Fork" button at the top right of the repository's page on GitHub. This will create a copy of the repository in your GitHub account.
+
+2. **Clone Your Fork:** Clone your forked repository to your local machine using `git clone`.
 
    ```bash
-   git clone https://github.com/btror/mc-pathfinding.git
+   git clone https://github.com/your-username/your-project.git
    ```
-
-3. Create a new branch for your feature or bug fix:
+3. **Create a Branch:** Create a new branch for your work. Use a descriptive name that summarizes your feature or bug fix.
 
    ```bash
-   git checkout -b feature-or-bug-fix-name
+   git checkout -b feature/my-new-feature
    ```
+4. **Make Changes:** Make your changes, following the coding conventions and guidelines described in the project.
 
-4. Make your changes and commit them (make sure to increase pom.xml version):
+5. **Test Your Changes:** Ensure that your changes work as expected and that you have added tests if necessary.
+
+6. **Commit Your Changes:** Commit your changes with a clear and concise commit message.
 
    ```bash
    git commit -m "Description of your changes"
    ```
 
-5. Open a pull request on your branch:
+7. **Push to Your Fork:** Push your changes to your fork on GitHub.
 
-6. In your PR, provide a detailed description of your changes, why they are necessary, and any relevant information.
-
-7. Ensure your code follows our coding conventions and standards.
-
-8. Be responsive to feedback and be willing to make changes if necessary.
+8. Create a Pull Request: Go to the GitHub page of your forked repository, switch to the branch with your changes, and click the "New Pull Request" button. Provide a clear title and description for your pull request.
 
 ### Coding Guidelines
 
