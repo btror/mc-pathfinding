@@ -58,9 +58,13 @@ public abstract class Simulation {
     protected boolean validateNeighbor(int row, int col, int zNum, boolean usesG, boolean usesH) {
         if (row > -1 && col > -1 && zNum > -1
                 && row < nodeSnapshot.length && col < nodeSnapshot[0].length && zNum < nodeSnapshot[0][0].length
-                && nodeSnapshot[row][col][zNum].getType() == 0
+                && (nodeSnapshot[row][col][zNum].getType() == 0 || nodeSnapshot[row][col][zNum].getType() == 2 ||
+                    nodeSnapshot[row][col][zNum].getType() == 4 || nodeSnapshot[row][col][zNum].getType() == 5)
                 && !closedList.contains(nodeSnapshot[row][col][zNum])) {
             nodeSnapshot[row][col][zNum].setParent(nodeCurrent);
+            if (nodeSnapshot[row][col][zNum].getType() != 4 && nodeSnapshot[row][col][zNum].getType() != 5) {
+                nodeSnapshot[row][col][zNum].setType(2);
+            }
 
             if (usesG) {
                 nodeSnapshot[row][col][zNum].setG(calculateG(nodeSnapshot[row][col][zNum]));
@@ -184,8 +188,8 @@ public abstract class Simulation {
                     System.out.println(e.getMessage());
                 }
 
-                simulationSnapshot[nodeStart.getRow()][nodeStart.getCol()][nodeStart.getZ()] = 4;
-                simulationSnapshot[nodeTarget.getRow()][nodeTarget.getCol()][nodeTarget.getZ()] = 5;
+//                simulationSnapshot[nodeStart.getRow()][nodeStart.getCol()][nodeStart.getZ()] = 4;
+//                simulationSnapshot[nodeTarget.getRow()][nodeTarget.getCol()][nodeTarget.getZ()] = 5;
 
                 try {
                     assert openList.peek() != null;
@@ -200,8 +204,14 @@ public abstract class Simulation {
     private ArrayList<Node> generatePath() {
         ArrayList<Node> path = new ArrayList<>();
         Node temp = nodeCurrent;
+        if (temp.getType() != 4 && temp.getType() != 5) {
+            temp.setType(3);
+        }
         path.add(temp);
         while (temp.getParent() != null) {
+            if (temp.getType() != 4 && temp.getType() != 5) {
+                temp.setType(3);
+            }
             temp = temp.getParent();
             path.add(temp);
         }
@@ -228,6 +238,10 @@ public abstract class Simulation {
 
     public void setBeamWidth(int beamWidth) {
         this.beamWidth = beamWidth;
+    }
+
+    public Node[][][] getNodeSnapshot() {
+        return nodeSnapshot;
     }
 
     public int[][][] getSimulationSnapshot() {
