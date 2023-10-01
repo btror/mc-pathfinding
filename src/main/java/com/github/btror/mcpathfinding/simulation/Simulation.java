@@ -187,13 +187,10 @@ public abstract class Simulation {
                 } catch (NullPointerException e) {
                     System.out.println(e.getMessage());
                 }
-
-//                simulationSnapshot[nodeStart.getRow()][nodeStart.getCol()][nodeStart.getZ()] = 4;
-//                simulationSnapshot[nodeTarget.getRow()][nodeTarget.getCol()][nodeTarget.getZ()] = 5;
-
                 try {
                     assert openList.peek() != null;
                 } catch (NullPointerException ignored) {
+                    System.out.println(ignored.getMessage());
                 }
 
                 closedList.add(nodeCurrent);

@@ -7,11 +7,12 @@ import com.github.btror.mcpathfinding.simulation.pathfinding.BeamSearch;
 import com.github.btror.mcpathfinding.simulation.pathfinding.GreedyBestFirstSearch;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class SimulationFactoryTest {
 
     @Test
-    public void testGetSimulation_astar() {
+    public void testGetSimulation_astarSearch() {
         Simulation simulation1 = SimulationFactory.getSimulation("a*");
         Simulation simulation2 = SimulationFactory.getSimulation("astar");
         Simulation simulation3 = SimulationFactory.getSimulation("a-star");
@@ -61,5 +62,12 @@ public class SimulationFactoryTest {
         assertEquals(simulation4.getClass(), BeamSearch.class);
         assertEquals(simulation5.getClass(), BeamSearch.class);
         assertEquals(simulation6.getClass(), BeamSearch.class);
+    }
+
+    @Test
+    public void testGetSimulation_invalidAlgorithm() {
+        Simulation simulation = SimulationFactory.getSimulation("invalid algorithm");
+
+        assertNull(simulation);
     }
 }

@@ -18,7 +18,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void testAstarSearch() {
+    public void testSearch_astarSearch() {
         Simulation simulation = new AStarSearch();
 
         mockSimulationSnapshot = createSimulationSnapshot();
@@ -27,14 +27,14 @@ public class SimulationTest {
         int[] simulationStart = {0, 0, 0};
         simulation.setSimulationStrikeStart(simulationStart);
 
-        int[] simulationTarget = {5, 0, 0};
+        int[] simulationTarget = {5, 5, 5};
         simulation.setSimulationStrikeTarget(simulationTarget);
 
         simulation.start();
         simulation.findPath();
 
         assertEquals(simulation.getNodeSnapshot()[0][0][0].getType(), 4);
-        assertEquals(simulation.getNodeSnapshot()[5][0][0].getType(), 5);
+        assertEquals(simulation.getNodeSnapshot()[5][5][5].getType(), 5);
         for (int i = 1; i < simulation.getSimulationPath().size() - 1; i++) {
             Integer[] path = simulation.getSimulationPath().get(i);
             assertEquals(simulation.getNodeSnapshot()[path[0]][path[1]][path[2]].getType(), 3);
@@ -42,7 +42,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void testBeamSearch() {
+    public void testSearch_beamSearch() {
         Simulation simulation = new BeamSearch();
         simulation.setBeamWidth(5);
 
@@ -52,14 +52,14 @@ public class SimulationTest {
         int[] simulationStart = {0, 0, 0};
         simulation.setSimulationStrikeStart(simulationStart);
 
-        int[] simulationTarget = {5, 0, 0};
+        int[] simulationTarget = {5, 5, 5};
         simulation.setSimulationStrikeTarget(simulationTarget);
 
         simulation.start();
         simulation.findPath();
 
         assertEquals(simulation.getNodeSnapshot()[0][0][0].getType(), 4);
-        assertEquals(simulation.getNodeSnapshot()[5][0][0].getType(), 5);
+        assertEquals(simulation.getNodeSnapshot()[5][5][5].getType(), 5);
         for (int i = 1; i < simulation.getSimulationPath().size() - 1; i++) {
             Integer[] path = simulation.getSimulationPath().get(i);
             assertEquals(simulation.getNodeSnapshot()[path[0]][path[1]][path[2]].getType(), 3);
@@ -67,7 +67,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void testGreedyBestFirstSearch() {
+    public void testSearch_greedyBestFirstSearch() {
         Simulation simulation = new GreedyBestFirstSearch();
 
         mockSimulationSnapshot = createSimulationSnapshot();
@@ -76,14 +76,14 @@ public class SimulationTest {
         int[] simulationStart = {0, 0, 0};
         simulation.setSimulationStrikeStart(simulationStart);
 
-        int[] simulationTarget = {5, 0, 0};
+        int[] simulationTarget = {5, 5, 5};
         simulation.setSimulationStrikeTarget(simulationTarget);
 
         simulation.start();
         simulation.findPath();
 
         assertEquals(simulation.getNodeSnapshot()[0][0][0].getType(), 4);
-        assertEquals(simulation.getNodeSnapshot()[5][0][0].getType(), 5);
+        assertEquals(simulation.getNodeSnapshot()[5][5][5].getType(), 5);
         for (int i = 1; i < simulation.getSimulationPath().size() - 1; i++) {
             Integer[] path = simulation.getSimulationPath().get(i);
             assertEquals(simulation.getNodeSnapshot()[path[0]][path[1]][path[2]].getType(), 3);
@@ -108,6 +108,12 @@ public class SimulationTest {
                 }
             }
         }
+        simulationSnapshot[0][1][2] = 1;
+        simulationSnapshot[0][2][2] = 1;
+        simulationSnapshot[0][3][2] = 1;
+        simulationSnapshot[1][3][2] = 1;
+        simulationSnapshot[3][3][3] = 1;
+        simulationSnapshot[4][3][3] = 1;
 
         return simulationSnapshot;
     }
