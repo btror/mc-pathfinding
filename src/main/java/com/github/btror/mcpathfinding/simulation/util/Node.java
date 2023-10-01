@@ -7,7 +7,7 @@ public class Node {
     private int f;
     private int g = 0;
     private int h;
-    private final int type;
+    private int type;
     private Node parent;
 
     public Node(int r, int c, int z, int t) {
@@ -52,6 +52,10 @@ public class Node {
 
     public int getG() {
         return g;
+    }
+
+    public void setType(int value) {
+        type = value;
     }
 
     public int getType() {

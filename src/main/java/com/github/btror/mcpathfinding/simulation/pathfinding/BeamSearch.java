@@ -17,19 +17,6 @@ public class BeamSearch extends Simulation {
 
     @Override
     public void start() {
-        nodeCurrent = new Node(
-                simulationStart[0],
-                simulationStart[1],
-                simulationStart[2],
-                0);
-        nodeTarget = new Node(
-                simulationTarget[0],
-                simulationTarget[1],
-                simulationTarget[2],
-                0);
-        nodeSnapshot[simulationStart[0]][simulationStart[1]][simulationStart[2]] = nodeCurrent;
-        nodeSnapshot[simulationTarget[0]][simulationTarget[1]][simulationTarget[2]] = nodeTarget;
-
         for (int i = 0; i < simulationSnapshot.length; i++) {
             for (int j = 0; j < simulationSnapshot[i].length; j++) {
                 for (int k = 0; k < simulationSnapshot[i][j].length; k++) {
@@ -44,6 +31,19 @@ public class BeamSearch extends Simulation {
                 }
             }
         }
+
+        nodeCurrent = new Node(
+                simulationStart[0],
+                simulationStart[1],
+                simulationStart[2],
+                4);
+        nodeTarget = new Node(
+                simulationTarget[0],
+                simulationTarget[1],
+                simulationTarget[2],
+                5);
+        nodeSnapshot[simulationStart[0]][simulationStart[1]][simulationStart[2]] = nodeCurrent;
+        nodeSnapshot[simulationTarget[0]][simulationTarget[1]][simulationTarget[2]] = nodeTarget;
 
         int h = calculateH(nodeCurrent);
         nodeCurrent.setH(h);
