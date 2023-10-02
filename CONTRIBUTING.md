@@ -2,6 +2,15 @@
 
 Welcome to mc-pathfinding! We're thrilled that you're interested in contributing. Before you get started, please take a moment to read this document to understand how you can contribute to our project.
 
+## Table of Contents
+
+- [How to Contribute](#how-to-contribute)
+- [Code Style and Guidelines](#code-style-and-guidelines)
+- [Data Model](#data-model)
+- [Reporting Issues](#reporting-issues)
+- [Issue Tracking](#issue-tracking)
+- [License](#license)
+
 ## How to Contribute
 
 1. **Fork the Repository:** Click the "Fork" button at the top right of the repository's page on GitHub. This will create a copy of the repository in your GitHub account.
@@ -31,9 +40,17 @@ Welcome to mc-pathfinding! We're thrilled that you're interested in contributing
 8. Create a Pull Request: Go to the GitHub page of your forked repository, switch to the branch with your changes, and click the "New Pull Request" button. Provide a clear title and description for your pull request.
 
 
-
 ## Code Style and Guidelines
-When adding new classes or files make sure to follow the [data model](#data-model).
+
+A few general rules:
+
+- When adding new classes or files make sure to follow the [data model](#data-model).
+- Make sure existing unit tests pass and add new ones if possible.
+  - For example, if you add a new pathfinding algorithm you'll need to add unit tests in the `SimulationTest` and `SimulationFactoryTest` files.
+- Make sure any new features work properly before creating a PR. You can do this by building a jar file and adding it your local server.
+  - One way to test new features/fixes is to create a temporary class that implements `CommandExecutor`, then call the static methods on `McPathfinding`.
+  - Watch this [tutorial](https://www.youtube.com/watch?v=lyzcll2JNOA) by [The Breakdown](https://www.youtube.com/@TheBreakdownXYZ) on how to set up up a local server if you don't have one.
+
 
 ## Data Model
 
@@ -65,6 +82,10 @@ Class `AStarSearch`
 
 - Implementation of the A\* pathfinding algorithm.
 
+Class `BeamSearch`
+
+- Implementation of the Beam Search pathfinding algorithm.
+
 Class `GreedyBestFirstSearch`
 
 - Implementation of the Greedy Best-First Search pathfinding algorithm.
@@ -86,7 +107,27 @@ Class `Animation`
 
 - Manages the visualization of the pathfinding process in Minecraft.
 - Animates the pathfinding steps, including block changes and particle effects.
+
 </details>
+
+<details>
+<summary>UML Diagram</summary>
+<br>
+
+[Lucidchart link](https://lucid.app/lucidchart/ff59dc30-19c4-4c85-8b49-0015e833c6c8/edit?viewport_loc=-1711%2C-1383%2C4042%2C2110%2C0_0&invitationId=inv_5760d042-41fd-4531-af6a-7d3142470512)
+
+<img src="src/main/resources/mc-pathfinding-uml.jpeg" width="540" height="500">
+</details>
+
+
+### Reporting Issues
+
+If you encounter a bug, have a feature request, or have questions about the project, please open an issue on our GitHub
+repository. When reporting an issue, be sure to:
+
+- Provide a descriptive title and clear description of the issue.
+- Specify the steps to reproduce the problem, if applicable.
+- Include any relevant error messages or screenshots.
 
 
 ## Issue Tracking
