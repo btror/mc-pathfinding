@@ -2,6 +2,15 @@
 
 Welcome to mc-pathfinding! We're thrilled that you're interested in contributing. Before you get started, please take a moment to read this document to understand how you can contribute to our project.
 
+## Table of Contents
+
+- [How to Contribute](#how-to-contribute)
+- [Code Style and Guidelines](#code-style-and-guidelines)
+- [Data Model](#data-model)
+- [Reporting Issues](#reporting-issues)
+- [Issue Tracking](#issue-tracking)
+- [License](#license)
+
 ## How to Contribute
 
 1. **Fork the Repository:** Click the "Fork" button at the top right of the repository's page on GitHub. This will create a copy of the repository in your GitHub account.
@@ -38,9 +47,9 @@ A few general rules:
 - When adding new classes or files make sure to follow the [data model](#data-model).
 - Make sure existing unit tests pass and add new ones if possible.
   - For example, if you add a new pathfinding algorithm you'll need to add unit tests in the `SimulationTest` and `SimulationFactoryTest` files.
-- Make sure any new features work properly before creating a PR. You can do this by running your plugin on a local spigot server.
-  - Here's a useful tutorial on how to set up up a local server and configure plugins: TODO: insert YT video
-  - There's also a file for running testing commands: TODO: create command file to run stuff with everything commented out
+- Make sure any new features work properly before creating a PR. You can do this by building a jar file and adding it your local server.
+  - One way to test new features/fixes is to create a temporary class that implements `CommandExecutor`, then call the static methods on `McPathfinding`.
+  - Watch this [tutorial](https://www.youtube.com/watch?v=lyzcll2JNOA) by [The Breakdown](https://www.youtube.com/@TheBreakdownXYZ) on how to set up up a local server if you don't have one.
 
 
 ## Data Model

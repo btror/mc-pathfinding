@@ -14,11 +14,6 @@ Example use case: mc-lightning-strike [repository](https://github.com/btror/mc-l
   - [Pathfinding Methods](#pathfinding-methods)
   - [Examples](#examples)
 - [Contributing](#contributing)
-  - [Reporting Issues](#reporting-issues)
-  - [Code Contributions](#code-contributions)
-  - [Coding Guidelines](#coding-guidelines)
-  - [Development Environment](#development-environment)
-- [Data Model](#data-model)
 - [License](#license)
 
 ## Installation
